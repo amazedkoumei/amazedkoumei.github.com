@@ -1,0 +1,73 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'less',
+1 verbose cli   'jshint',
+1 verbose cli   'recess',
+1 verbose cli   'uglify-js' ]
+2 info using npm@1.1.62
+3 info using node@v0.8.11
+4 verbose read json /usr/local/lib/package.json
+5 verbose read json /usr/local/lib/package.json
+6 verbose cache add [ 'less', null ]
+7 silly cache add name=undefined spec="less" args=["less",null]
+8 verbose parsed url { pathname: 'less', path: 'less', href: 'less' }
+9 verbose cache add [ 'jshint', null ]
+10 silly cache add name=undefined spec="jshint" args=["jshint",null]
+11 verbose parsed url { pathname: 'jshint', path: 'jshint', href: 'jshint' }
+12 verbose cache add [ 'recess', null ]
+13 silly cache add name=undefined spec="recess" args=["recess",null]
+14 verbose parsed url { pathname: 'recess', path: 'recess', href: 'recess' }
+15 verbose cache add [ 'uglify-js', null ]
+16 silly cache add name=undefined spec="uglify-js" args=["uglify-js",null]
+17 verbose parsed url { pathname: 'uglify-js', path: 'uglify-js', href: 'uglify-js' }
+18 silly lockFile 0b439cf4-less less
+19 verbose lock less /Users/takeo_yamaji/.npm/0b439cf4-less.lock
+20 silly lockFile da5c03cb-jshint jshint
+21 verbose lock jshint /Users/takeo_yamaji/.npm/da5c03cb-jshint.lock
+22 silly lockFile d0d1f171-recess recess
+23 verbose lock recess /Users/takeo_yamaji/.npm/d0d1f171-recess.lock
+24 silly lockFile d31cae06-uglify-js uglify-js
+25 verbose lock uglify-js /Users/takeo_yamaji/.npm/d31cae06-uglify-js.lock
+26 silly lockFile 0b439cf4-less less
+27 silly lockFile da5c03cb-jshint jshint
+28 silly lockFile d0d1f171-recess recess
+29 silly lockFile d31cae06-uglify-js uglify-js
+30 verbose addNamed [ 'less', '' ]
+31 verbose addNamed [ null, '' ]
+32 silly lockFile e13833ab-less less@
+33 verbose lock less@ /Users/takeo_yamaji/.npm/e13833ab-less.lock
+34 verbose addNamed [ 'jshint', '' ]
+35 verbose addNamed [ null, '' ]
+36 silly lockFile a02a2468-jshint jshint@
+37 verbose lock jshint@ /Users/takeo_yamaji/.npm/a02a2468-jshint.lock
+38 verbose addNamed [ 'recess', '' ]
+39 verbose addNamed [ null, '' ]
+40 silly lockFile e131134d-recess recess@
+41 verbose lock recess@ /Users/takeo_yamaji/.npm/e131134d-recess.lock
+42 verbose addNamed [ 'uglify-js', '' ]
+43 verbose addNamed [ null, '' ]
+44 silly lockFile 679a1028-uglify-js uglify-js@
+45 verbose lock uglify-js@ /Users/takeo_yamaji/.npm/679a1028-uglify-js.lock
+46 silly lockFile e13833ab-less less@
+47 silly lockFile a02a2468-jshint jshint@
+48 silly lockFile e131134d-recess recess@
+49 silly lockFile 679a1028-uglify-js uglify-js@
+50 error Error: EACCES, open '/Users/takeo_yamaji/.npm/e13833ab-less.lock'
+50 error  { [Error: EACCES, open '/Users/takeo_yamaji/.npm/e13833ab-less.lock']
+50 error   errno: 3,
+50 error   code: 'EACCES',
+50 error   path: '/Users/takeo_yamaji/.npm/e13833ab-less.lock' }
+51 error Please try running this command again as root/Administrator.
+52 error System Darwin 12.2.1
+53 error command "node" "/usr/local/bin/npm" "install" "-g" "less" "jshint" "recess" "uglify-js"
+54 error cwd /Users/takeo_yamaji/githubpages/amazedkoumei.github.com/bootstrap
+55 error node -v v0.8.11
+56 error npm -v 1.1.62
+57 error path /Users/takeo_yamaji/.npm/e13833ab-less.lock
+58 error code EACCES
+59 error errno 3
+60 error stack Error: EACCES, open '/Users/takeo_yamaji/.npm/e13833ab-less.lock'
+61 verbose exit [ 3, true ]

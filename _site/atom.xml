@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>amazedkoumei.com</title>
+ <link href="http://amazedkoumei.github.com/atom.xml" rel="self"/>
+ <link href="http://amazedkoumei.github.com"/>
+ <updated>2013-01-15T09:56:14+09:00</updated>
+ <id>http://amazedkoumei.github.com</id>
+ <author>
+   <name>amazedkoumei</name>
+   <email>contact@amazedkoumei.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>amazedkoumei.com has opend</title>
+   <link href="http://amazedkoumei.github.com/2013/01/14/amazedkoumeicom-has-opend"/>
+   <updated>2013-01-14T00:00:00+09:00</updated>
+   <id>http://amazedkoumei.github.com/2013/01/14/amazedkoumeicom-has-opend</id>
+   <content type="html">&lt;h4 id='contents'&gt;contents&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Main page | introduction of my products&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iOS App&lt;/li&gt;
+
+&lt;li&gt;Chrome Extension&lt;/li&gt;
+
+&lt;li&gt;And more.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;Blog ( in Japanese )&lt;/p&gt;
+&lt;/li&gt;
+
+&lt;li&gt;
+&lt;p&gt;List I want to make&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Something I want&lt;/li&gt;
+
+&lt;li&gt;Technical interest&lt;/li&gt;
+
+&lt;li&gt;Something eliminating the frustrating in our daily life&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content>
+ </entry>
+ 
+ 
+</feed>

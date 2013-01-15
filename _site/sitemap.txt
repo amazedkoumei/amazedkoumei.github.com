@@ -1,0 +1,15 @@
+
+http://amazedkoumei.github.com/archive.html
+http://amazedkoumei.github.com/atom.xml
+http://amazedkoumei.github.com/categories.html
+http://amazedkoumei.github.com/contact/index.html
+http://amazedkoumei.github.com/contact/index.html
+http://amazedkoumei.github.com/index.html
+http://amazedkoumei.github.com/pages.html
+http://amazedkoumei.github.com/sitemap.txt
+http://amazedkoumei.github.com/tags.html
+
+http://amazedkoumei.github.com/2013/01/14/amazedkoumeicom-has-opend
+
+http://amazedkoumei.github.com/motion-octofeed/
+http://amazedkoumei.github.com/motion-clipto/
