@@ -10,3 +10,7 @@
 .app-feature {
   padding: 10px;
 }
+
+.nav li {
+  font-size:150%;
+}
