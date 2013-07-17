@@ -1,0 +1,92 @@
+---
+layout: post
+title: '[ #ewords ][ #koumeilabs ] Mobile Safari のキャッシング  .manifest の使い方'
+date: 2011/02/20 17:00
+tags: [koumeilabs,googleAppEngine,ewords]
+comments: false
+---
+
+<div class='post'>
+先日このブログで紹介した、iPhone向け英単語学習サイト『<a href="http://ewords.amazedkoumei.com" target="_blank">eWords</a>』。<br />
+※eWordsの紹介記事は<a href="http://blog.amazedkoumei.com/2011/02/ewords-iphone-on-gae.html" target="_blank">こちら</a><br />
+<br />
+eWordsでは無通信状態でも利用できるよう、Mobile Safariのキャッシュ機能を使用している。<br />
+Mobile Safariでキャッシュ機能を使用するための手順は以下の2つだ。<br />
+<ol><li>.manifest ファイル（マニフェストファイル）の作成</li>
+<li>対象のHTMLに上記ファイルを読み込ませる記述を追加</li>
+</ol><br />
+マニフェストファイルの名前は便宜上「ewords.manifest」とする。<br />
+マニフェストに記載する事項は以下の4つだ。<br />
+「#」で始まる行はコメントとして扱われる。<br />
+<ol><li>冒頭に「CACHE MANIFEST」の文字列</li>
+<li>キャッシュするリソースを列挙する「CACHE」セクション</li>
+<li>通信するリソースを列挙する「NETWORK」セクション</li>
+<li>オフライン時の代替手段を定義する「FALLBACK」セクション</li>
+</ol><h2>例） ewords.manifest</h2><blockquote>CACHE MANIFEST<br />
+# Version: 201102200900<br />
+<br />
+# キャッシュするリソースを明示的に列挙する<br />
+CACHE:<br />
+/<br />
+/images/hoge.png<br />
+/css/huga.css<br />
+/js/piyo.js<br />
+<br />
+# 「オンラインホワイトリスト」と呼ばれるセクション<br />
+# ここに記述したリソースはキャッシュの対象にならず、必ずネットワークアクセスされる<br />
+NETWORK:<br />
+/api/get<br />
+<br />
+# 「FALLBACK:」で始まるセクションは代替エントリを定義する<br />
+# この例では、「/」にアクセスしようとして失敗したら、<br />
+# 代わりに「/offline.html」を表示する<br />
+FALLBACK:<br />
+/  /offline.html</blockquote><br />
+次に対象のHTMLにマニフェストファイルを読み込ませる記述を追加する。<br />
+HTMLの開始タグに以下のような属性を付与すればOKだ。<br />
+<blockquote>&lt;html manifest="ewords.manifest"&gt;</blockquote>このHTMLファイルも便宜上「ewords.html」とする。<br />
+<br />
+マニフェストファイルを使うにはいくつか注意点が必要だ。<br />
+<br />
+<br />
+<h3>1. まずは、マニフェストファイルを更新した場合。</h3><br />
+マニフェストファイルが更新されたことをMobile Safariに通知するために<br />
+<b>ファイル中のコメントを修正する必要がある。</b><br />
+セクションではなく「#」で始まるコメントだ。<br />
+そのため、マニフェストファイルには「# Version: 201102200900」のようにバージョン番号としてタイムスタンプを記述するのが通例となっているようだ。<br />
+<br />
+<br />
+<h3>2. 次に外部のJSファイルやCSSファイルを修正した場合。</h3><br />
+動作を検証するためには2回リロードする必要がある。<br />
+マニフェストを指定したHTMLはロードされるとマニフェストに記述されたリソースのチェックを始める。<br />
+そしてリソースに変更があれば、ダウンロードを開始する。<br />
+このダウンロードがすべて完了した時点でもう一度リロードすることで、初めて変更後のJSファイルやCSSファイルが適用されるという訳だ。<br />
+<br />
+このダウンロードの様子は、この<a href="http://jonathanstark.com/blog/2009/09/27/debugging-html-5-offline-application-cache/" target="_blank">デバッギング用のJavascript</a>を仕込むことで確認できる。<br />
+<br />
+<br />
+<h3>3. 最後にHTMLファイルにimgタグやscriptタグを追加した場合。</h3><br />
+必ずマニフェストファイルを修正しなければならない。<br />
+マニフェストファイルが指定されたHTMLはマニフェストファイルに未記載のファイルをロードしない。<br />
+逆にHTMLに記載されていない外部リソースでもマニフェストファイルに記載されていればロードしてしまう。<br />
+つまり、HTMLを修正した場合、合わせてマニフェストファイルも修正し、最新の状態に保つ必要がある。<br />
+当然この時マニフェストファイルのバージョン番号の更新も必要だ。<br />
+<br />
+<br />
+以上のように、大変不思議な仕様になっている。<br />
+仕様策定者を小一時間問い詰めたい次第だ。<br />
+<br />
+なお、eWordsではNETWORKセクション、CALLBACKセクションは使用していない。<br />
+これらのセクションを使用すると、また不思議な仕様が発見できるかもしれない。<br />
+<br />
+新たな不思議仕様が見つかったら是非、コメント欄などで教えていただきたい。<br />
+<br />
+enjoy！<br />
+<br />
+=======================================================================<br />
+書評ブログ『<a href="http://dialy.amazedkoumei.com" target="_blank">諸葛亮孔明の知恵袋</a>』もやってます。<br />
+興味がありましたらお立ち寄りください。<br />
+=======================================================================</div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

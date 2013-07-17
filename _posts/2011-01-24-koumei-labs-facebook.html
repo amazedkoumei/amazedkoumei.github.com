@@ -1,0 +1,65 @@
+---
+layout: post
+title: '[ #koumeilabs ] Facebookアプリケーション クライアントサイド編'
+date: 2011/01/24 02:14
+tags: [koumeilabs,facebook]
+comments: false
+---
+
+<div class='post'>
+FacebookのAPIをいろいろ触ってみた。<br />
+<br />
+触ってみた結果はこちら 。<br />
+<a href="http://koumei-labs.amazedkoumei.com/fbml/" target="_blank">http://koumei-labs.amazedkoumei.com/fbml/</a><br />
+<br />
+今回もやはりホストはGoogle App Engine。<br />
+<br />
+Google App Engineに載せてはいるが、上のページを表示するためのサーバサイドプログラムは一切動いていない。<br />
+すべてがFacebookが提供している<a href="http://developers.facebook.com/docs/reference/fbml/" target="_blank">FBML</a>と<a href="http://developers.facebook.com/docs/reference/javascript/" target="_blank">javascriptSDK</a>で動いている。<br />
+<br />
+<a href="http://developers.facebook.com/docs/reference/fbml/" target="_blank">FBML</a>とはFacebook Markup Languageの略で、要するにFacebookで使用されている部品を流用するためのHTMLだと思ってもらえばいい。<br />
+<br />
+名前は非常に仰々しいが大変シンプルに作られている。<br />
+例えばログインボタンを表示するために必要な記述はたったの3行だ。<br />
+<ol><li>XMLNS属性 <span class="Apple-style-span" style="color: magenta;">xmlns:fb="http://www.facebook.com/2008/fbml&nbsp;</span>の指定</li>
+<li><span class="Apple-style-span" style="color: magenta;">http://connect.facebook.net/en_US/all.js</span> (※1)をロードするSCRIPTタグ</li>
+<li>ログインボタンを表示する <span class="Apple-style-span" style="color: magenta;">&lt;fb:login-button&gt;&lt;/fb:login-button&gt;</span></li>
+</ol><br />
+たったこれだけを記述するだけでログインボタンが表示される。<br />
+<span style="font-size: 10px; line-height: 1em;">※1<br />
+<span class="Apple-style-span" style="color: magenta;"> /en_US/all.js</span> は英語用のスクリプトだ。<br />
+日本語で表記したい場合は <span class="Apple-style-span" style="color: magenta;">/ja_JP/all.js</span> をロードすればいい。<br />
+<span class="Apple-style-span" style="color: magenta;"> /[言語コード]_[国２桁コード]/all.js</span> という作りになっている。</span><br />
+<br />
+ログイン後にログインボタンをログアウトボタンに変更する、や<br />
+ログインユーザにStreamの更新権限を与えない<br />
+といった、細々した設定は <span class="Apple-style-span" style="color: magenta;">fb:login-buttonタグ</span>に属性指定するだけで変更可能だ。<br />
+<br />
+ログイン後にログインボタンをログアウトボタンに変更する場合は<br />
+<span class="Apple-style-span" style="color: magenta;">&lt;fb:login-button autologoutlink="true"&gt;&lt;/fb:login-button&gt;</span><br />
+のように、<span class="Apple-style-span" style="color: magenta;">autologoutlink属性</span>を<span class="Apple-style-span" style="color: magenta;">TRUE</span>に設定してやるだけでいい。<br />
+<br />
+例としてログインボタンを使ったが、Facebook上で使われているほとんどの部品を、このようなシンプルな記述で表現できる。また、これでも面倒臭いのだ、という人のために<a href="http://developers.facebook.com/plugins" target="_blank">コード生成用ページ</a>までFacebookは準備している周到さだ。<br />
+<br />
+<br />
+『FacebookのUIは日本人には馴染まない』という意見をよく聞くが、『だったら好みのUIを作ればいいじゃないですか、日本のサードパーティさん』ってことなんでしょうかね。。<br />
+<br />
+<br />
+ちなみにこれにサーバサイドプログラムを組み合わせればより高度なことができる。<br />
+Facebookが閉じられた空間であることを考えれば、ウン千万円かけて作った社内システムと同程度、それ以上のものを作ってしまうこともできるのでは、とも思えるし、まったく別発想のアプリケーションだって生まれてくるはずだ。<br />
+フリーランスやベンチャーの働き方を根底から覆してしまうようなモノだって、ひょっとすると・・<br />
+<br />
+<br />
+まだ解析できていないがGoogle App Engine上で動作するFacebookアプリケーションのサンプルとして<a href="http://apps.facebook.com/runwithfriends/" target="_blank">Run with Friends</a>（※2）にFacebookのディベロッパーページからリンクが貼られていたので、興味のある方は使ってみて欲しい。<br />
+<span style="font-size: 10px; line-height: 1em;">※2「Today」をクリックした時にセットされる月の値が間違っているがまぁご愛嬌。</span><br />
+<br />
+ソースコードは下記に公開されている。<br />
+<a href="https://github.com/facebook/runwithfriends" target="_blank">https://github.com/facebook/runwithfriends</a><br />
+<br />
+<br />
+最後になったが<a href="http://developers.facebook.com/docs/reference/fbml/" target="_blank">FBML</a>と<a href="http://developers.facebook.com/docs/reference/javascript/" target="_blank">javascriptSDK</a>を調べてみて日本語解説記事の少なさに驚いた。<a href="http://developers.facebook.com/docs/reference/fbml/" target="_blank">FBML</a>がいつ公開されたのかは知らないが、2007年にはすでに公開されていたと記憶している。<br />
+<br />
+それだけ日本でのFacebookの浸透度が低いということなのだろうが、つい先日、映画「ソーシャルネットワーク」も公開され、今後ユーザ数も増えていくはずだ。</div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

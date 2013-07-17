@@ -1,0 +1,82 @@
+<!-- start content-wrapper -->
+<div id='content-wrapper'>
+<!-- start crosscol-wrapper -->
+<div id='crosscol-wrapper' style='crosscol'>
+<div class='crosscol section' id='crosscol'></div>
+</div>
+<!-- end crosscol-wrapper -->
+<!-- start main-wrapper -->
+<div class='post-wrapper' id='main-wrapper'>
+<div class='main section' id='main'><div class='widget Blog' id='Blog1'>
+<div class='blog-posts hfeed'>
+<!-- google_ad_section_start -->
+
+          <div class="date-outer">
+        
+<h2 class='date-header'>{{ page.date | date: "%Y/%m/%d" }}</h2>
+<div class='post hentry uncustomized-post-template'>
+<div class='breadcrumbs'>
+<a href='{{ page.url }}' rel='bookmark' title='permanent link'>
+{{ page.date | date: "%Y/%m/%d %H:%M" }}
+</a>
+</div>
+<a name='2501269603291446661'></a>
+<h3 class='post-title entry-title'>
+<a href='http://blog.amazedkoumei.com/2013/04/bugfix-sublimeknifesolo-v101.html'>{{ page.title }}a</a>
+</h3>
+<div class='post-header-line-1'></div>
+<div class='post-body entry-content'>
+{{ content }}
+<div style='clear: both;'></div>
+</div>
+
+
+
+
+
+
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-timestamp'>
+時刻:
+<a class='timestamp-link' href='{{ page.url }}' rel='bookmark' title='permanent link'>
+{{ page.date | date: "%Y/%m/%d %H:%M" }}
+</a>
+</span>
+</div>
+
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+tags:
+  {% assign tags_list = page.tags %}
+  {% include JB/tags_list %}
+</span>
+</div>
+
+<hr />
+
+{% if page.comments %}
+    {% include JB/comments %}
+{% endif %}
+
+
+
+<div class='blog-pager' id='blog-pager'>
+
+{% if page.next %}
+<span id='blog-pager-newer-link'>
+<a class='blog-pager-newer-link' href='{{ page.next.url  }}' id='Blog1_blog-pager-newer-link' title='次の投稿'>next</a>
+</span>
+{% endif %}
+
+
+{% if page.previous %}
+<span id='blog-pager-older-link'>
+<a class='blog-pager-older-link' href='{{ page.previous.url }}' id='Blog1_blog-pager-older-link' title='前の投稿'>prev</a>
+</span>
+{% endif %}
+
+<a class='home-link' href='/'>home</a>
+</div>
+
+<div class='clear'></div>

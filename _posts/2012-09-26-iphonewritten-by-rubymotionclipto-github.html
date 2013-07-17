@@ -1,0 +1,79 @@
+---
+layout: post
+title: 'iPhoneアプリを申請したでござる。なぜかWritten by Rubymotion！（アプリの名前はClipTo, Githubでソースコード公開ちう）'
+date: 2012/09/26 07:04
+tags: [rubymotion,iphoneアプリ,clipto]
+comments: false
+---
+
+<div class='post'>
+<p>ここ最近ちまちまとXcodeでiPhoneアプリを作っていたのですが、どうにもモチベーションがあがらずですね。</p>
+<p>なんとはなしに <a href="http://www.rubymotion.com/" target="_blank">RubyMotion</a> 買って <a href="https://github.com/HipByte/RubyMotionSamples" target="_blank">サンプルコード</a> 眺めてふむふむと。</p>
+<p>ドキュメントに目を通すまでもなく、なにか1つちょろアプリをペロッと作れそうな気がしたので、前から欲しいのあったんだよねとシコシコと右手と左手を動かしてみたところ数時間で地味に便利なものができあがりまして、どうせならAppStoreに申請してしまおうと、体裁整えて、バグをつぶして、アイコン作って、最初使い方わからずまごまごしそうなのでガイドラインページ作って、どうせならGithubページにホストしようとちまちま調べて、Githubページではjekyllというブログエンジンが使えるらしいぞとjekyllをインスコして、ページを作って、AppStoreにはCode Signが不正だと何度も弾かれて、何時間使ったのかなぁ（遠い目</p>
+<p> </p>
+<p>アイコン作成はもう少し楽にできそうな気がしました。原因はツールの不備ですよね。</p>
+<p>サイズと色とグラデーションが指定できて、図形と画像とテキストを載せること<strong>だけ</strong>ができる画像編集ソフトがあれば格段に楽になるのですが、どこかにありませぬか。。</p>
+<p>ブラシとかぼかしとかよくわかりませぬ。なくてもグラデーション機能がそれなりの精度であれば無問題！</p>
+<p> </p>
+<p><a href="https://github.com/mojombo/jekyll" target="_blank">jekyll</a> はなかなかに素敵なブログエンジンでして、例えばHPの制作会社様でしたら、運用をお客様におまかせする案件には不向きですけども、自社で運用までアウトソーシングで受ける場合でしたらWordpressよりも小回りも効いて提案力的にも運用工数的にもどちらにもプラスになるんじゃないかと思った次第です。</p>
+<p> </p>
+<p>以上前置きｗ</p>
+<p> </p>
+<p> </p>
+<h4>アプリ(ClipTo)の概要</h4>
+<p>私のiPhoneはその大部分の時間をRSSリーダとして使われておりまして、RSSをふむふむと読んでいるとたまに気になる未知のワードがでてくるわけです。</p>
+<p>当然その場合にはググリたくなるのですが、それが微妙に手間。</p>
+<p>iPhone自体検索が弱くてもとまかさんのブログを拝見していてもこのようなエントリが投下されてますね。</p>
+<p> </p>
+<p>    <a href="http://d.hatena.ne.jp/moto_maka/20120822/1345576685" target="_blank">iPhoneのSpotlightをアプリランチャにしつつWeb検索を簡単に行う方法 - もとまか日記 </a></p>
+<p> </p>
+<p>で、NotificationCenterからSafariを立ちあげて、クリップボードの内容でGoogle検索してくれるアプリを作りました。</p>
+<p>それだけだと寂しかったのでSend to Email機能もつけました。Send To EmailができればだいたいのWebサービスと連携できますし。</p>
+<p> </p>
+<p>詳細はまたリリースできましたら書こうかなと思います。</p>
+<p> </p>
+<p>アイコンはこんな感じｗ</p>
+<p> </p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="370296974785.png" src="http://lh6.ggpht.com/-TdhRUiFgeIE/UGIpbBizJzI/AAAAAAAABOU/7pmR1cMQttA/370296974785.png?imgmax=800" alt="370296974785" width="170" height="170" border="0" /></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h4>RubyMotionの利点</h4>
+<p>Xcodeからの解放！</p>
+<p>これにつきます。Objective-Cのアレなところを埋める利点として配列やDictionaryをRuby風に書けるとか、[]を書かなくていいとか、ViewControllerをnewで生成できるとかありますけど、Xcodeからの解放に比べればかすむ、かすむ。私がRubyistではないというのもあるとは思いますけど。</p>
+<p> </p>
+<p>Rubyに関しては昔ちょろっとしたsinatraを書いたことがある程度なのですが、その時の印象としてはどうにも、随所に漂うPerlテイストが気にいらない、という印象でした。</p>
+<p>男前でも頭が良くてもお金持ちでも、ズボンにシャツをインしていたら生理的にイヤなのワタシ。女子力高いの。</p>
+<p> </p>
+<p>話を戻してXcodeですけども、バージョン4で大きく改善 (Appleさんありがとう！) されたとはいえ、起動は遅いわもっさりしてるわでお気に入りの <a href="http://www.sublimetext.com/2" target="_blank">SublimeText2</a> と比べると雲泥の差、月とスッポンで、Xcodeを立ち上げるのがイヤでイヤでマシンの前でモジモジモジモジしている間に陽が暮れてさらには登ってきていたのは私の欠陥ではなくXcodeの欠陥だったのだ、とまたひとつ自分の殻を破ることができました（なんじゃそら）。</p>
+<p> </p>
+<p>なにが言いたいかというと、プログラマに限らずモノ作るニンゲンにとってそのためのツールというのはモチベーションに大きく関わってくるものだ、いう考えが私にはあるということと、Rubymotinoの利点であるXcodeからの解放は、結局は理屈ではなく感情・好みの話だということ。</p>
+<p> </p>
+<p>なので、Xcodeでもりもりと開発できている方には <a href="http://www.rubymotion.com/" target="_blank">RubyMotion</a> は必要のないツールです。</p>
+<p> </p>
+<p>そしてXcodeに嫌悪感を抱いている方にRubyMotionの利点を理屈で表現するとするならば</p>
+<ul>
+<li>好きなエディタを使える</li>
+<li>(Objective-Cから解放されることで)コードの記述量が減る（上述の Ruby like な配列・ディクショナリ、newメソッド、あとはHeaderファイル不要)</li>
+</ul>
+<p>の2点でしょうか。</p>
+<p> </p>
+<p>あと派生的な効果として、Ruby界隈に片足を踏み込むきっかけとしていいかな、と。最近GithubのFeedを興味深く眺めているのですが、new repository や Starred のRuby率が尋常ではなく高いのです。まつもとゆきひろさんもRubyの魅力はコミュニティにある的なことを言っていたような言っていなかったような。</p>
+<p> </p>
+<p><a href="http://www.rubymotion.com/" target="_blank">RubyMotion</a> 周りでも多くのライブラリがGithubにあがってまして、今回は素のRubyMotionで実装しましたが、ViewをStyleSheet風に記述できるという <a href="https://github.com/rubymotion/teacup" target="_blank">RubyMotion / teacup</a> あたりなど次回から取り入れていこうかな、と。</p>
+<p> </p>
+<p>あ、今回も利用させていただきましたが、<a href="http://www.sublimetext.com/2" target="_blank">SublimeText2</a> 使いであれば <a href="http://www.sublimetext.com/2" target="_blank">SublimeText2</a> 上でRubyMotionのbuild/deployができて入力補完してくれる <a href="haraken3 / SublimeRubyMotionBuilder" target="_blank">haraken3 / SublimeRubyMotionBuilder</a> は必須のPluginです、はい。</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h4 style="font-size: medium;">最後に</h4>
+<p>そんなこんなで本日( 2012/9/26 )、<a href="http://connpass.com/event/1039/" target="_blank">RubyMotionもくもく会</a> に参加させていただきます。</p>
+<p>こうするともっと楽に書けるよ、とかそんな話する機会はあるのかな。</p>
+<p> </p>
+<p>ClipToのソースコードはこちらで公開しています。</p>
+<p>  <a href="https://github.com/amazedkoumei/motion-clipto" target="_blank">amazedkoumei / motion-clipto</a></p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

@@ -1,0 +1,68 @@
+---
+layout: post
+title: '[ #eWords ] iPhone向け英単語学習サイト on GAE'
+date: 2011/02/14 09:00
+tags: [英語,googleAppEngine,ewords]
+comments: false
+---
+
+<div class='post'>
+Google App Engine上に英単語の学習サイトを作成した。<br />
+名前は『<a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a>』。<br />
+<br />
+URLはこちら。iPhoneでアクセスしてほしい。<br />
+<a href="http://ewords.amazedkoumei.com/" target="_blank">http://ewords.amazedkoumei.com/</a><br />
+<br />
+作成の動機はいたって素直で、英語をマスタしたいからだ。<br />
+<br />
+英語の学習方法については、いろいろな方法論が語られているが、私はひたすら単語を覚えることにした。<br />
+以下のブログは、私が日頃愛読している2つのブログだが、どちらも単語力の強化を勧めている。<br />
+有名なブログなのでご存知の方も多いだろう。<br />
+<br />
+<a href="http://blog.goo.ne.jp/mit_sloan/e/dd4569f6e8fe6b812aa7c817abd2014f" target="_blank"><b>英文を読むのが苦痛な人はまずは単語力を身につけよう | My Life After MIT Sloan</b></a><br />
+<blockquote>1. 英文を読むのが苦痛な人は、まずは自分の単語力を疑ってみよう<br />
+<br />
+英語学習に一番役に立つのは、とにかく大量の英語をインプットすることだ。<br />
+英字新聞、英語の本などとにかく英文を大量に読む。<br />
+Podcast、英語ニュースなどとにかく聞く。<br />
+これは正しいのだが、ボキャブラリーが不十分な状態でこれをやるとかなりの苦行である。<br />
+<br />
+英文を読むときは「辞書など調べず、文中から意味を推測しろ」と誰もが言うし、私も今までのエントリでそう書いてきた。<br />
+でも、これはある程度単語力がある場合の話である。<br />
+<br />
+もしあなたが今勉強してる英文を読んでいて（例えば試験向けの読解問題集、英字新聞）<br />
+一文に一語以上知らない単語が出てくるようであれば、その文章を読むには明らかにボキャブラリ不足だと思う。<br />
+<br />
+この頻度で新しい単語に出くわす状態で、「文中から意味を推測する」のは正直難しい。<br />
+それなのに頑張って続けてた方、その苦行に耐えられたあなたはすごいです。<br />
+まずは単語を勉強すべし。<br />
+</blockquote><br />
+<a href="http://www.lastday.jp/2010/08/24/learning-english-from-mba-students" target="_blank"><b>MBAホルダーから教えてもらった英語学習方法 | Last Day. jp</b></a><br />
+<blockquote>英語学習で１番大切なのは語彙（vocabulary）の多さである。文法やListeningそしてWritingも語彙力がなければ、いくら勉強をしても無駄である。<br />
+<br />
+Listeningは通勤電車で英語の音声を垂れ流しにしている人がいるが、知らない単語は耳に入ってこないので上達しない。<br />
+<br />
+単語を勉強しないで、いきなり文を書いてみろと言われても何も書けない。<br />
+だから単語を覚える作業には１番ウェイトをかける必要がある。<br />
+</blockquote><br />
+<a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a>の仕組みはいたって簡単だ。<br />
+<br />
+1. 海外のニュースソースから記事のタイトルと本文を抽出する。<br />
+2. 単語ごとに分割する。この時に記事中に出現した回数を記録する。<br />
+3. 分割した各単語を<a href="http://code.google.com/intl/ja/apis/language/translate/overview.html" target="_blank">Google Translate API</a>で翻訳する。<br />
+<br />
+こうして出来上がったデータを出現回数の多い順に表示しているのが<a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a>だ。<br />
+<br />
+Google Translate APIの翻訳結果はなかなかにお馬鹿だったりするが、楽しんで勉強する分には、まぁご愛嬌だろう。<br />
+<br />
+それよりもGoogle Translate APIが返すレスポンス形式が今後の拡張を意識した作りになっているのが興味深い。<br />
+ご存じの方も多いだろうが、本家の<a href="http://translate.google.co.jp/" target="_blank">Google翻訳</a>では翻訳結果を音声で再生できる。<br />
+APIで音声を再生できるようになれば、またできることの幅が広がるのだが。<br />
+<br />
+ひとまずは、音声なしの<a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a>ですきま時間を埋めてみることにする。<br />
+<br />
+もしよろしければ使ってみてください。<br />
+<br /></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

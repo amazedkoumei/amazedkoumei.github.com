@@ -1,0 +1,96 @@
+---
+layout: post
+title: 'jquery.mobile.forpc-0.1.2.js is Published - Firefox4でのbackground-imageのズレを修正しました。'
+date: 2011/05/24 08:00
+tags: [jQueryMobile]
+comments: false
+---
+
+<div class='post'>
+<p>以前公開した、jQuery Mobileで作成したページをPC向けに表示するためのライブラリ<br /> 『 jQuery Mobile for PC 』をFirefox4に対応版を公開しました。<br /> <br /></p>
+<p><a href="http://blog.amazedkoumei.com/2011/04/jquery-mobilepc-jquery-mobile-for-pc.html" target="_blank"><img src="http://capture.heartrails.com/150x130/shadow?http://blog.amazedkoumei.com/2011/04/jquery-mobilepc-jquery-mobile-for-pc.html" border="0" alt="" width="150" height="130" align="left" /></a><a href="http://blog.amazedkoumei.com/2011/04/jquery-mobilepc-jquery-mobile-for-pc.html" target="_blank">jQuery Mobileで作成したページをPC向けに表示するためのライブラリ『 jQuery Mobile for PC 』を公開しました | 諸葛亮孔明もびっくりですわ のブログ</a><a rel="nofollow" href="http://b.hatena.ne.jp/entry/http://blog.amazedkoumei.com/2011/04/jquery-mobilepc-jquery-mobile-for-pc.html" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/http://blog.amazedkoumei.com/2011/04/jquery-mobilepc-jquery-mobile-for-pc.html" border="0" alt="" /></a><br /> <span style="color: #808080; font-size: 80%;"> </span><br /> <strong>jquery.mobile.forpcの紹介エントリです。</strong><br style="clear: both;" /></p>
+<p> </p>
+<h4>修正内容</h4>
+<p>背景画像の横幅がFirefox4では画像の横幅に依存する状態になっていましたが<br /> これをDocumentの幅に合わせるよう修正しました。<br /> <br /></p>
+<h4>jquery.mobile.forpの使い方</h4>
+<p><a href="http://blog.amazedkoumei.com/2011/04/jquery-mobilepc-jquery-mobile-for-pc.html" target="_blank">上記のエントリ</a>に詳しいです。<br /> ご興味ありましたらご一読いただけますと幸いです。<br /> <br /></p>
+<h4>ソースコード</h4>
+<p>下記の内容でGitHubに公開しています。<br /> <br /> <a href="http://github.com/amazedkoumei/jquery.mobile.forpc" target="_blank">amazedkoumei / jquery.mobile.forpc | GitHUB</a><br /> <br /> ライセンスはMITライセンスとしていますので、私のコピーライト表示を含んだヘッダを維持したままであれば再配布も変更も自由にしていただいてかまいません。<br /> <br /> jquery.mobile.forpc-0.1.2.js</p>
+<pre class="brush: javascript">/*!
+ * jquery.mobile.forpc JavaScript Library v0.1.1
+ *
+ * Copyright (c) 2011 amazedkoumei (Twitter: @amazedkoumei, Blog:http://blog.amazedkoumei.com)
+ * Licensed under the MIT license + "keep this comment block even if you modify it".
+ *
+ * History:
+ *  04-11-2011 Published as jquery.mobile.forpc-0.1.0.js
+ *  04-12-2011 bug fixed: stylesheet is not applied for external html as jquery.mobile.forpc-0.1.1.js
+ *  24-05-2011 Published: matching document width to background-image width on Firefox4 as jquery.mobile.forpc-0.1.2.js
+ */
+var iPhoneImage = {
+ // set your iPhone image path
+ PATH : "/core/css/images/background-iphone.png",
+ // set Integer, how many px far from left side you would like to show iPhone image
+ // null means centering
+ POSITION_LEFT : null,
+ 
+ WIDTH : 396,
+ HEIGHT : 744,
+ INNER_WIDTH : 320,
+ INNER_HEIGHT : 460,
+ MAGIN_LEFT : 37,
+ MAGIN_TOP : 145,
+ isLoading : true
+}; // end iPhoneImage
+
+$(function(){
+ if( navigator.userAgent.indexOf('Linux; U; Android ') == -1 &amp;&amp;
+  navigator.userAgent.indexOf('iPhone; U') == -1 &amp;&amp;
+  navigator.userAgent.indexOf('iPad; U') == -1){
+  
+  $('div[data-role="page"]').live('pagebeforeshow',function(event, ui){
+   if(!jQuery.support.checkOn){
+    // for web-kit page transition
+    $('.background-iphone').show();
+   }
+  });
+  $('div[data-role="page"]').live('pageshow',function(event, ui){
+   $('.background-iphone').hide();
+   $('.' + $.mobile.activePageClass).closest('.background-iphone').show();
+  });
+  $('div[data-role="page"]').live('pagecreate',function(event){
+   var resizeRate =  iPhoneImage.HEIGHT / $(window).height();
+   if(iPhoneImage.POSITION_LEFT == null) {
+    iPhoneImage.POSITION_LEFT = ($(window).width() - iPhoneImage.INNER_WIDTH)/2;
+   }
+   $(this).css("overflow-y", "auto");
+   $(this).css("overflow-x", "hidden");
+   $(this).css("height", iPhoneImage.INNER_HEIGHT + "px");
+   $(this).css("width", iPhoneImage.INNER_WIDTH + "px");
+   $(this).css("margin-top", iPhoneImage.MAGIN_TOP + "px");
+   $(this).css("margin-left", iPhoneImage.POSITION_LEFT + iPhoneImage.MAGIN_LEFT + "px");
+   $(this).wrap('');
+   $(this).closest('.background-iphone').prepend('<img class="background-iphone-img" src="' + iPhoneImage.PATH + '" alt="" />');
+   $(this).closest('.background-iphone').css("padding-left", iPhoneImage.POSITION_LEFT + "px");
+   $(this).closest('.background-iphone').css("height", $(document).height() + "px");
+   $(this).closest('.background-iphone').css("background-size", "100% 100%");
+   $(this).closest('.background-iphone').css("font-size", resizeRate*100 + "%");
+   $(this).closest('.background-iphone').css("position", "relative");
+   $(this).closest('.background-iphone-img').css("height", resizeRate*100 + "%");
+  });
+  $('div[data-role="page"]').live('pagebeforecreate',function(event){
+   $(this).find('div[data-position="fixed"]').each(function(index, div) {
+    $(div).attr("data-position", "inline");
+   });
+  });
+ }
+}); // end onload
+</pre>
+<p> </p>
+<h4>最後に</h4>
+<p>iPhone向け英単語学習サイト『eWords』でもjquery.mobile.forpcを使用しています。<br /> 単語ページで左右にスワイプすることで単語を切り替えられます。<br /> <br /></p>
+<p><a href="http://ewords.amazedkoumei.com/"><img src="http://capture.heartrails.com/150x130/shadow?http://ewords.amazedkoumei.com/" border="0" alt="" width="150" height="130" align="left" /></a><a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a><a href="http://b.hatena.ne.jp/entry/http://ewords.amazedkoumei.com/" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/http://ewords.amazedkoumei.com/" border="0" alt="" /></a><br /> <span style="color: #808080; font-size: 80%;"> </span><br /> <strong>すきま時間の有効活用！英語マスタへの道は単語から！</strong><br style="clear: both;" /></p>
+<p><strong>eWords 関連エントリ : </strong><br /> <a href="http://blog.amazedkoumei.com/2011/02/ewords-iphone-on-gae.html" target="_blank">[ #eWords ] iPhone向け英単語学習サイト on GAE</a><br /> <a href="http://blog.amazedkoumei.com/2011/02/ewords-koumeilabs-google-translate-api.html" target="_blank">[ #ewords ][ #koumeilabs ] Google Translate API v2 ( Google翻訳API )の使い方</a><br /> <a href="http://blog.amazedkoumei.com/2011/02/ewords-koumeilabs-mobile-safari.html" target="_blank">[ #ewords ][ #koumeilabs ] Mobile Safari のキャッシング .manifest の使い方</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/ewords-iphone.html" target="_blank">[ #eWords ] iPhone向け英単語学習サイト 機能追加のお知らせ</a><br /> <br /> ぜひアクセスしてみてください。<br /> <br /> <br /> <br /></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

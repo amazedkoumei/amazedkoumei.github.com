@@ -1,0 +1,71 @@
+---
+layout: post
+title: 'プログラマ meets デザイナ♡。EvernoteとSVNを使ってメールから添付ファイルをなくそうず！'
+date: 2011/12/06 08:00
+tags: [evernote,お仕事系雑感]
+comments: false
+---
+
+<div class='post'>
+<div class="separator" style="clear: both; text-align: center;"><a style="clear: left; float: left; margin-left: 1em; margin-bottom: 1em;" href="http://3.bp.blogspot.com/-RkBKFvvLTEQ/Tt0JzXqKCMI/AAAAAAAAArg/z3RsJTAhWnQ/s1600/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-12-06%2B3.13.01%25EF%25BC%2589.png"><img src="http://3.bp.blogspot.com/-RkBKFvvLTEQ/Tt0JzXqKCMI/AAAAAAAAArg/z3RsJTAhWnQ/s400/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-12-06%2B3.13.01%25EF%25BC%2589.png" border="0" alt="" width="150" height="101" /></a></div>
+<p>添付ファイル付きのメールってテンション下がりませんか？<br /> <br /> そりゃ1通や2通ならさばきますよ、人間だもの。<br /> <br /> でも20通30通きたらどうですか？<br /> <br /></p>
+<ul>
+<li>.txtなら、まぁ見てもいいかてか本文に書けよ、と思いつつも仕事をこなし、</li>
+<li>.xls、.ppt、.pdfなら、まぁ見てもいいかてか概要くらい本文に書けよ、と思いつつも仕事をこなし、</li>
+<li>.zipなら、まぁ見てもいいかでもタバコ休憩のその後でね、とタバコを吸い、</li>
+<li>ストレージへのURLが本文に書いてあったらば、ちょっとゴハン食べてこよ、と現実逃避します。</li>
+</ul>
+<p><br /> お仕事の後の疲労感って添付ファイル付きメールの数に比例している気がするのです。<br /> 少なくとも私は。<br /> <br /> で、いま、とある案件で添付ファイルゼロを実践できております。</p>
+<p> </p>
+<h4>背景としてですね</h4>
+<p>いまWordpressをベースにとあるサイトの構築をしています。<br /> サイトの概要はと言いますと、Wordpressの一般的な使われ方としての情報発信サイトとしての性格に、その情報に興味をもった方が交流しあえるSNS的機能をがっちゃんこしたものになります。<br /> <br /> そのSNS的な部分とWordpressの基本機能で実現できない部分の構築を・・ということでお声かけいただきました。<br /> <br /> お話を伺ってみると</p>
+<ol>
+<li style="margin-top: 0px;">まずは見た目を画像で作って、関係者全員で合意を得ます、と。</li>
+<li style="margin-top: 0px;">Wordpressに静的なページを構築しつつ（デザイナさんの仕事）</li>
+<li style="margin-top: 0px;">並行してSNS的な部分の仕組みと+αの機能を構築し（私のお仕事）</li>
+<li style="margin-top: 0px;">最後に静的ページと仕組みの部分をがっちゃんこ（たぶん私のお仕事・・・）</li>
+</ol>
+<p><br /> という流れになりそうでして、どう考えても最後の工程が修羅場になるだろうという印象だったんですね。<br /> <br /> なので、最後の工程が省けるようある書式でHTMLタグを記述すれば直接データベースの情報を引っ張ってこれる仕組みを私の方で作りましょう、そして静的ページの構築完了それすなわちサイトの構築完了という状況にしましょう、と提案させていただきました。<br /> <br /> 実はそんなたいした提案ではなく中島聡さんご提唱のPure Ajaxという考え方を実情に合わせてスペックダウンさせて使いましょう、というただそれだけのことなんですけど。。<br /> <br /> ちなみにPure Ajaxって日本のWebの作り方にすごくマッチすると思いますし、中島さんご自身がそのためのライブラリも公開されてますので、ぜひ下記URLをご参照ください。</p>
+<ul>
+<li><a href="http://www.facebook.com/note.php?note_id=179569622077334&amp;id=795940530" target="_blank">Pure-AJAX Web Application Architecture</a></li>
+<li><a href="http://satoshi.blogs.com/life/2011/01/pure-ajax.html" target="_blank">ピュアAJAXアーキテクチャのススメ</a></li>
+<li><a href="http://satoshi.blogs.com/life/2011/01/javascript_template_engine_snbinder.html" target="_blank">JavaScript HTMLテンプレートエンジン SNBinder 公開</a></li>
+</ul>
+<h4>作業分担としてですね</h4>
+<p>大まかに下記のように作業分担を決めました。</p>
+<ul>
+<li>themeディレクトリ配下はデザイナさんの管轄</li>
+<li>pluginディレクトリ配下は私の管轄</li>
+</ul>
+<p><br /> 加えて動作の検証はAWSでおこなっているのですが、</p>
+<ul>
+<li>AWSとSVNは必ず同じ状態にすること</li>
+</ul>
+<p><br /> と、決めました。<br /> <br /> そしてWordpress全体をSVNにコミットしています。<br /> これでお互いの作業の成果物はAWSのブラウジングとSVNの同期で確認できます。<br /> <br /> 私はこのようなHTMLを書けばデータベースの内容をページに表示できます、という仕様をEvernoteの共有ノートブックに都度書きこんで共有します。<br /> <br /> メールはEvernoteに追記・変更した旨を伝えるアラートとしてのみ機能しています。<br /> <br /> これだけです！<br /> たったこれだけでメールから添付ファイルがなくなりました！<br /> <br /> <br /> おまいら、まだ協業メンバー間で添付ファイルつけてメール送ってんの？<br /> バカじゃねーの( ´_ゝ｀)ﾌｰﾝ</p>
+<h4>ラッキーだったことはですね</h4>
+<p>こういうこと、特に「ある書式でHTMLタグを記述すれば直接データベースの情報を引っ張ってこれる仕組みを導入しましょう」なんてことを言い出すと往々にして反発を受けるものなのですが、、段取り踏まずに突然言い出す私が悪いことも重々承知しているのですが、、デザイナさんはきちんと理解しようとしてくれて、そしてきちんと理解してくれる方でした。<br /> <br /> いまは彼にいろいろWordpressテクニックを教わりながらサイト構築を進めています。<br /> <br /> 沖縄の方なんですけどね・・沖縄行きたい欲が高まってることもあり、彼の存在は私の沖縄ロングバケーションの口実になりそうな気もするし、なんとか思いとどまる気もするし・・ｗ とりあえず夏までは待つ程度の理性はまだ保ってますｗ</p>
+<h4>最後に</h4>
+<p>サイト構築も終盤に差し掛かり、Redmineも動き始め、はたまた私の苦手分野なこともいろいろ考えねばならなくなってきている状況でございます。 <br /> <br /> 自戒の意もこめ、愛読している『大東京トイボックス』から一節。</p>
+<blockquote>どの現場にもそこそこプログラムが組める奴はゴロゴロいる。<br /> <br /> だがその先いけるヤツってのはあと一行を削ることをけしてあきらめないヤツだ。<br /> <br /> コトバにすると陳腐だがな<br /> <br /> 魂ってのは案外<br /> <br /> そういう小さいところに宿るもんなんだよ</blockquote>
+<p><br /> お後がよろしいようで。<br /> <br /></p>
+<div class="amazlet-box" style="margin-bottom: 0px;">
+<div class="amazlet-image" style="float: left; margin: 0px 12px 1px 0px;"><a name="amazletlink" href="http://www.amazon.co.jp/exec/obidos/ASIN/4344822870/amazedkoumei-22/ref=nosim/" target="_blank"><img style="border: none;" src="http://ecx.images-amazon.com/images/I/51ItUBJr1cL._SL160_.jpg" alt="大東京トイボックス (7) (バーズコミックス)" /></a></div>
+<div class="amazlet-info" style="line-height: 120%; margin-bottom: 10px;">
+<div class="amazlet-name" style="margin-bottom: 10px; line-height: 120%;"><a name="amazletlink" href="http://www.amazon.co.jp/exec/obidos/ASIN/4344822870/amazedkoumei-22/ref=nosim/" target="_blank">大東京トイボックス (7) (バーズコミックス)</a>
+<div class="amazlet-powered-date" style="font-size: 80%; margin-top: 5px; line-height: 120%;">posted with <a title="大東京トイボックス (7) (バーズコミックス)" href="http://www.amazlet.com/browse/ASIN/4344822870/amazedkoumei-22/ref=nosim/" target="_blank">amazlet</a> at 11.12.06</div>
+</div>
+<div class="amazlet-detail">うめ <br />幻冬舎 (2011-08-24)</div>
+<div class="amazlet-sub-info" style="float: left;">
+<div class="amazlet-link" style="margin-top: 5px;"><a name="amazletlink" href="http://www.amazon.co.jp/exec/obidos/ASIN/4344822870/amazedkoumei-22/ref=nosim/" target="_blank">Amazon.co.jp で詳細を見る</a></div>
+</div>
+</div>
+</div>
+<p><br /> <br /> <br /></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

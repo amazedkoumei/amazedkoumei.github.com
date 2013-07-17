@@ -1,0 +1,49 @@
+---
+layout: post
+title: '[小ネタ]Google App Engine / Python でローカルと本番サーバとで動作を変える方法'
+date: 2011/06/08 08:00
+tags: [小ネタ,googleAppEngine,python]
+comments: false
+---
+
+<div class='post'>
+<div class="separator" style="clear: both; text-align: center;"><a style="clear: left; float: left; margin-right: 1em; margin-bottom: 1em;" href="http://1.bp.blogspot.com/-z_PBpUUmkzs/TewkxnawUYI/AAAAAAAAAh8/r863J_7LESU/s1600/Google_App_Engine_logo_wtxt.png"><img src="http://1.bp.blogspot.com/-z_PBpUUmkzs/TewkxnawUYI/AAAAAAAAAh8/r863J_7LESU/s400/Google_App_Engine_logo_wtxt.png" border="0" alt="" width="161" height="188" /></a></div>
+<p><br /> <br /> Google App EngineはさすがGoogleさん提供のクラウドサービスなだけあって、本番環境に公開したプログラムは非常に高速で動作します。<br /> <br /> 反面ローカル環境ではデータ量が増えると、起動やアプリケーションのレスポンスが極端に劣化してしまいます。<br /> <br /> <br /> <br /> またFacebookアプリケーションを作成する場合には<br /> ローカル環境と本番環境とで別のAppIdを使いたいですよね。<br /> <br /> 本番環境にアップロードする度にプログラムを書き換えるのはイヤなものです。<br /> <br /> <br /> では、どうするか。<br /> <br /></p>
+<h4>答え</h4>
+<p>setting.py を作成し、os.environ.get("HTTP_HOST", "")でホスト名を取得します。<br /> <br /> あとは取得したホスト名ごとに定数を定義すればOK。<br /> <br /> 以下の例では</p>
+<ul>
+<li>ローカル環境でのみTrueになる IS_LOCAL</li>
+<li>ローカル環境、本番環境、それぞれで使用するFacebookの認証情報（FACEBOOK_APP_ID, FACEBOOK_APP_SECRET）</li>
+</ul>
+<p>を定義しています。<br /> <br /> <strong>setting.py</strong></p>
+<pre class="brush: py">import os
+
+host = os.environ.get("HTTP_HOST", "")
+if(host != "localhost:8080"):
+ # 本番サーバの設定
+ IS_LOCAL = False
+ FACEBOOK_APP_ID = 'xxxxxxxxxx'
+ FACEBOOK_APP_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+else:
+ # ローカルの設定
+ IS_LOCAL = True
+ FACEBOOK_APP_ID = 'yyyyyyyyy'
+ FACEBOOK_APP_SECRET = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
+</pre>
+<p><strong>index.py</strong></p>
+<pre class="brush: py">import setting, facebook
+
+# FacebookのOAuth認証
+user = facebook.get_user_from_cookie(self.request.cookies
+         , setting.FACEBOOK_APP_ID
+         , setting.FACEBOOK_APP_SECRET)
+
+if setting.IS_LOCAL:
+ # ローカルでのみ動作させたい処理
+ doSomethingOnLocal()
+</pre>
+<p><br /> 『<a href="http://shogifun.amazedkoumei.com/" target="_blank">将棋Fun</a>』では、最初ローカル環境でも13000件の棋譜データを使用していたのですが、ちょっとお話にならないくらい起動もレスポンスも遅かったので、ローカル環境でのみ100件のデータで動くように設定しました。<br /> <br /> <br /> おかげでサクサク快適な開発環境と相成りました。<br /> <br /> <br /></p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

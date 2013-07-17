@@ -1,0 +1,86 @@
+---
+layout: post
+title: 'RubyMotionでinstance_evalとdefine_methodを使ってみようず あとついでにsendメソッドも'
+date: 2012/12/24 17:03
+tags: [rubymotion]
+comments: false
+---
+
+<div class='post'>
+<p>この記事は <a href="http://www.adventar.org/calendars/18" target="_blank">RubyMotion Advent Calendar 2012</a> の24日目の記事です。</p>
+<p>クリスマス・イブですね。皆さまいかがお過ごしでしょうかリア充爆発しろなんて言わないよ絶対。</p>
+<p> </p>
+<p>さてさてここ最近とても大好きなRubyMotion、Xcodeが大嫌いであるがゆえに使い始めておりまして、ワタクシ決してRuby畑のニンゲンではなく、<a href="http://connpass.com/event/1039/" target="_blank">第1回のRubyMotionもくもく会</a> でしたか、<a href="https://twitter.com/satococoa" target="_blank">@satococoa</a> に「Rubyぽく書くために読んだらいい本かWebページ教えてください」と質問したところ「メタプログラミングRubyに決まってるだろJK」とのお答えをいただきましてシコシコと読んでる最中でございます。 ※まだ読み終えてない←</p>
+<p> </p>
+<p><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048687158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51TODrMIEnL._SL160_.jpg" alt="メタプログラミングRuby" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048687158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">メタプログラミングRuby</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 12.12.24</div></div><div class="amazlet-detail">Paolo Perrotta <br />アスキー・メディアワークス <br />売り上げランキング: 44,947<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4048687158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jp で詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+</p>
+<p> </p>
+<p>本書で紹介されているテクニックのいくつかはRubyMotionにすでに移植されておりまして、こちらのエントリが詳しいです。</p>
+<p><blockquote><a href="http://clayallsopp.com/posts/rubymotion-metaprogramming/" target="_blank">RubyMotion Metaprogramming</a></blockquote></p>
+<p> </p>
+<p>このエントリでは <a href="http://clayallsopp.com/posts/rubymotion-metaprogramming/" target="_blank">RubyMotion Metaprogramming</a> で紹介されてるテクニックのうち</p>
+<p>
+<ul>
+  <li>instance_eval
+    <ul>
+      <li>インスタンスの外部からインスタンス変数, インスタンスメソッドにアクセスするテクニック</li>
+    </ul>
+  </li>
+  <li>define_method
+    <ul>
+      <li>インスタンスのメソッドを動的に作成するテクニック</li>
+    </ul>
+  </li>
+</ul>
+</p>
+<p>を使って、アプリを書き換えてみようかと思います。</p>
+<p> </p>
+<p> </p>
+<h4>instance_eval / インスタンスの外部からインスタンス変数にアクセスするテクニック</h4>
+<p>題材には作成中のアプリのそこかしこで使っている、InformViewという自作パーツを使用します。</p>
+<p>修正前のソースは<a href="https://gist.github.com/4368177" target="_blank">こちら</a></p>
+<p> </p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="IMG_0003.png" src="http://lh3.ggpht.com/-dU_K6-j2m-A/UNYi_a3LlPI/AAAAAAAABZs/2c5fDi7CtVI/IMG_0003.png?imgmax=800" alt="IMG 0003" width="320" height="568" border="0" /></p>
+<p> </p>
+<p>これを表示するための記述はこんな感じでした。</p>
+<p><script src="https://gist.github.com/4360993.js"></script></p>
+<p> </p>
+<p>それをこうしたい。</p>
+<p><script src="https://gist.github.com/4361036.js"></script></p>
+<p> </p>
+<p>で、InformViewクラスはこんな記述になりました。</p>
+<p>クラスメソッドからSingletonで作成されたインスタンスのインスタンス変数にアクセスするためにinstance_evalを使っています。Rubyのクラスメソッドは</p>
+<p><blockquote>def self.method_name() end</blockquote></p>
+<p>の形式で定義できます。この例ではself.showとself.hideですね。</p>
+<p><script src="https://gist.github.com/4361041.js"></script></p>
+<p> </p>
+<p> </p>
+<h4>define_method / インスタンスのメソッドを動的に作成するテクニック</h4>
+<p>これまた題材は作成中のアプリです。</p>
+<p>修正前のソースは<a href="https://gist.github.com/4361091" target="_blank">こちら</a></p>
+<p> </p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="IMG_0004.png" src="http://lh3.ggpht.com/-_CkqV5IUD-o/UNYjBFW8m5I/AAAAAAAABZ0/0i0nY_DH5Fg/IMG_0004.png?imgmax=800" alt="IMG 0004" width="320" height="568" border="0" /></p>
+<p> </p>
+<p>それぞれReadabilityの「記事の既読・未読を切り替えるもの」「記事のFavを切り替えるもの」でして、やっている処理はほぼ同じなわけです。修正前のソースの toggleFavoriteメソッド() とtoggleArchive() メソッドを見比べてくみてください。違うのはAPIにPostするパラメータ名だけですね。</p>
+<p> </p>
+<p>これをこのように変更しました。toggleFavoriteメソッド() とtoggleArchive() メソッド が！ひとつの記述で！</p>
+<p><script src="https://gist.github.com/4361120.js"></script></p>
+<p> </p>
+<p> </p>
+<h4>最後に</h4>
+<p>『RubyMotionを使うからにはRubyぽく書いてみようず！』というドヤ顔タイトルを考えていたんですけど、出来上がりがあんまりRubyぽくなかったのでやめました( ；∀；)</p>
+<p> </p>
+<p>Rubyっぽさとはいったいどうすればでるのか！</p>
+<p>Rubyっぽさとはいったいなんなのか！</p>
+<p> </p>
+<p>あと、こちらのソースではメソッドを動的に呼び出せるsendメソッドを使っています。</p>
+<p><blockquote><a href="https://github.com/amazedkoumei/motion-octofeed/blob/master/app/activity_template_github_api.rb" target="_blank">motion-octofeed / app / activity_template_github_api.rb</a></blockquote></p>
+<p>RubyMotionのSDKがあれば、お手元のシミュレータ・実機で動作確認できます。</p>
+<p>ダウンロードはこちら → <a href="https://github.com/amazedkoumei/motion-octofeed" target="_blank">amazedkoumei / motion-octofeed</a></p>
+<p> </p>
+<p>それでは皆さま！よいクリスマス・イブをお過ごしください！！</p>
+<p> </p>
+</div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

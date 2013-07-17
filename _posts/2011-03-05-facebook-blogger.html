@@ -1,0 +1,99 @@
+---
+layout: post
+title: 'Facebookの新しいコメントシステムの導入方法 +α Bloggerへの実装の詳細'
+date: 2011/03/05 09:30
+tags: [ブログツール,facebook]
+comments: false
+---
+
+<div class='post'>
+先日、Facebookが新しいコメントシステムを実装したことが発表された。<br />
+<br />
+<a href="http://jp.techcrunch.com/archives/20110301facebook-rolls-out-overhauled-comments-system-try-them-now-on-techcrunch/" target="_blank">Facebook、新コメント・プラグインを発表―Google、Twitterは協力を拒否〔実例は元記事参照〕 | TechCrunch</a> (2011年3月2日)<br />
+<br />
+本ブログにも導入してみたので、その手順を紹介しようと思う。<br />
+<br />
+導入にあたっては、下記のソースを表示させたい場所に貼りつけるだけでOKだ。<br />
+ソース中の YOUR_CANONICAL_URL には、そのエントリのURLを記述する。<br />
+<blockquote>&lt;div id="fb-root"&gt;&lt;/div&gt;<br />
+&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;<br />
+&lt;fb:comments href="YOUR_CANONICAL_URL"&gt;&lt;/fb:comments&gt;<br />
+</blockquote><br />
+以上で終了だ。とてもシンプルだ。<br />
+<br />
+ただBloggerでは YOUR_CANONICAL_URL を動的に切り替えるための実装がやや複雑だったので手順を残しておくことにした。<br />
+Bloggerをご利用の方はぜひ参考にしていただきたい。<br />
+Blogger以外をご利用の方も、おそらく手順的には大差はないだろうと思う。<br />
+<br />
+手順は以下の通りだ。<br />
+<br />
+<br />
+<h3>1. ダッシュボードから「デザイン->HTMLの編集」 を開く</h3>Bloggerの管理画面にログインし、ダッシュボードから「デザイン->HTMLの編集」 を開く。<br />
+「デザイン->ページ要素」でウィジェットを追加することで実装できれば良かったのだが<br />
+標準で用意されている「HTML/JavaScript」ウィジェットでは実現できなかった。<br />
+<br />
+もしウィジェット追加で実現できるのであれば、<br />
+ぜひコメント、もしくはTwitterで教えていただきたい。<br />
+<br />
+<br />
+<h3>2. 念のために現在のフォーマットをバックアップする</h3>これからブログのHTMLソースを修正することになるので、<br />
+念のためにバックアップをとっておく。<br />
+<br />
+バックアップは「テンプレートをバックアップ/復元」欄の「テンプレートをすべてダウンロード」をクリックすると取得できる。（下記画像の赤枠部分）<br />
+<br />
+もし、ブログを破壊してしまった場合は、上記リンクをクリックしてダウンロードされるXMLファイルをアップロードすればよい。<br />
+<br />
+<div class="separator" style="clear: both; text-align: left;"><a href="http://4.bp.blogspot.com/-KmFj-yaXRbg/TXFysch_RaI/AAAAAAAAAbs/bPJdA9M550I/s1600/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-05%2B8.13.18%25EF%25BC%2589.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="175" width="400" src="http://4.bp.blogspot.com/-KmFj-yaXRbg/TXFysch_RaI/AAAAAAAAAbs/bPJdA9M550I/s400/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-05%2B8.13.18%25EF%25BC%2589.png" /></a></div><br />
+<br />
+<h3>3. ウィジェットのHTMLを表示する</h3>「テンプレートを編集」欄の「ウィジェットのテンプレートを展開」チェックをONにすると<br />
+ウィジェットのHTMLが表示される。（下記画像の赤枠部分）<br />
+<br />
+<div class="separator" style="clear: both; text-align: left;"><a href="http://4.bp.blogspot.com/-fufbjHJ3HA8/TXF0HhwOPgI/AAAAAAAAAb0/a2aG6wC8OAE/s1600/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-05%2B8.10.11%25EF%25BC%2589.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="172" width="400" src="http://4.bp.blogspot.com/-fufbjHJ3HA8/TXF0HhwOPgI/AAAAAAAAAb0/a2aG6wC8OAE/s400/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-05%2B8.10.11%25EF%25BC%2589.png" /></a></div><br />
+<br />
+<h3>4. 挿入するソースコードを下記のように修正する。</h3>赤字部分が修正箇所だ。<br />
+<blockquote><span style="color:red;">&lt;b:if cond='data:blog.pageType == &quot;item&quot;'&gt;</span><br />
+&lt;div id="fb-root"&gt;&lt;/div&gt;<br />
+&lt;script src="http://connect.facebook.net/en_US/all.js#xfbml=1"&gt;&lt;/script&gt;<br />
+&lt;fb:comments <span style="color:red;">expr:</span>href="<span style="color:red;">data:post.url</span>"&gt;&lt;/fb:comments&gt;<br />
+<span style="color:red;">&lt;/b:if'&gt;</span><br />
+</blockquote><br />
+<br />
+<h3>5. ソースコードを挿入する</h3>通常は、&lt;data:post.body/&gt;という記述を探し、その直下に上記４のソースを挿入すればよい。<br />
+<br />
+ただし、本ブログでは<br />
+<ol><li>記事の下に「You might alse like:」というコンテンツを配置している</li>
+<li>Facebookコメント導入後も通常のコメントを合わせて表示したい</li>
+<li>将来的にコメント非表示の設定をした場合はFacebookもコメントも非表示にしたい</li>
+</ol><br />
+という理由から&lt;b:if cond='data:post.allowComments'&gt;の直下に挿入している。<br />
+<br />
+<br />
+<h3>5. テンプレートを保存ボタンをクリックする</h3>変更を保存する。<br />
+<br />
+<br />
+以上で終了だ。<br />
+Facebookコメントの公式ドキュメントは現状こちらのようなので詳細が気になる方はぜひご一読いただきたい。<br />
+<a href="http://developers.facebook.com/blog/post/472" target="_blank">Improving Comments Across The Web | Developer Blog</a><br />
+<br />
+<br />
+ちなみに旧コメントシステムから機能的には進化していないようだ。<br />
+<br />
+変更点は何かというと、以前はFacebookアプリケーションの登録が必要だったのだが、それが不要になった。<br />
+Facebookアプリケーションの登録自体は2分とかからないのだが、<br />
+ブログツールとしては、致命的だと考えたのだろう。<br />
+<br />
+Facebookのエンジニアもサイトを使ってもらうために汲々としているのが、妙に嬉しい。<br />
+<br />
+このコメント機能がブログをどのうように変化させるのかはわからないが、<br />
+せっかく実装を簡単にしてくれたのだ。<br />
+願わくば普及して世の中がどう変化するのか見てみたい。<br />
+<br />
+<br />
+もし導入を検討されている方がいらっしゃいましたら、<br />
+本ブログで動作をテストいただいて結構です。<br />
+このコメントシステムの普及でなにが起きるのか、一緒に体験しましょう。<br />
+<br />
+enjoy！</div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

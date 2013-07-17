@@ -1,0 +1,95 @@
+---
+layout: post
+title: 'jQuery Mobile - APIの利用でより細かなカスタマイズ'
+date: 2011/03/26 10:30
+tags: [jQueryMobile]
+comments: false
+---
+
+<div class='post'>
+<p><strong>他と差別化できるjQuery Mobile</strong><a style="float: right;" title="jquerymobile-logo by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5556824060/"><img style="margin: 10px;" src="http://farm6.static.flickr.com/5229/5556824060_ca1d1873f3_m.jpg" alt="jquerymobile-logo" width="240" height="131" /></a><br /> <br /> jQuery Mobileに対して、楽に実装できる反面自由度に欠けるのではないか、という印象をお持ちの方も少ないかと思います。<br /> <br /> 私の過去のエントリでも、jQuery MobileがいかにHTML完結でサイト構築できるかに焦点を当てて紹介してきました。<br /> <br /> 過去のエントリ :<br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-3.html" target="_blank">jQuery Mobileのススメ - 商用利用に耐えうる3つの理由</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile.html" target="_blank">jQuery Mobile - 標準テーマでらくらくデザイン</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-data-transition.html" target="_blank">jQuery Mobile - data-transition属性でアニメーション指定</a><br /> <br /> ところがどっこい、jQuery Mobileは独自にJavascript・CSSを記述して、独自に拡張可能なように設計されています。<br /> 他のサイトと差別化を図りたい場合も問題なく利用できるんですね。<br /> <br /> 「楽に」しかし「自由に」。<br /> <br /> 本当によくできたライブラリだと思います。<br /> <br /> <br /></p>
+<h3>Javascriptで拾えるイベント</h3>
+<p><br /> 拾えるイベントの一覧です。<br /> ざっと眺めただけでおおよそのイメージが掴めるのではないでしょうか。</p>
+<ul>
+<li><strong>tap</strong></li>
+<li><strong>taphold</strong></li>
+<li><strong>swipe</strong></li>
+<li><strong>swipeleft</strong></li>
+<li><strong>swiperight</strong></li>
+<li><strong>orientationchange</strong></li>
+<li><strong>scrollstart</strong></li>
+<li><strong>scrollstop</strong></li>
+<li><strong>pagebeforeshow</strong></li>
+<li><strong>pagebeforehide</strong></li>
+<li><strong>pageshow</strong></li>
+<li><strong>pagehide</strong></li>
+<li><strong>pagebeforecreate</strong></li>
+<li><strong>pagecreate</strong></li>
+</ul>
+<p><br /> 最後の2つがやや分かりにくいので捕捉説明します。<br /> <br /> jQuery Mobileはページがロードされた時にページを構成する部品をスマートフォンに最適化してくれます。<br /> <br /> この処理はonloadのタイミングで実行されるのですが、<br /> <br /> <strong>pagebeforecreate</strong>は、この部品の最適化処理の『前処理』のことを<br /> <strong>pagecreate</strong>は、この処理の『後処理』のことを指します。<br /> <br /> これらのタイミングで動作させたいJavascriptメソッドがあれば<br /> pagebeforecreate, pagecreateにイベントとして登録すればよいのです。<br /> <br /> イベントの登録は以下のような処理をonload時に実行すればOKです。</p>
+<pre class="brush: jscript">$('.hoge').live('tap',function(event){
+  doSomething();
+});
+</pre>
+<p>"hoge"クラスの要素がタップされた時にdoSomething()メソッドを実行しなさい、という命令ですね。<br /> <br /> <br /> ちなみに最適化される部品についてはIBMさんが1枚の画像にしてくれています。<br /> 全部とは言えませんが、充分な部品が提供されていますね。<br /> <br /> <a href="http://jquerymobile.com/demos/1.0a3/" target="_blank">公式デモサイト</a>の「Components」でこれらの部品の詳細が解説されています。<br /> 興味のある方はぜひご覧になってみてください。<br /> <br /> <span style="font-size: 50%;"><strong>jQuery Mobileで最適化される部品</strong></span><br /> <a style="margin-left: 1em; margin-right: 1em;" href="http://3.bp.blogspot.com/-Kgfry9uJoTs/TYzntRuzE2I/AAAAAAAAAds/KgV2eIQTsKk/s1600/fig01.jpg"><img src="http://3.bp.blogspot.com/-Kgfry9uJoTs/TYzntRuzE2I/AAAAAAAAAds/KgV2eIQTsKk/s1600/fig01.jpg" border="0" alt="" /></a><br /> 参考 : <a href="http://www.ibm.com/developerworks/jp/web/library/wa-jqmobile/?cmp=dw&amp;cpb=dwwdv&amp;ct=dwrss&amp;cr=dwrss&amp;ccy=jp&amp;csr=030411">jQuery Mobile の紹介 | IBM</a><br /> <br /> <br /> <br /> <br /></p>
+<h3>提供されているメソッド</h3>
+<p><br /> jQuery Mobileはいくつかのメソッドが外部から呼び出せるよう設計されています。<br /> 今回は、iPhone向け英単語学習サイト『<a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a>』で使用した２つのメソッドを紹介したいと思います。<br /> <br /></p>
+<h4>$.mobile.changePage(to, transition, reverse, changeHash);</h4>
+<table border="1">
+<thead> 
+<tr>
+<th>引数名</th><th>デフォルト値</th><th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>to</td>
+<td>-</td>
+<td>遷移先URL <span style="color: red;">※1</span></td>
+</tr>
+<tr>
+<td>transition</td>
+<td>"slide" <span style="color: red;">※2</span></td>
+<td>遷移時のアニメーション</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td>false</td>
+<td>trueの場合逆方向にアニメーション</td>
+</tr>
+<tr>
+<td>changeHash</td>
+<td>true</td>
+<td>trueの場合ページ遷移ハッシュを更新する</td>
+</tr>
+</tbody>
+</table>
+<p><br /> ページ遷移のためのメソッドです。<br /> to, transition, reverseについては、前回のエントリでページ遷移の詳細を紹介したので、そちらをご覧になっていただくとより理解しやすいと思います。ぜひご覧になってください。<br /> <br /> 前回のエントリ : <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-data-transition.html">jQuery Mobile - data-transition属性でアニメーション指定</a><br /> <br /> changeHashはやや分かりにくいですね。<br /> <br /> jQuery Mobileは「back」ボタンを自動表示する機能を備えており、そのためにページ遷移を記録するための配列を内部にもっています。<br /> <br /> changeHashはその配列を更新するか否かを指示するためのパラメータです。<br /> 「back」ボタンを非表示にする場合はfalseを指定しましょう。<br /> <span style="color: red;">※1</span><br /> jQuery ObjectやAjaxパラメータを渡すことも可能です。jQuery Objectを渡した場合の動作については前回のエントリをご覧になってください。<br /> <a href="http://jquerymobile.com/demos/1.0a3/#docs/api/methods.html">公式ページ</a>によると、2つのページ参照を配列で渡すことができるようですが、よく意味が理解できませんでした。ご存じの方、教えて頂けると幸いです。<br /> <span style="color: red;">※2</span><br /> アニメーションのデフォルト値は変更可能です。<br /> 詳細は<a href="http://jquerymobile.com/demos/1.0a3/#docs/api/globalconfig.html" target="_blank">こちら</a>をご覧になってください。「defaultTransition」でページ内検索すると該当箇所に辿り着きます。<br /> <br /></p>
+<h4>$.mobile. pageLoading(Done);</h4>
+<table border="1">
+<thead> 
+<tr>
+<th>引数名</th><th>デフォルト値</th><th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Done</td>
+<td>false</td>
+<td>trueの場合、loadingイメージを隠す</td>
+</tr>
+</tbody>
+</table>
+<p><br /> loadingメッセージを表示するためのメソッドです。<br /> <br /> loadingメッセージとは重い処理を実行する時にだす<br /> グルグル回るこれのことですね。<br /> <br /> <a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5559572808/"><img style="margin-left: 30px;" src="http://farm6.static.flickr.com/5054/5559572808_d530b0203b_m.jpg" alt="" width="160" height="240" /></a><br /> <br /> 一般的には下記のようなソースをonloadイベントに記述することになると思います。</p>
+<pre class="brush: jscript">$('.hoge').live('tap',function(event){
+  $.mobile. pageLoading(); // loadingメッセージを表示
+  doSomethingHeavy();
+  $.mobile. pageLoading(true); // loadingメッセージを隠す
+});
+</pre>
+<p>"hoge"クラス要素がタップされた場合にloadingメッセージを表示して、何らかの重い処理をするというソースですね。<br /> <br /> loadingメッセージのメッセージ内容は変更可能です。<br /> 詳細は<a href="http://jquerymobile.com/demos/1.0a3/#docs/api/globalconfig.html" target="_blank">こちら</a>をご覧になってください。「loadingMessage」でページ内検索すると該当箇所に辿り着きます。<br /> <br /> 他のメソッドに興味のある方は、<a href="http://jquerymobile.com/demos/1.0a3/#docs/api/methods.html" target="_blank">公式ページ</a>に詳しい解説があります。<br /> <br /> 是非参考にしてください。<br /> <br /> <br /></p>
+<h3>最後に</h3>
+<p><br /> 公式ページにもデモが準備されています。<br /> <br /> デモ : <a href="http://jquerymobile.com/demos/1.0a3/" target="_blank">jQuery Mobile: Demos and Documentation : Pages</a><br /> <br /> 今回紹介したのは、APIの2行目「Events」と<br /> 3行目「Methods &amp; Utilities」の内容の一部です。<br /> 興味がありましたら、ぜひ他の項目もご覧になってください。<br /> <br /> <br /><br /></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

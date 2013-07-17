@@ -1,0 +1,519 @@
+
+.container-narrow {
+  margin: 0 auto;
+  max-width: 700px; }
+
+.container-narrow > hr {
+  margin: 30px 0; }
+
+.navbar .nav {
+  float: right; }
+
+/* posts index */
+.post > h3.title {
+  position: relative;
+  padding-top: 10px; }
+
+.post > h3.title span.date {
+  position: absolute;
+  right: 0;
+  font-size: 0.9em; }
+
+.post > .more {
+  margin: 10px 0;
+  text-align: left; }
+
+/* post-full*/
+.post-full .date {
+  margin-bottom: 20px;
+  font-weight: bold; }
+
+/* tag_box */
+.tag_box {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; }
+
+.tag_box li {
+  line-height: 28px; }
+
+.tag_box li i {
+  opacity: 0.9; }
+
+.tag_box.inline li {
+  float: left; }
+
+.tag_box a {
+  padding: 3px 6px;
+  margin: 2px;
+  background: #eee;
+  color: #555;
+  border-radius: 3px;
+  text-decoration: none;
+  border: 1px dashed #cccccc; }
+
+.tag_box a span {
+  vertical-align: super;
+  font-size: 0.8em; }
+
+.tag_box a:hover {
+  background-color: #e5e5e5; }
+
+.tag_box a.active {
+  background: #57A957;
+  border: 1px solid #4c964d;
+  color: #FFF; }
+
+
+
+
+.app-link {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  height: 30px;
+}
+.app-description {
+  padding: 10px;
+  height: 30px;
+}
+.app-feature {
+  padding: 10px;
+}
+
+
+div.comments div.author {
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+div.comments div.author span{
+  font-weight: normal;
+}
+
+
+
+
+
+#navbar-iframe {height:0px;visibility:hidden;display:none}
+.feed-links {display: none;}
+body, .body-fauxcolumn-outer {
+background: #FDFDFA;
+color: #080000;
+font-family: Georgia, "Times New Roman", serif;
+line-height: 1;
+margin: 0;
+/*padding: 0;*/
+border: 0;
+font: inherit;
+font-size: 100%;
+vertical-align: baseline;
+}
+a {
+color: #9C0001;
+-webkit-tap-highlight-color: #d7dcdf;
+text-decoration: none;
+}
+a:hover {
+color:#C77405;
+text-decoration:underline;
+}
+a img {
+border-width:0;
+}
+/* Header
+-----------------------------------------------
+*/
+#header-wrapper {
+margin: 0 auto 10px;
+margin-left: 21px;
+padding-bottom: 35px;
+margin-bottom: 10px;
+}
+#header-inner {
+background-position: center;
+margin-left: auto;
+margin-right: auto;
+}
+#header {
+margin: 10px;
+border: 0px solid #cccccc;
+text-align: center;
+color:#000000;
+}
+#header h1 {
+font-size: 2em;
+text-shadow: 4px 4px 4px #aaa;
+margin:5px 5px 0;
+padding:15px 10px .25em;
+line-height:1.2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+}
+h1.title {
+text-shadow: 4px 4px 4px #aaa;
+margin:5px 5px 0;
+padding:15px 10px .25em;
+line-height:1.2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+}
+#header a {
+color:#000000;
+text-decoration:none;
+}
+#header a:hover {
+color:#666;
+}
+#header .description {
+margin:0 5px 5px;
+padding:0 20px 15px;
+max-width:600px;
+letter-spacing:.2em;
+line-height: 1.4em;
+color: #444444;
+}
+#header img {
+margin-left: auto;
+margin-right: auto;
+}
+/* Menu Horizontal
+---------------------------------------------*/
+.menubar {
+height: 30px;
+margin: 0 auto;
+padding: 0 auto;
+border-bottom: 1px groove;
+margin-left: 19px;
+}
+.menuhorizontal {
+height: 30px;
+margin: 0 auto;
+padding: 2px 0px;
+margin-right: 12px;
+}
+.menuhorizontal ul{margin: 0; padding-left:7px;color:#000;font:bold 11px normal normal 16px Yanone Kaffeesatz;}
+.menuhorizontal li{display: inline; margin: 0;}
+.menuhorizontal li a{float: left;display: block;text-decoration:none;font:bold 11px normal normal 16px Yanone Kaffeesatz;padding: 5px 15px 5px 15px;border-right:1px solid #eee;color: #111}
+.menuhorizontal li a:visited{color: #111;}
+.menuhorizontal li a:hover{background:#111;color:#fff;text-decoration:none;}
+/* Outer-Wrapper
+----------------------------------------------- */
+#outer-wrapper {
+max-width: 940px;
+min-width: 300px;
+margin: 0 auto;padding: 5px 0px;
+font:inherit;
+padding: 0 0 1.8em 4em;
+}
+#wrap2 {
+width: 90%;
+font-size: 87.5%;
+margin: 20px auto 3.1% auto;
+min-width: 300px;
+}
+#main-wrapper {
+margin: 0 10px 0;
+float: center;
+/* fix for long text breaking sidebar float in IE */
+overflow: hidden;
+/* fix for long non-text content breaking IE sidebar float */
+}
+/* Headings
+----------------------------------------------- */
+h2 {text-shadow: 1px 1px 3px #fff;border-bottom:1px groove;
+margin:1.0em 0 .5em;
+font:normal bold 16px Yanone Kaffeesatz;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#444444;
+}
+/* Posts
+-----------------------------------------------
+*/
+h2.date-header {
+display:none;
+margin:1.5em 0 .5em;
+}
+.post-wrapper {
+padding: 5px 10px;
+}
+.post {
+padding-bottom: 20px;
+margin-bottom: 20px;
+}
+.post h3 {
+font-size: 1.7em;
+font-weight: 600;
+line-height: 1.2;
+border-top: 1px solid #CDCDCC;
+border-bottom: 1px solid #CDCDCC;
+padding-top: 0.8em;
+padding-bottom: 0.8em;
+}
+.post h3 a, .post h3 a:visited, .post h3 strong {
+display:block;
+text-decoration:none;
+color:#000000;
+font-weight:bold;
+}
+.post-body {
+line-height: 1.7em;
+}
+.post h3 strong, .post h3 a:hover {
+color:#c22400;
+}
+.post-body h4 {
+display: block;
+-webkit-margin-before: 1.33em;
+-webkit-margin-after: 1.33em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+font-weight: bold;
+}
+.post-body p {
+margin:0 0 .75em;
+}
+.post-body ul li {
+padding-top: 5px;
+padding-bottom: 5px;
+}
+.post-body ol li {
+padding-top: 5px;
+padding-bottom: 5px;
+}
+.post-body blockquote {
+line-height: 1.45em;
+margin: 1.5em 4em;
+position: relative;
+display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 40px;
+-webkit-margin-end: 40px;
+}
+.post-body blockquote, q {
+quotes: none;
+}
+.post-body blockquote::before {
+content: "\201C";
+filter: alpha(opacity=20);
+font-family: "Constantia", Georgia, 'Hoefler Text', 'Times New Roman', serif;
+font-size: 4em;
+left: -0.5em;
+opacity: .2;
+position: absolute;
+top: .25em;
+color: #080000;
+}
+.post-body blockquote p {
+margin:.75em 0;
+}
+.post-body pre, .post-body code {
+font-family: "Droid Sans Mono", "Lucidia Console", "Menlo", "Courier New", Courier, monospace;
+font-size: 90%;
+max-width: 100%;
+overflow: auto;
+padding: 0.2em 0.4em;
+white-space: pre;
+word-wrap: break-word;
+background-color: #fffffe;
+}
+.post-footer {
+margin: .75em 0;
+color:#444444;
+text-transform:uppercase;
+letter-spacing:.1em;
+font: italic normal 12px Yanone Kaffeesatz;
+line-height: 1.4em;
+}
+.post-share-buttons {float:right;}
+.jump-link {
+float:right;margin-top:5px;
+margin-right: 10px;
+}
+.jump-link a{
+font-style:italic;
+font-size:18px;
+}
+.comment-link {
+margin-left:.6em;
+}
+/* Comments
+----------------------------------------------- */
+#comments h4 {text-shadow: 1px 1px 3px #fff;
+margin:1em 0;
+font-weight: bold;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color: #444444;
+}
+#comments-block {
+margin:1em 0 1.5em;
+line-height:1.6em;
+}
+#comments-block .comment-author {
+margin:.5em 0;
+}
+#comments-block .comment-body {
+margin:.25em 0 0;
+}
+#comments-block .comment-footer {border-bottom:1px solid #eee;
+margin:-.25em 0 2em;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.1em;
+}
+#comments-block .comment-body p {
+margin:0 0 .75em;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+.avatar-image-container img {
+background:  url(http://4.bp.blogspot.com/-8esMPELupvY/TqLfjKjr1II/AAAAAAAAAb0/gnV8jhNKQpM/s000/afhlwj.png) no-repeat center;
+float:none;
+}
+.avatar-image-container {
+background:  url(http://4.bp.blogspot.com/-8esMPELupvY/TqLfjKjr1II/AAAAAAAAAb0/gnV8jhNKQpM/s000/afhlwj.png) no-repeat;
+}
+.avatar-image-container.avatar-stock img {
+display:none;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+}
+#blog-pager-newer-link {
+float: left;
+}
+#blog-pager-older-link {
+float: right;
+}
+#blog-pager {
+text-align: center;
+margin-top: 30px; 
+}
+/* Profile
+----------------------------------------------- */
+.profile-img {width:65px;height:65px;padding:6px;overflow: hidden;margin-top:5px;border:1px solid #eee;
+background:#f7f7f7;}
+.profile-data {
+margin:0;
+text-transform:uppercase;
+letter-spacing:.1em;
+font: italic normal 12px Yanone Kaffeesatz;
+color: #444444;
+font-weight: bold;
+line-height: 1.6em;
+}
+.profile-datablock {
+margin:.5em 0 .5em;
+}
+.profile-textblock {
+margin: 0.5em 0;
+line-height: 1.6em;
+}
+.profile-link {
+font: italic normal 12px Yanone Kaffeesatz;
+text-transform: uppercase;
+letter-spacing: .1em;
+}
+/* Footer
+----------------------------------------------- */
+#footer {
+width: 610px;
+margin: 0 auto 10px;
+margin-left: 21px;
+}
+#footer-column-divide {
+clear:both;
+}
+.footer-column {
+margin: 0 auto 10px;
+margin-left: 21px;
+}
+#credit {
+margin: 0px auto;
+padding: 100px 0 0 0;
+text-align:center;
+}
+/* Subscription Email widget
+--------------------------------------*/
+.sidebar .FollowByEmail .follow-by-email-inner .follow-by-email-address {
+border: 1px solid #EEEEEE;
+height: 21px;
+width: 97%;
+}
+.sidebar .FollowByEmail .follow-by-email-inner .follow-by-email-submit {
+background:#CCCCCC;
+color: #666666;
+font-family: tahoma;
+font-size: 11px;
+font-weight: bold;
+height: 24px;
+width: 70px;
+cursor:pointer;
+}
+.FollowByEmail .follow-by-email-inner input:hover {
+color: #FFF !important;
+}
+.sidebar .FollowByEmail .follow-by-email-inner form{
+margin:0;
+}
+/** Page structure tweaks for layout editor wireframe */
+body#layout #header {
+margin-left: 0px;
+margin-right: 0px;
+}
+/* Breadcrumbs
+--------------------------------------*/
+.breadcrumbs{
+margin-bottom: 0.9em;
+}
+.post-body img {max-width:99% !important;}
+/* PageNavi
+--------------------------------------*/
+.blog-pager,#blog-pager{
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+text-align:center;
+}
+.showpageNum a,.showpage a {
+float:left;
+line-height:14px;
+padding:2px 4px 0;
+min-width:8px;
+border:1px solid #d7dce0;
+color:#848a8c;
+text-decoration:none;
+margin:0 3px;
+}
+.showpageNum a:hover,.showpage a:hover {
+color:#fff;
+background:#7f8487;
+border-bottom-color:#848a8c;
+}
+.showpageOf{
+margin:0 8px 0 0;
+display:none;
+}
+.showpagePoint {
+color:#fff;
+background:#7f8487;
+border-bottom-color:#848a8c;
+float:left;
+line-height:14px;
+padding:2px 4px 0;
+min-width:8px;
+border:1px solid #d7dce0;
+text-decoration:none;
+}
+
+.post-list-hedaer {
+  margin-bottom: 30px;
+}
+.post-list-title {
+  font-size: 1.7em;
+}

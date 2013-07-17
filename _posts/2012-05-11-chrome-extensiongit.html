@@ -1,0 +1,81 @@
+---
+layout: post
+title: 'Chrome Extension開発で自動テストとGitを試してみての感想'
+date: 2012/05/11 20:20
+tags: [Unitテスト,github,engineering,qunit]
+comments: false
+---
+
+<div class='post'>
+<p>先日ChromeのExtensionを2つほど作成しまして、まぁ自分が欲しかったから作ったのですけれども、テクニック的な興味はExtension自体にはなく</p>
+<ul>
+<li>自動テストとTDD（テスト駆動開発）</li>
+<li>Gitによるバージョン管理とGitHubでのソースの共有</li>
+</ul>
+<p>の2点にありまして、せっかくですので使ってみての感想をつらつらと書き残しておこうかと思います。</p>
+<p>ちなみに作成したExtensionは下記になります。</p>
+<p><hr /></p>
+<p><a href="http://blog.amazedkoumei.com/2012/05/chrome-extensionato-ichinenchrome-web.html" target="_blank"><img class="alignleft" src="http://capture.heartrails.com/150x130/shadow?http://blog.amazedkoumei.com/2012/05/chrome-extensionato-ichinenchrome-web.html" alt="" width="150" height="130" align="left" border="0" /></a><a style="color: #0070c5;" href="http://blog.amazedkoumei.com/2012/05/chrome-extensionato-ichinenchrome-web.html" target="_blank">Chrome Extension「ato-ichinen」をChrome Web StoreとGithubに公開しました | 諸葛亮孔明もびっくりですわ のブログ</a><a href="http://b.hatena.ne.jp/entry/http://blog.amazedkoumei.com/2012/05/chrome-extensionato-ichinenchrome-web.html" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/http://blog.amazedkoumei.com/2012/05/chrome-extensionato-ichinenchrome-web.html" alt="" border="0" /></a><br style="clear: both;" /><br /> Chrome Web Store: <a href="https://chrome.google.com/webstore/detail/pojaolkbbklmcifckclknpolncdmbaph" target="_blank">https://chrome.google.com/webstore/detail/pojaolkbbklmcifckclknpolncdmbaph</a><br /> GitHub: <a href="https://github.com/amazedkoumei/chrome-ext-ato-ichinen" target="_blank">https://github.com/amazedkoumei/chrome-ext-ato-ichinen</a></p><p><hr /></p>
+<p>  <a href="http://blog.amazedkoumei.com/2012/05/chrome-extensionmy-searchchrome-web.html" target="_blank"><img class="alignleft" src="http://capture.heartrails.com/150x130/shadow?http://blog.amazedkoumei.com/2012/05/chrome-extensionmy-searchchrome-web.html" alt="" width="150" height="130" align="left" border="0" /></a><a style="color: #0070c5;" href="http://blog.amazedkoumei.com/2012/05/chrome-extensionmy-searchchrome-web.html" target="_blank">Chrome Extension「My はてブ Search」をChrome Web StoreとGithubに公開しました | 諸葛亮孔明もびっくりですわ のブログ</a><a href="http://b.hatena.ne.jp/entry/http://blog.amazedkoumei.com/2012/05/chrome-extensionmy-searchchrome-web.html" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/http://blog.amazedkoumei.com/2012/05/chrome-extensionmy-searchchrome-web.html" alt="" border="0" /></a><br style="clear: both;" /><br /> Chrome Web Store: <a href="https://chrome.google.com/webstore/detail/fagdddhhkjdpchaokeceilckcefmbeil" target="_blank">https://chrome.google.com/webstore/detail/fagdddhhkjdpchaokeceilckcefmbeil</a><br /> GitHub: <a href="https://github.com/amazedkoumei/chrome-ext-my-hatebu-search-in-google" target="_blank">https://github.com/amazedkoumei/chrome-ext-my-hatebu-search-in-google</a></p>
+<p><hr /></p>
+<p> </p>
+<h4>自動テスト / TDDについての感想</h4>
+<p>GitHubにあげてから何回かBugFixをPushしたのですが確かに楽だったのいうのが率直な感想です。</p>
+<p>例えば正規表現に不具合など、自動テストを書いてなかった場合にはすでにテスト済みのケースの再試験も必要となりますし、とてもストレスを感じる修正ですが、自動テストを書いてあったおかげで思いっきって修正をかけることができました。</p>
+<p>修正手順としましても</p>
+<ol>
+<li style="margin: 0px;">不具合のあったケースのテストを記述</li>
+<li style="margin: 0px;">テストが失敗することを確認</li>
+<li style="margin: 0px;">本体を修正</li>
+<li style="margin: 0px;">テストが成功することを確認</li>
+</ol>
+<p>といういわゆるTDD（テスト駆動）な直し方を、テスト駆動でやるねん( ノ゜Д゜)  と肩肘はることなく自然とそうしました。それが一番楽な修正方法でしたから。</p>
+<p> </p>
+<p>自動テスト / TDDに関するトピックでよく話題にのぼるカバレッジ率ですが、こちらについてもよく言われるように決して100%を目指す必要はないと感じました。</p>
+<p>自動テストを、書くべき・さぼるべき、のひとつの基準としては、Webアプリケーション開発の経験が長いためそれを例に書きますけども、「ブラウザから視線を切らねば確認できない箇所」というのがまず当てはまるかな、と。神はディテールに宿ると言いますが、ストレスもディテールに宿るのでありますよ。</p>
+<p>具体的な例をあげますと</p>
+<ul>
+<li>データベースのCRUD</li>
+<li>ログ出力</li>
+<li>ファイルの入出力</li>
+<li>メール送信</li>
+</ul>
+<p>あたりでしょうか。クリックしてDB覗いて、クリックしてログを覗いて、クリックしてメーラー覗いてとかもうね。。ストレスはディテールに宿るのでありますよ。</p>
+<p> </p>
+<p>これに加えて、ちょろ修正に対して膨大なケースの試験が発生してしまうもの。</p>
+<ul>
+<li>正規表現</li>
+<li>入力値のValidation</li>
+</ul>
+<p>あたり。</p>
+<p>インジェクション対策の試験であるとか、発生させるのが困難な例外処理の試験であるとか、ブラウザ以外のツールを使わねばならない面倒な試験を、ただエディタに文字列を打ち込むだけで繰り返し実施できる環境ができてしまうのは素敵だなと感じた次第です。</p>
+<p> </p>
+<p>BugFixではなく新機能作成の際にテスト駆動にこだわる必要はあまり感じませんでした。</p>
+<p>定型の業務システムのようにガチガチに仕様が固まっている場合はTDDで開発するのが幸せなんでしょうけども、そうでないものについては、とりあえず動くものを作り、試行錯誤して、うむ、これで行こうと大方針を決めてからテストを作成しないと、テストがお荷物になってしまうかなと。</p>
+<p>つまりは自動テストが試行錯誤の味方になってくれる適切な作成タイミングというものが確かにあって、そのタイミングで作成するのが幸せなはずなんですけど、、、ちょっとそのタイミングを言語化するのは難しいですな（・ω・｀）</p>
+<p> </p>
+<p>以上、なにをいまさらな話ですけど、そう思って、書き残したいとも思ったんだから堪忍してーな。</p>
+<p>ちなみにExtensionの開発で使ったqunitのハマりどころはこちらで別途エントリしておりますのでもしよろしければ。</p>
+<p>→ <a href="http://blog.amazedkoumei.com/2012/05/javascriptunitqunittestasyncteststart.html" target="_blank">JavascriptのUnitテストライブラリ「qunit」のtest()メソッドとasyncTest()メソッドとstart()メソッドについて</a></p>
+<p> </p>
+<h4>Gitによるバージョン管理 / GitHubでのソースの共有 について</h4>
+<p>これもまぁなにをいまさらな話なのですが、ローカルにリポジトリがあるのはとても幸せだなと感じました。</p>
+<p>CVSやSubversionを使ってのチーム開発ですと、やはり中途半端なものをみんなが使うサーバにコミットするわけにはいきませんから、コピペでバックアップをとってDiffツールで比較するとか、ちょｗいま2012年なんですけどｗｗみたいなことをせねばならず、それはそれはストレスなわけですが、Gitの場合はローカルにリポジトリがあるわけですから、もうガンガンと誰を気にすることなくコミットできてしまうわけです。</p>
+<p>ちなみに今回ぼっちで開発しているので、上記の感想は完全に妄想です。しかしだからと言ってぼっちの妄想力なめんなよこの野郎（・ω・｀）</p>
+<p> </p>
+<p>GitHubについてはまだよく分からない部分もありますが（自作自演のPullRequestはしてみたけども！ひとりで！Issueも切って！泣いたりなんかしなかったけどね！）、チケット管理機能 (<a href="https://github.com/amazedkoumei/chrome-ext-my-hatebu-search-in-google/issues" target="_blank">Issuesタブ</a>) やWiki (<a href="https://github.com/amazedkoumei/chrome-ext-my-hatebu-search-in-google/wiki" target="_blank">Wikiタブ</a>)、branch相関図 (<a href="https://github.com/amazedkoumei/chrome-ext-my-hatebu-search-in-google/network" target="_blank">Networkタブ</a>) などなどありまして、いわゆるオープンソースでない企業様内での開発も、イントラ内にマイサーバを立てるのではなくPrivateリポジトリ使って開発していった方が幸せになれるのではなかろうかと思った次第です。安いし。</p>
+<p> </p>
+<h4>最後に</h4>
+<p>プログラムを書いていて一番ストレスを感じるのは、やはり動いているものを壊す時でして、自動テストもGitもそのストレスを大いに取り払ってくれる素敵なツールだと感じました。</p>
+<p>UIであるとかUXであるとかが取り沙汰され、クライアントもどんどんリッチになっている昨今、ノンストレスで試行錯誤できる環境は必須かなと思う次第です。</p>
+<p>取り除けるのは小さな小さなストレスかもしれませんが、それを積み重ねてストレスゼロに近づければ、それはそれは幸せではないですか。</p>
+<p> </p>
+<p>個人的な開発環境につきましても小さな小さなストレスを取り除くべく、日々小さな小さな工夫をこらし、少しでもソースに集中できる環境を構築するために時間と労力をつぎ込んでおります。</p>
+<p> </p>
+<p>プログラマにご連絡の際には極力メールで頂けると喜ばれると思います。</p>
+<p> </p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

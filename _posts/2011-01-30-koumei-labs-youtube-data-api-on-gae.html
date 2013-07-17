@@ -1,0 +1,50 @@
+---
+layout: post
+title: '[ #koumeilabs ] YouTube Data APIの使い方 on GAE'
+date: 2011/01/30 23:55
+tags: [koumeilabs,youtube]
+comments: false
+---
+
+<div class='post'>
+YouTube Data APIをいろいろ触ってみた。<br />
+<br />
+触ってみた結果はこちらに公開しているので一度アクセスしてもらいたい。<br />
+<a href="http://koumei-labs.amazedkoumei.com/youtube/" target="_blank">http://koumei-labs.amazedkoumei.com/youtube/</a><br />
+<br />
+今回もやはりホストはGoogle App Engineだ。<br />
+<br />
+<a href="http://code.google.com/intl/en/apis/youtube/2.0/developers_guide_protocol.html" target="_blank">YouTube Data API</a>は前回のFBMLに比べるとやや優しくない印象を受ける。<br />
+<a href="http://blog.amazedkoumei.com/2011/01/koumei-labs-facebook.html" target="_blank">前回のエントリ</a>にも書いたがFBMLでは<span class="Apple-style-span" style="color: magenta;">&lt;fb:login-button&gt;&lt;/fb:login-button&gt;</span>と記述するだけでFacebookへのログインボタンを表示できる。<br />
+一方、YouTube Data APIはXML形式のレスポンスを返すのみだ。<br />
+<br />
+つまりFBMLでは<a href="http://developers.facebook.com/docs/reference/fbml/" target="_blank">ドキュメント</a>に記載されているパーツを切り貼りしていくだけで、それなりのUIを作ることができるのに対し、<a href="http://code.google.com/intl/en/apis/youtube/2.0/developers_guide_protocol.html" target="_blank">YouTube Data API</a>ではHTMLとJavascriptを使ってUIをすべて自分で手作りせねばならないので、やや敷居が高いと言える。<br />
+<br />
+反面、Googleのサービスだけあって、Google App Engineとの親和性は高い。<br />
+Google App Engineで<a href="http://code.google.com/intl/en/apis/youtube/2.0/developers_guide_protocol.html" target="_blank">YouTube Data API</a>を使うための<a href="http://code.google.com/p/gdata-python-client/" target="_blank">gdata-python-client</a>というライブラリが公開されているからだ。<br />
+<br />
+このライブラリはXML形式で受け取ったレスポンスをたったの3行でPythonオブジェクトに変換してくれる。<br />
+例えば、YouTubeの動画情報をPythonオブジェクトに変換するための記述は下記の通りだ。<br />
+<blockquote>yt_service = gdata.youtube.service.YouTubeService()<br />
+yt_service.developer_key = YOUTUBE_DEVELOPER_KEY ※1<br />
+entry = yt_service.GetYouTubeVideoEntry(video_id=videoID)<br />
+<br />
+<span style="font-size: 10px; line-height: 1em;">※1<br />
+YOUTUBE_DEVELOPER_KEYには取得したディベロッパーキーを代入しておく。<br />
+ディベロッパーキーは<a href="http://code.google.com/apis/youtube/dashboard/ " target="_blank">http://code.google.com/apis/youtube/dashboard/</a>で取得できる。<br />
+ちなみにこの記述がなくてもローカルでは動作するが、Google App Engine上ではtoo_many_recent_callsエラーが頻発することになる。too_many_recent_callsエラーはその名の通り、APIのリクエスト回数が制限値を超えた場合に発生するものだ。ディベロッパーキーが見つからない場合はIPアドレスでもってAPI利用者を特定しているのかもしれない。</span><br />
+</blockquote><br />
+<a href="http://code.google.com/p/gdata-python-client/" target="_blank">gdata-python-client</a>は下記からダウンロードできる。<br />
+<a href="http://code.google.com/p/gdata-python-client/downloads/list" target="_blank">http://code.google.com/p/gdata-python-client/downloads/list</a><br />
+<br />
+インストールも簡単だ。<br />
+圧縮ファイルを解凍後、その中の「atom」ディレクトリと「gdata」ディレクトリを、Google App Engineのルートディレクトリに直下にコピーするだけで完了する。<br />
+<br />
+また、この<a href="http://code.google.com/p/gdata-python-client/" target="_blank">gdata-python-client</a>はYouTube以外のGoogleが提供しているサービス -例えば、GoogleドキュメントやGoogleマップ、BloggerやGoogleアナリティクス- などにも対応している。<br />
+<br />
+先日公開された<a href="http://code.google.com/intl/ja/more/table/" target="_blank">まるで元素記号のようなGoogleのAPI群</a>を見ても分かる通り、GoogleのAPIの充実ぶりは日に日に増している。<br />
+GoogeやFacebookがAPIを公開し、その資産を利用できるのだから、これを利用しない手はない。<br />
+<br /></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

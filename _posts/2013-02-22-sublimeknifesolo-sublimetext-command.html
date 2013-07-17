@@ -1,0 +1,109 @@
+---
+layout: post
+title: 'SublimeKnifeSolo - SublimeText の Command Palette から knife solo を実行できる Plugin を書いたでござる'
+date: 2013/02/22 17:37
+tags: [環境構築,SublimeText,python]
+comments: false
+---
+
+<div class='post'>
+<p>環境構築手順 を Ruby でシーケンシャルに記述できる <a href="http://wiki.opscode.com/display/chef/Chef+Solo" target="_blank">chef-solo</a> 、ローカルで作成した <a href="http://wiki.opscode.com/display/chef/Chef+Solo" target="_blank">chef-solo</a> の cookbook を remote に同期してくれてなおかつ実行してくれる <a href="http://matschaffer.github.com/knife-solo/" target="_blank">knife-solo</a> 。</p>
+<p>その <a href="http://matschaffer.github.com/knife-solo/" target="_blank">knife-solo</a> のコマンドを SublimeText の Command Palette から叩ける Plugin が SublimeKnifeSolo を 書きました！</p>
+<blockquote>
+<p><a href="https://github.com/amazedkoumei/SublimeKnifeSolo" target="_blank">amazedkoumei / SublimeKnifeSolo</a></p>
+</blockquote>
+<p> </p>
+<h4>導入メリット</h4>
+<ul>
+<li>cookbook 編集後に SublimeText から離れることなく kife solo コマンドが実行できる。</li>
+<li>remote へのログイン情報を ~/.ssh/config ではなく SublimeText に保存できる。</li>
+<ul>
+<li>もちろん複数の host, user に対応可能（ドヤッ</li>
+</ul>
+</ul>
+<p> </p>
+<h4>仕様</h4>
+<ul>
+<li>使い方はこんな感じ</li>
+<ul>
+<li>
+cookbook 編集後に <code>⌘ + shift + p</code> で  Command Palette を起動し "knife solo" などで絞り込むと "SublimeKnifeSolo: cook", "SublimeKnifeSolo: prepare" コマンドが見える。
+</li>
+<li>コマンドを選択すると、登録した remote の一覧が表示される。</li>
+<li>remote を選択すると その remote に対して knife solo コマンドが実行されます。</li>
+</ul>
+<li>Command Palette を起動した時に開いていたファイルのディレクトリから solo.rb を探す。見つからなければ上の階層で探し最初に見つかった solo.rb を実行！</li>
+<ul>
+<li>solo.rb が見つからなければエラー</li>
+</ul>
+<li>remote の設定項目は <a href="http://matschaffer.github.com/knife-solo/" target="_blank">knife-solo</a> に準拠。</li>
+<ul>
+<li>host</li>
+<li>user</li>
+<li>identity information</li>
+<li>port</li>
+<li>password</li>
+</ul>
+<li>サポートしているコマンド。</li>
+<ul>
+<li>knife solo prepare</li>
+<li>knife solo cook</li>
+<ul>
+<li>bootstrap と clean もあった方がいいと思いつつ、まだ使ったことないので保留。</li>
+<li>init は SublimeText から実行したい欲求はないかな、と思っている。</li>
+</ul>
+</ul>
+<li>対応OS</li>
+<ul>
+<li>OSXのみ</li>
+</ul>
+</ul>
+<p> </p>
+<h4>インストール</h4>
+<p><strike>以下のコマンドを実行</strike></p>
+<pre>git clone https://github.com/amazedkoumei/SublimeKnifeSolo.git ~/Library/Application\ Support/Sublime\ Text 2/Packages/SublimeKnifeSolo</pre>
+<p><strike><a href="https://github.com/wbond/package_control_channel" target="_blank">PackageControllChannel</a> には現在申請中です。通るかな（ドキドキ</strike></p>
+<p><b>2013/03/15 追記:</b></p>
+<p>PackageControllに登録されました。冒頭に Sublime とつけるのは非推奨だそうなので 名称は KnifeSolo となっています。</p>
+<p>SublimeText から PackageControll を起動し ( command + shift + p ) 検索窓に "knifesolo" と入力し、Enter を押すことでインストールできます。</p>
+<p> </p>
+<p>申請のための手続きは、下記のページの "Submitting a Package" セクションと "Custom packages.json on GitHub" セクションにまとまっています。</p>
+<ul>
+<li><a href="http://wbond.net/sublime_packages/package_control/package_developers" target="_blank">Package Developers – Sublime Package Control – a Sublime Text 2 Package Manager by bond</a></li>
+<ul>
+<li><a href="http://wbond.net/sublime_packages/package_control/package_developers#Submitting_a_Package" target="_blank">Submitting a Package</a></li>
+<li><a href="http://wbond.net/sublime_packages/package_control/package_developers#Custom_packages_json_on_GitHub" target="_blank">Custom packages.json on GitHub</a></li>
+</ul>
+</ul>
+<p> </p>
+<h4>設定</h4>
+<code>⌘ + shift + p</code> で  Command Palette を起動し "knife solo" などで絞り込むと次のメニューが見えます。
+<ul>
+<li><a href="https://github.com/amazedkoumei/SublimeKnifeSolo/blob/master/SublimeKnifeSolo.sublime-settings" target="_blank">Preferences: SublimeKnifeSolo Settings – Default</a></li>
+<li>Preferences: SublimeKnifeSolo Settings – User</li>
+</ul>
+<p>Default を参考に User に設定を記述してください。</p>
+<p>設定ファイルは Json 形式。上のリンクからも内容確認できます。</p>
+<ul>
+<li><span style="color: #333333; font-family: Consolas, 'Liberation Mono', Courier, monospace; font-size: 12px; line-height: 16px; white-space: pre;">path = knife コマンドのPATH</span></li>
+<li><span style="color: #333333; font-family: Consolas, 'Liberation Mono', Courier, monospace; font-size: 12px; line-height: 16px; white-space: pre;">parameters = remote へのログイン情報のリスト</span></li>
+</ul>
+<p> </p>
+<p> </p>
+<h4>最後に </h4>
+<p>enjoy! って書いて締めたかったけど実はちょっと心配事があってだな・・・</p>
+<p>Pacage Controll 申請の注意書きに「パッケージ名の冒頭にSublimeという文字列がある場合は間引いて申請しましょう」と書いてあったので素直に間引いて申請したんですけど</p>
+<ul>
+<li>KnifeSolo という名前になってしまうけど、いいんですか？ そんな他人様のプロジェクト名そのまんまのパッケージ名でいいんですか？</li>
+<li>Plugin 内で使ってるコマンド名が全部 SublimeKnifeSolo になってるんですけど・・・</li>
+</ul>
+<p>というあたり。。</p>
+<p> </p>
+<p>後者はまぁ自分が直せばそれでいいんでしょうけど、前者ってどうやねんと。</p>
+<p>そのようなケースよく見かけますけど、いざ自分がするとなると気になって気になって。</p>
+<p>どうなんですか？マナー的に？そのままいってしまおうとは思っているのですが。</p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

@@ -1,0 +1,34 @@
+---
+layout: post
+title: 'JavascriptのUnitテストライブラリ「qunit」のtest()メソッドとasyncTest()メソッドとstart()メソッドについて'
+date: 2012/05/06 10:33
+tags: [javascript,Unitテスト,qunit]
+comments: false
+---
+
+<div class='post'>
+<p>技術的なエントリです。そこはかとなくハマりまして・・。</p>
+<p>グローバルな領域を書き換えたりDBをごにょごにょするテストを実行すると成功したり失敗したり。明らかにテストが非同期で実行されておりまして、では順番に丁寧に実行するにはどうすればいいのかという話。</p>
+<h5>test()メソッド</h5>
+<p><script src="https://gist.github.com/2563998.js?file=test_method_tips.js">  </script></p>
+<h5>asyncTest()メソッド</h5>
+<p><script src="https://gist.github.com/2563998.js?file=asyncTest_method_tips.js"> </script></p>
+<p> </p>
+<p>qunitではテストを実行するためにtest()メソッドとasyncTest()メソッドが用意されておりまして、</p>
+<ul>
+<li>test()メソッドは与えられた関数を非同期に実行</li>
+<li>asyncTest()メソッドは与えられた関数内でstart()メソッドが実行されるのを待って次のテストを実行</li>
+</ul>
+<p>という仕様になっています。</p>
+<p>別途次のテストの実行をstart()メソッドが実行されるまで待機させるstop()メソッドというものが用意されていますが、いまのところ使い道がピンときていませんのでここでは割愛します。</p>
+<p> </p>
+<p>qunitの全容については以下のエントリに詳しいです。私がハマった箇所についても言及されています。</p>
+<p>　　<a href="http://d.hatena.ne.jp/Jxck/20100721/1279681676" target="_blank">QUnitの基本的な使い方</a></p>
+<p> </p>
+<p>本家はこちら</p>
+<p>　　<a href="http://docs.jquery.com/QUnit" target="_blank">QUnit - jQuery JavaScript Library</a></p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

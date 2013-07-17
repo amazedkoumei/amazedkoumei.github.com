@@ -1,0 +1,129 @@
+---
+layout: post
+title: 'am-motion-parts : RubyMotion製 アプリから 汎用的な部分を取り出して別リポジトリにしたら頭もコードもスッキリした件'
+date: 2013/03/04 18:14
+tags: [rubymotion,github]
+comments: false
+---
+
+<div class='post'>
+<p>え？ それって昔からあるやり方じゃ・・・とか言うな。傷つきやすいんです。ワタクシ。</p>
+<p> </p>
+<p>RubyMotion 、少しずつ認知が広まってますね。</p>
+<p>月1定期開催で自分も何度もお世話になっている RubyMotion もくもく会も初めて ////// のキャンセル待ちがでるとか</p>
+<blockquote>
+<p><a href="http://connpass.com/event/1917/" target="_blank">第7回 RubyMotion もくもく会</a></p>
+</blockquote>
+<p> </p>
+<p><a href="http://rubymotion.jp/" target="_blank"> RubyMotionJP</a> の方々が翻訳してくれたチュートリアルにはてブがいぱーいつくとか ( 2013/03/04 時点で 200超 )</p>
+<blockquote>
+<p><a href="http://b.hatena.ne.jp/entry/tutorial.rubymotion.jp/" target="_blank">はてなブックマーク - RubyMotion Tutorial: Ruby で iOS アプリを作ろう</a></p>
+</blockquote>
+<p> </p>
+<p>いあ、自分は単なる RubyMotion のしがない１ユーザでしかないんですけど、嬉しいではないですか、自分の好きなプロダクトが認知されて一般的になっていくのを見てるのは。iOS App の開発 make it easy になってまじ RubyMotion イノベーティブ。やばいわーこのプロダクトやばいわー。</p>
+<p> </p>
+<p>自分が良かれと思うものを作って、売って。で、生活していったらなんだか幸せになる人がいぱーいでてきましたとかね、１つの理想的な働き方なわけで溢れるリスペクトがとまらない訳です。</p>
+<p>おれもう中年なのにこの文章、思春期の人が書いてるみたいですね！！</p>
+<p> </p>
+<p>さて、本題の RubyMotion製 アプリから 汎用的な部分を取り出して別リポジトリにしたら頭もコードもスッキリした件 ですが、リポジトリはこちら。</p>
+<blockquote>
+<p><a href="https://github.com/amazedkoumei/am-motion-parts" target="_blank">amazedkoumei/am-motion-parts</a></p>
+</blockquote>
+<p> </p>
+<p>構成はいまのところ ( 2013/03/04 時点 ) 下記の通り</p>
+<ul>
+<li>AMP::InformView</li>
+<ul>
+<li>非同期処理中にユーザに処理中である旨を通知する View</li>
+</ul>
+<li>AMP::ActivityViewController</li>
+<ul>
+<li>iOS6 で追加された UIActivityViewController の拡張版</li>
+</ul>
+<li>AMP::SmoothTableViewCell</li>
+<ul>
+<li>TableViewCell を addSubView(label) で作るとカクカクしてしまうので drawRect で描画するCell</li>
+</ul>
+<li>AMP::GithubAPI</li>
+<ul>
+<li>GithubAPI の Wrapper クラス</li>
+<li>API の網羅性低いです。。</li>
+</ul>
+</ul>
+<p> </p>
+<p> </p>
+<h4>AMP::InformView</h4>
+<p> </p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="Untitled_note.png" src="http://lh4.ggpht.com/-ddAkliJJsnU/UTRfsYp69_I/AAAAAAAABg0/M1yP8FWdYZ0/Untitled_note.png?imgmax=800" alt="Untitled note" width="160" height="284" border="0" /></p>
+<p> </p>
+<p>これを show メソッドと hde メソッド で制御します。</p>
+<p>続きはWebで！（意訳 :  Usage は <a href="https://github.com/amazedkoumei/am-motion-parts/blob/master/README.md" target="_blank">README</a> を参照してください )</p>
+<p> </p>
+<p> </p>
+<h4>AMP::ActivityViewController</h4>
+<p> </p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="Untitled_note2.png" src="http://lh3.ggpht.com/-Nq97yCV7Wdk/UTRftMp-rDI/AAAAAAAABg8/4rZ6wOAEVfw/Untitled_note2.png?imgmax=800" alt="Untitled note2" width="160" height="284" border="0" /></p>
+<p> </p>
+<p>iOS6 で追加された UIActivityViewController は</p>
+<ol>
+<li>ViewController を生成して</li>
+<li>自分で作った Activity ( Custom Activity ) を追加して</li>
+<li>使用しない <a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivity_Class/Reference/Reference.html" target="_blank">Built-In Activity</a> ( Twitter とか Facebook とか Mail とか ) を指定して</li>
+<li>表示！</li>
+</ol>
+<p>と若干使い勝手が悪いので、<a href="http://developer.apple.com/library/ios/#documentation/UIKit/Reference/UIActivity_Class/Reference/Reference.html" target="_blank">Built-In Activity</a> も Custom Activity と一緒に追加できるようにしました。</p>
+<p> </p>
+<p>あと、Open in Safari とか Hatena bookmark とか若干の Custom Activity をバンドルしてます。</p>
+<p> </p>
+<p>なお、 Custom Activity はこちらのライブラリが非常に充実しております。</p>
+<blockquote>
+<p><a href="https://github.com/shu223/UIActivityCollection" target="_blank">shu223/UIActivityCollection</a></p>
+</blockquote>
+<p> </p>
+<p> </p>
+<p> </p>
+<h4>AMP::SmoothTableViewCell</h4>
+<p>TableViewCell は スクロールのたびに View の再描画が実行される仕様になっておりまして、その処理が重いとスクロールがカクカクしてしまう問題がありまして。有名どころだと一昔前の Facebook アプリ。</p>
+<p> </p>
+<p>それを 解消するために View に Label を addSubView するのではなく drawRect で全部描画してしまいましょうという Hack があるわけです。</p>
+<p>詳しくはこちらの本の 『1-6. UITableView Hacks』</p>
+<p><div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114721/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/41Oz7xE4iXL._SL160_.jpg" alt="iOS SDK Hacks ―プロが教えるiPhoneアプリ開発テクニック" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114721/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">iOS SDK Hacks ―プロが教えるiPhoneアプリ開発テクニック</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 13.03.04</div></div><div class="amazlet-detail">吉田 悠一 高山 征大 UICoderz <br />オライリージャパン <br />売り上げランキング: 31,890<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4873114721/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+</p>
+<p> </p>
+<p>この実装を TableView 作成のたびに書くのはあまりに非効率なので AMP::SmoothTableViewCell を継承して drawRect の内容だけ書けばOK なようにしました。</p>
+<p> </p>
+<p> </p>
+<h4>AMP::GithubAPI</h4>
+<p><a href="http://developer.github.com/v3/" target="_blank">GithubAPI</a> の Wrapper クラス</p>
+<p>絶賛開発中です。</p>
+<p>I/F 変わるかも（ゴニョゴニョ</p>
+<p> </p>
+<p> </p>
+<h4>最後に</h4>
+<p>ここまで書いておいてアレな感想ですけど、アプリ作ってそこから汎用化可能な部分をライブラリとしてスピンアウト！というアプローチもいいですが、使えるものは世の中から探し出してどうしても自分で書かねばならぬ部分だけゴリゴリっと、というアプローチが正道であるなと感じました。</p>
+<p>ライブラリの作り方アプローチではなく、アプリケーションの作り方の話になってしまいますけども。</p>
+<p> </p>
+<p>スキル的にもモチベーション的にも自分はライブラリよりもアプリケーションの側なのですが、それならば世の中にコミットするために相応しいアプローチというのは前者ではなく後者なのだろうな、と。</p>
+<p> </p>
+<p>昨日だったか一昨日だったかこれ読んだのですよ。</p>
+<blockquote>
+<p><a href="http://www.clear-code.com/blog/2013/2/27.html" target="_blank">クリアなコードに囲まれて - クリアコードでの二年間 - ククログ(2013-02-27)</a></p>
+</blockquote>
+<p> </p>
+<p>共感しつつも「2年前の私」といまの自分が重なる部分が多くてですね。ちょっとヘコみました。</p>
+<p> </p>
+<p>Github的な開発スタイルが浸透してきて、Twitterでも 『インストールでつまづいたから Pull Req. 送っといたわー』といった発言もちょいちょい目にするようになりました。 </p>
+<p> </p>
+<p>つまづいたら内容と解決策まとめて bad know-how としてブログで公開といったスタイルも、もはや悪行と呼ばれても仕方ない世の中になりつつあるのかもしれません。 </p>
+<blockquote>
+<p>「なんでこれ、開発者の人に問題を報告しないの？」</p>
+</blockquote>
+<p>ですよ。ええ。</p>
+<p> </p>
+<p>くるくると世の中変わっていっておもしろいですね！</p>
+<p>まとめと本文の乖離っぷりはんぱないけど気にしない！</p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

@@ -1,0 +1,37 @@
+---
+layout: post
+title: 'jQuery Mobile - 標準テーマでらくらくデザイン'
+date: 2011/03/23 08:30
+tags: [jQueryMobile]
+comments: false
+---
+
+<div class='post'>
+<p><strong>"0"を"1"にすることと"1"を"2"にすることは全く別のことなんだ。</strong><br /> という言葉をよく耳にしますが、まったく同感です。<br /> <br /> "0"を"1"にする作業は楽しくもあり、苦しくもあり、また時間もかかるのですが<br /> 状況によっては「こんなことに使う時間いまないし」という場合もままありますよね。<br /> <br /> 先日紹介したjQuery Mobileでは標準で5つのテーマが準備されています。<br /> <br /> 紹介エントリ : <strong><a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-3.html" target="_blank">jQuery Mobileのススメ - 商用利用に耐えうる3つの理由</a></strong><br /> <br /> <br /></p>
+<h3>テーマは5つ 組み合わせも可能</h3>
+<p><br /> jQuery Mobileは標準で5つのテーマが準備されています。<br /> 以下に紹介するjQuery Mobileのバージョンは2011/3/23時点の最新版「1.0a3」になります。<br /> <br /> <a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5548164544/"><img style="margin: 8px;" src="http://farm6.static.flickr.com/5029/5548164544_0df13ac65c_m.jpg" alt="" width="160" height="240" /></a><a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5547581475/"><img style="margin: 8px;" src="http://farm6.static.flickr.com/5015/5547581475_e1dd559c64_m.jpg" alt="" width="160" height="240" /></a><a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5547581541/"><img style="margin: 8px;" src="http://farm6.static.flickr.com/5293/5547581541_385936d131_m.jpg" alt="" width="160" height="240" /></a><a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5547581837/"><img style="margin: 8px;" src="http://farm6.static.flickr.com/5017/5547581837_e72c116d0d_m.jpg" alt="" width="160" height="240" /></a><a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5547581851/"><img style="margin: 8px;" src="http://farm6.static.flickr.com/5296/5547581851_e712bb55eb_m.jpg" alt="" width="160" height="240" /></a><br /> <br /> <br /> テーマの組み合わせも可能です。<br /> <br /> <a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5541100780/"><img style="margin: 8px;" src="http://farm6.static.flickr.com/5297/5541100780_845a9333a0_m.jpg" alt="" width="160" height="240" /></a><br /> <br /> <br /> これは自作のiPhone向け英単語学習サイト『<a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a>』ですが、ヘッダ・フッタ・ボタンはThemeB、listviewはThemeAで実装されています。<br /> <br /> <br /></p>
+<h3>テーマの実装方法</h3>
+<p> </p>
+<pre class="brush: xml">&lt;div id="themeA" data-role="page" data-theme="a" data-position="inline"&gt;
+ &lt;div data-role="header" data-position="inline"&gt;
+  &lt;h1&gt;Theme A&lt;/h1&gt;
+ &lt;/div&gt;
+ 
+ &lt;div data-role="content"&gt;
+  &lt;ul data-role="listview" data-theme="a" data-inset="true"&gt;
+   &lt;li&gt;&lt;a href="#themeA"&gt;Theme A&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href="#themeB"&gt;Theme B&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href="#themeC"&gt;Theme C&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href="#themeD"&gt;Theme D&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href="#themeE"&gt;Theme E&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+ &lt;/div&gt;
+ &lt;div data-role="footer" data-position="fixed"&gt;
+  &lt;h1&gt;footer&lt;/h1&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p><br /> 1行目と7行目に注目してください。<br /> <strong>data-theme="a"</strong> という記述がありますね。<br /> <br /> これだけでjQuery Mobileが適切なスタイルを割り当ててくれます。<br /> <br /> <a href="http://koumei-labs.amazedkoumei.com/jqmobile/theme" target="_blank">デモページ</a>を準備しました。<br /> 実装の際の参考にしてください。<br /> <br /> <br /> 簡単な記述で外枠が出来上がりましたね。<br /> あとは作りたいものに合わせて部品を配置していくだけです。<br /> <br /> 部品も数多く提供されています。<br /> いろいろとドキュメントを探してみましたが<a href="http://jquerymobile.com/demos/1.0a3/" target="_blank">公式デモページ</a>が一番わかりやすかったように思います。（英語ですが・・）<br /> <br /> 興味のある方はリンク先の「Components」の欄をご覧になってください。<br /> 必要な記述量とその記述で実現できることの対比に驚かれるのではないかと思います。<br /> <br /> 本当に素晴らしいライブラリですね。<br /> <br /> <br /><br /></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

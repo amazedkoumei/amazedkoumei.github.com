@@ -1,0 +1,57 @@
+---
+layout: post
+title: '[小ネタ] Google+1ボタンの右側の余白をなくす方法'
+date: 2011/06/03 08:00
+tags: [小ネタ,ブログツール]
+comments: false
+---
+
+<div class='post'>
+<p>Google +1 を当ブログにも設置してみました。<br /> Googleさんがタグジェネレータを用意してくれているので設置は非常に簡単です。<br /> <br /> タグジェネレータはこちら <br /> → <a rel="nofollow" href="http://www.google.com/webmasters/+1/button/" target="_blank">Google +1 をWebサイトに表示</a><br /> <br /> <br /> タグジェネレータにはscriptタグを埋め込むように指示されます。<br /> 指示に従ってタグを埋め込むとこんな感じにGoogle +1 ボタンが設置されます。<br /> <br /> <a title="スクリーンショット（2011-06-02 23.03.55） by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5790418260/"><img src="http://farm6.static.flickr.com/5061/5790418260_c130396e5d.jpg" alt="スクリーンショット（2011-06-02 23.03.55）" width="500" height="126" /></a><br /> <br /> <br /> 右側に若干アレな余白があるのが分かりますでしょうか。<br /> <br /> <a title="スクリーンショット（2011-06-02 23.03.55） by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5789807319/"><img src="http://farm4.static.flickr.com/3142/5789807319_127e0d0c62.jpg" alt="スクリーンショット（2011-06-02 23.03.55）" width="500" height="126" /></a><br /> <br /> <br /> 埋め込んだスクリプトが動作した結果、このような記述が・・・</p>
+<pre class="brush: xml">&lt;g:plusone size="medium"&gt;&lt;/g:plusone&gt;
+</pre>
+<p><br /> このように置換され、ボタンが表示されます。</p>
+<pre class="brush: xml">&lt;div style="height: 20px; width: 82px; display: inline-block;" id="___plusone_0"&gt;
+&lt;iframe allowtransparency="true" hspace="0" id="I1_1307025807685" marginheight="0" marginwidth="0" name="I1_1307025807685" src="https://plusone.google.com/u/0/_/+1/button?hl=ja&amp;amp;jsh=s%3Bplusone%3Agoogleapis.client%4021550740_8d71de52%2Fclient%3Bgoogleapis.proxy%4021550740_8d71de52%2Fproxy%3Bplusone%3Agoogleapis.client%3Aiframes-styles-bubble%4021550740_8d71de52%2Fbubble%3Biframes-styles-bubble%21plusone%3Agoogleapis.client%4021550740_8d71de52%2Fbubble_only%3Bplusone-unsupported%4021550740_8d71de52%2Funsupported#url=http%3A%2F%2Fblog.amazedkoumei.com%2F2011%2F05%2F13000funiphone.html&amp;amp;size=medium&amp;amp;count=true&amp;amp;useSharedProxy=true&amp;amp;rcache=true&amp;amp;scache=true&amp;amp;id=I1_1307025807685&amp;amp;parent=http%3A%2F%2Fblog.amazedkoumei.com&amp;amp;rpctoken=604458771&amp;amp;_methods=_ready%2C_close%2C_open%2C_resizeMe" style="position: static; left: 0pt; top: 0pt; width: 86px; height: 20px; visibility: visible;" tabindex="-1" vspace="0" frameborder="0" scrolling="no" width="100%"&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+</pre>
+<p><br /> タグに直接style属性でwidthが指定されているためスタイルシートによる解決はできません。<br /> <br /> ではどうするか。<br /> <br /></p>
+<h4>答え</h4>
+<p>このようにDIVタグで囲んであげればいい。</p>
+<pre class="brush: xml">&lt;div style="width:60px;"&gt;
+&lt;g:plusone size="medium"&gt;&lt;/g:plusone&gt;
+&lt;/div&gt;
+</pre>
+<p><br /> 当たり前ですね。<br /> でも結構悩んだんです（恥）<br /> <br /> 誰かの助けになれば幸いです（笑）<br /> <br /> <br /> <br /></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Anonymous&nbsp;<span>2011/06/30 13:16</span>
+</div>
+<div class='content'>
+これだと数字が増えた場合にだめになりそうですけど・・</div>
+</div>
+<hr />
+<div class='comment'>
+<div class='author'>amazedkoumei&nbsp;<span>2011/06/30 14:48</span>
+</div>
+<div class='content'>
+( ﾟдﾟ)ﾊｯ!<br /><br />最大桁数て3桁なのかな・・？<br />「1k」って表記はみたことあるんですけど、、、</div>
+</div>
+<hr />
+<div class='comment'>
+<div class='author'>Anonymous&nbsp;<span>2011/07/01 12:39</span>
+</div>
+<div class='content'>
+普通にcssの!importantを使えば、余計な事しなくても大丈夫ですよｗｗ</div>
+</div>
+<hr />
+<div class='comment'>
+<div class='author'>amazedkoumei&nbsp;<span>2011/07/01 19:15</span>
+</div>
+<div class='content'>
+なるほど。知らなかったです。!important。<br />恥ずかしい(´・ω・｀)<br /><br />数字増えたことのことを考えると右側の余白は甘んじて受け入れるしかない・・のですかね。</div>
+</div>
+<hr />
+</div>

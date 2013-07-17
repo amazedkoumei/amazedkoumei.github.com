@@ -1,0 +1,106 @@
+---
+layout: post
+title: 'jQuery Mobile - data-transition属性でアニメーション指定'
+date: 2011/03/25 08:30
+tags: [jQueryMobile]
+comments: false
+---
+
+<div class='post'>
+<p><strong>Aタグにdata-transition属性を指定するだけでページ遷移時のアニメーションを指定できます。</strong><a style="float: right;" title="jquerymobile-logo by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5556824060/"><img style="margin: 10px;" src="http://farm6.static.flickr.com/5229/5556824060_ca1d1873f3_m.jpg" alt="jquerymobile-logo" width="240" height="131" /></a><br /> <br /> iPhoneアプリを触るのは楽しいですよね。<br /> <br /> 画面がニューっと現れたり、ふわっと消えたり、くるっと回ったり・・etc<br /> <br /> jQuery MobileはこれらのアニメーションをJavascriptやCSSを記述することなく、簡単に実現できるよう設計されています。<br /> <br /> 今日はその実装方法の紹介です。<br /> jQuery Mobileのバージョンは2011/3/25時点の最新版「1.0a3」です。<br /> <br /> <br /></p>
+<h3>前提知識 : jQuery Mobileのページ遷移の概要</h3>
+<p><br /> まずはサンプルソースをご覧ください。<br /> こちらの<a href="http://koumei-labs.amazedkoumei.com/jqmobile/action" target="_blank">デモページ</a>のソースです。</p>
+<pre class="brush: xml">&lt;!doctype html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8" /&gt;
+&lt;title&gt;jQuery Mobile Action&lt;/title&gt;
+&lt;style type="text/css" media="screen"&gt;@import "/core/css/jquery.mobile-1.0a3.css";&lt;/style&gt;
+&lt;script type="text/javascript" src="/core/js/jquery-1.5.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;script type="application/x-javascript" src="/core/js/jquery.mobile-1.0a3.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!-- page1 --&gt;
+&lt;div id="page1" data-role="page" data-theme="a" data-position="inline"&gt;
+ &lt;div data-role="header" data-position="inline" data-backbtn="false"&gt;
+  &lt;h1&gt;page1&lt;/h1&gt;
+ &lt;/div&gt;
+ 
+ &lt;div data-role="content"&gt;
+  &lt;a data-role="button" href="#page2" data-transition="slide"&gt;slide&lt;/a&gt;
+  &lt;a data-role="button" href="#page2" data-transition="slide" data-direction="reverse"&gt;slide reverse&lt;/a&gt;
+  &lt;a data-role="button" href="#page2" data-transition="slideup"&gt;slideup&lt;/a&gt;
+  &lt;a data-role="button" href="#page2" data-transition="slidedown"&gt;slidedown&lt;/a&gt;
+  &lt;a data-role="button" href="#page2" data-transition="pop"&gt;pop&lt;/a&gt;
+  &lt;a data-role="button" href="#page2" data-transition="fade"&gt;fade&lt;/a&gt;
+  &lt;a data-role="button" href="#page2" data-transition="flip"&gt;flip&lt;/a&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- page1 --&gt;
+
+&lt;!-- page2 --&gt;
+&lt;div id="page2" data-role="page" data-theme="b" data-position="inline"&gt;
+ &lt;div data-role="header" data-position="inline" data-backbtn="false"&gt;
+  &lt;h1&gt;page2&lt;/h1&gt;
+ &lt;/div&gt;
+ 
+ &lt;div data-role="content"&gt;
+  &lt;a data-role="button" href="#page1" data-transition="slide"&gt;slide&lt;/a&gt;
+  &lt;a data-role="button" href="#page1" data-transition="slide" data-direction="reverse"&gt;slide reverse&lt;/a&gt;
+  &lt;a data-role="button" href="#page1" data-transition="slideup"&gt;slideup&lt;/a&gt;
+  &lt;a data-role="button" href="#page1" data-transition="slidedown"&gt;slidedown&lt;/a&gt;
+  &lt;a data-role="button" href="#page1" data-transition="pop"&gt;pop&lt;/a&gt;
+  &lt;a data-role="button" href="#page1" data-transition="fade"&gt;fade&lt;/a&gt;
+  &lt;a data-role="button" href="#page1" data-transition="flip"&gt;flip&lt;/a&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- page2 --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>13行目の<strong>data-role="page"</strong>に注目してください。<br /> jQuery Mobileはこの属性が指定されたDIV要素をページとして認識してくれます。<br /> <br /> 31行目にも同じように<strong>data-role="page"</strong>の記述がありますね。<br /> つまりjQuery Mobile的には、この1枚のHTMLの中に2つのページがあることになります。<br /> <br /> 実際の見え方はこのような感じです。<br /> <a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5556160495/"><img style="margin: 30px;" src="http://farm6.static.flickr.com/5270/5556160495_5a60116925_m.jpg" alt="" width="160" height="240" /></a><a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5556160673/"><img style="margin: 30px;" src="http://farm6.static.flickr.com/5265/5556160673_b6ffae1e84_m.jpg" alt="" width="160" height="240" /></a><br /> 次に19行目を見てください。<br /> aタグのhref属性に<strong>"#page2"</strong>を指定しています。<br /> このaタグをタップすると<strong>id="page2</strong>"が指定されたdiv要素に遷移します。<br /> <br /> 遷移先は31行目の<strong>data-role="page"</strong>を指定したdiv要素ですね。<br /> <br /> <br /></p>
+<h3>なぜこのような仕様になっているのか</h3>
+<p><br /> もちろん普通のaタグのようにhref="hoge.html"と、別ファイルを指定することも可能ですが、私はこの1枚のHTMLに複数ページを記載する方式をオススメします。<br /> <br /> jQuery Mobileを使って構築するサイトはモバイル向けのものです。<br /> <br /> ユーザは当然移動しながらサイトを閲覧しますし、閲覧中に通信できない場所に入り込んでしまう場合も多々あります。<br /> <br /> この方式であれば、<strong>最初にHTMLをロードしてしまえば、その後は無通信状態であってもページ遷移が可能になります。</strong><br /> <br /> 試しにデモページをロード後にAirplainモードにしてボタンを1つタップしてみてください。<br /> 正しくページ遷移できるのが確認できると思います。<br /> <br /> <br /></p>
+<h3>本題 : data-transition属性の指定</h3>
+<p><br /> 今度は19行目〜25行目に注目してください。<br /> data-transition属性に様々な属性値が設定されていますね。<br /> <br /> この属性値がページ遷移時のアニメーションを表現しています。<br /> 内容はこの表の通りです。</p>
+<table border="1">
+<thead> 
+<tr>
+<th>属性値</th><th>アクション</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slide</td>
+<td>右から左にスライド</td>
+</tr>
+<tr>
+<td>slideup</td>
+<td>下から上にスライド</td>
+</tr>
+<tr>
+<td>slidedown</td>
+<td>上から下にスライド</td>
+</tr>
+<tr>
+<td>pop</td>
+<td>中央から広がるように</td>
+</tr>
+<tr>
+<td>fade</td>
+<td>ふわっと</td>
+</tr>
+<tr>
+<td>flip</td>
+<td>くるっと回転</td>
+</tr>
+</tbody>
+</table>
+<p><br /> 伝わったでしょうか。たぶん伝わらないですね。<br /> 言葉というのは難しいですね。<br /> <br /> <a href="http://koumei-labs.amazedkoumei.com/jqmobile/action" target="_blank">デモページ</a>とこの表を見比べていただくとよいと思います。<br /> <br /> 逆方向に動かしたい場合は<strong>data-direction="reverse"</strong>を指定します。<br /> サンプルコードの20行目と38行目がそれに当たります。<br /> <br /> <br /></p>
+<h3>最後に</h3>
+<p><br /> 公式ページにもデモが準備されています。<br /> <br /> デモ : <a href="http://jquerymobile.com/demos/1.0a3/#docs/pages/index.html" target="_blank">jQuery Mobile: Demos and Documentation : Pages</a><br /> <br /> 今回紹介したのは、2行目の「Page transitions」の内容です。<br /> 興味がありましたら、ぜひ他の項目もご覧になってください。<br /> <br /> <br /><br /></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

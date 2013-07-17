@@ -1,0 +1,75 @@
+---
+layout: post
+title: 'バックグランドで非同期通信する際のハマり所 in RubyMotion'
+date: 2012/12/18 19:01
+tags: [rubymotion]
+comments: false
+---
+
+<div class='post'>
+<p>この記事は <a href="http://www.adventar.org/calendars/18" target="_blank">RubyMotion Advent Calendar 2012</a> の18日目の記事です。</p>
+<p>週末にアプリをシコシコとゴリゴリと書いていたのですけども。ハマったわー。いやーハマったわー。</p>
+<p> </p>
+<h4>やりたかったこと</h4>
+<p>以下の処理を、3以降は別スレッドで実行というのがやりたかったことです。</p>
+<ol>
+<li>WebView でコンテンツをロード</li>
+<li>WebViewのコンテンツのロードが完了したタイミングでコンテンツ内の文字列を改行で split</li>
+<li>splitした各文字列を某APIにHTTPリクエスト</li>
+<li>APIのレスポンスをファイルに保存したり配列に格納したり</li>
+</ol>
+<p> </p>
+<h4>ソースイメージ</h4>
+<p>ハマりどころ解説のためのソースイメージです。</p>
+<p><script src="https://gist.github.com/4326002.js"></script></p>
+<p> </p>
+<h4>ポイント概要</h4>
+<p>ここから本題です。</p>
+<p>なんとなく上から目線な表現になっていますが、日本語が不自由なだけです。恐縮です。誤り等ありましたらコメ欄かTwitter ( <a href="https://twitter.com/amazedkoumei" target="_blank">@amazedkoumei</a> ) でご指摘いただけると嬉しいです。</p>
+<p>ハマりどころをまとめると以下の3点です。</p>
+<ul>
+<li>UIWebView, NSURLConnection, Dispatch::Queueなどはきちんと閉じましょう。</li>
+<li>1回のWebページロードについて、UIWebViewDelegate#webViewDidFinishLoadが複数回呼ばれる場合があるので気をつけましょう。</li>
+<li>NSURLConnection を複数回投げる処理をgcdしたい場合は、delegateメソッド内にDispatch::Queueを書きましょう。</li>
+</ul>
+<p>以下、各要点の補足説明になります。</p>
+<p> </p>
+<h4>ポイントその１:  UIWebView, NSURLConnection, Dispatch::Queueなどはきちんと閉じましょう。</h4>
+<p>例えば viewDidLoad でUIWebViewをnewした直後にUIWebViewのdelegate先（例えばUIWebViewを作成したViewController)を解放した場合、ページのロード完了時に呼ばれる delegateメソッド "webViewDidFinishLoad" が呼ばれたタイミングでクラッシュします。</p>
+<p>ですので、ロード処理自体をストップさせてから安らかに解放される必要があるわけですが、上にあげたUIWebView, NSURLConnection, Dispatch::Queue にはそれぞれ中断メソッドが用意されているのでそれらを呼んであげましょう。メソッド名の統一感はゼロ。</p>
+<ul>
+<li>UIWebView#stopLoading()</li>
+<li>NSURLConnection#cancel()</li>
+<li>Dispatch::Queue#suspend!</li>
+</ul>
+<p>
+追記: 12/12/18<br />
+<a href="https://twitter.com/satococoa" target="_blank">@satococoa</a> にUIWebViewの場合、解放前にdelegateにnilを設定すればいいということをご指摘いただきました。
+</p>
+<p> </p>
+<p>ソースイメージでは sample_view_controller.rb の viewDidDisappear でこの処理をしています。</p>
+<p>NSURLConnection をWrapしている BW::HTTP モジュールを使う場合は get | post | put | delete 各メソッドが返す BW::HTTP::Queryオブジェクト内にNSURLConnectionオブジェクトが入っているので、それを大切に大切に補完しておきましょう。(ソースイメージの sample_api.rb の fetch メソッド参照)</p>
+<p>BW::HTTP モジュールってなんじゃらホイという方はこちらが分かりやすいです。</p>
+<p><a href="http://d.hatena.ne.jp/naoya/20120831/1346409758" target="_blank">RubyMotion - naoyaのはてなダイアリー</a></p>
+<p> </p>
+<h4 style="font-size: medium;">ポイントその２:  1回のWebページロードについて、UIWebViewDelegate#webViewDidFinishLoadが複数回呼ばれる場合があるので気をつけましょう。</h4>
+<p>把握できてるのは『ロードしたコンテンツ内にiframeがある場合』です。他にもあるかもしれません。</p>
+<p>webViewDidFinishLoad で重めの処理をする場合には気をつけてください。ソースイメージの程度であればなんら問題ないのですが、上述したシコシコゴリゴリのアプリではクラッシュしーのおかしな結果が返りーのともう散々で・・。</p>
+<p>その散々だったアプリのソースを公開できてればよかったんですけど、現在『動くけど汚いソース』となっておりましてしばしお時間いただきたく。</p>
+<p> </p>
+<h4 style="font-size: medium;">ポイントその３:  NSURLConnection を複数回投げる処理をgcdしたい場合は、delegateメソッド内にDispatch::Queueを書きましょう。</h4>
+<p>NSURLConnection.connectionWithRequest(request, delegate:delegate) をDipatch::Queue内でコールしても戻ってきてくれません。いったいどこに行ってしまわれるのか！</p>
+<p>ソースイメージでは sample_api.rb の fetch メソッドに該当の記述になります。先述の通り、BW::HTTP モジュールは NSURLConnection をWrapしております。</p>
+<p> </p>
+<p> </p>
+<p>ちなみに『非メインスレッドで Dipatch::Queue#async を繰り返しコールしていくとどこかで処理が止まってしまう』という問題にも遭遇しまして『 Dipatch::Queue#async はメインスレッドからのみコールする』という対処で乗り切ったのですが、ソースイメージのようなあっさりとした処理だと再現できませんでした。Dipatch::Queue チェーンがどこかで勝手に解放されるせいかな、とは思っておるのですが。</p>
+<p> </p>
+<h4 style="font-size: medium;">最後に</h4>
+<p>週末の割りと長めの時間を闘いに費やした気がするのですが、まとめるとこんなものか、という。</p>
+<p>簡単なソースイメージだけではあれなので、近い将来シコシコゴリゴリアプリをGithubにあげてリンク貼りたいですね。実行可能性としては『明日から本気だす』と同程度とですけども。</p>
+<p> </p>
+<p> </p>
+<p>こちらからは以上ですｗ</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

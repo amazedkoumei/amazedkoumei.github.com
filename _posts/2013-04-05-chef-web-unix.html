@@ -1,0 +1,203 @@
+---
+layout: post
+title: 'Chef, Web, Unix  最近読んだ本がどれも良書だった件'
+date: 2013/04/05 08:19
+tags: [電子書籍,書評]
+comments: false
+---
+
+<div class='post'>
+<p>最近読んだ本がどれも良書だったのでまとめて Blog up</p>
+
+<ul>
+<li><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">入門Chef Solo - Infrastructure as Code</a></li>
+<li><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839902879/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Webの創成 ― World Wide Webはいかにして生まれどこに向かうのか</a></li>
+<li><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">UNIXという考え方―その設計思想と哲学</a></li>
+</ul>
+
+<p>　</p>
+<p>入門Chef Solo は最近なにかとホットな Chef の入門書。</p>
+<p>Kindle で買った初めての技術書でソースコードのあたりとかどうかなーと思ってたけど、いい！素晴らしい！ハイライト機能で要点を1ヶ所にまとめれるしね！出版社さま既存の紙書籍の Kindle 化もなにとぞよろしくお願い致します。</p>
+<p>内容的には入門的な内容 + Chef を使った著者の感想 といった感じで、著者のブログ読んでる方ならご存知のとおり、とても分かりやすい日本語が心地いいです。</p>
+<p>　</p>
+<p>Webの創世 と Unixという考え方 は テクニックよりも ソフトウェア的な思想？哲学？そういったものをお勉強したく買いました。</p>
+<p>思想とか哲学とか書くと固っ苦しいけど、前者は、えーそうなんだ的な話もちらほらりでしたし、後者はこれまで経験的にふんわり思ってたことをしっかりと日本語で形にしてくれたりとか、読書的にとても気持ちいい体験させてくれる良書でした。</p>
+<p>　</p>
+
+
+<h4>入門Chef Solo - Infrastructure as Code</h4>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" alt="入門Chef Solo - Infrastructure as Code" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">入門Chef Solo - Infrastructure as Code</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 13.04.04</div></div><div class="amazlet-detail">伊藤直也 (2013-03-11)<br />売り上げランキング: 95<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B00BSPH158/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+
+<p>　</p>
+<p>サーバ管理ツール、本書の言葉を借りれば 「サーバの状態を管理し収束させるためのフレームワーク」である Chef の入門書です。</p>
+
+<p>環境構築大嫌いな私は、そこから解放されるべく、自分でも Chef 使ってみたんですけど</p>
+
+<ul>
+<li><a href="http://blog.amazedkoumei.com/2013/02/vagrant-chef-solo-nginx-sinatra.html" target="_blank">Vagrant + chef-solo 使って nginx + sinatra で HelloWorld! | 諸葛亮孔明もびっくりですわ のブログ</a></li>
+<li><a href="https://github.com/amazedkoumei/vagrant-centos-nginx_sinatra" target="_blank">amazedkoumei / vagrant-centos-nginx_sinatra | Github</a></li>
+</ul>
+
+
+<p>もうなんというかストレスフルだったわけです、学習が。</p>
+
+<p>　</p>
+
+<p>サーバの状態を管理するフレームワークである Chef なわけですから</p>
+
+<ul>
+<li>コマンドライン使って set up する際の自由度を損なわないように配慮しつつ</li>
+<li>本書でもたびたびでてくる Chef を使う理由のひとつでであるところの「冪等性 = その操作を複数回行なって結果が同じになる性質」を保証しつつ</li>
+<li>現在のサーバの状態を直観的に把握できる程度の可読性も必要だよね</li>
+</ul>
+
+
+<p>となった結果、 Chef を記述するために覚えねばならない概念が割りと多くなってしまっているのですよ。いあ、もうこれはしょうがない。</p>
+
+<p>それらの概念は <a href="http://wiki.opscode.com/display/chef/Home" target="_blank">本家</a> にまとまってはいるのですが分量が多く、しかもイングリッシュ。</p>
+
+<p>　</p>
+
+<p>そんな中、概念いっぱいあるけど、とりあえず <a href="http://docs.opscode.com/chef/resources.html" target="_blank">Resources</a> って概念だけ押させておけば Chef 使えるよね？　という切り口で解説してくれてるのが本書。</p>
+
+<p>Chef とは何か, Resources とは何か, どう使うのか, あたりが理解できたそのあとに、では Resources 以外の概念は、いつ使うの？, どう使うの？ と話が広がっていきます。</p>
+
+<p>Chef solo の基本が理解できたらば、サードパーティのライブラリ ( chef では レシピ と呼ぶ ) どうやって使うの？ そもそも使うべきなの？ 使うとしたらどういうときなの？ といった話やら、入門Chef Solo というタイトルの範疇を飛び越えて、クライアントサーバ型の Chef の話と飛躍していく、という構成。</p>
+
+<p>ひと通り読んでおけば、Chef のアウトラインが理解できるので、苦痛でしかなかった <a href="http://wiki.opscode.com/display/chef/Home" target="_blank">本家</a> の膨大なイングリッシュなドキュメントが、困ったときに参照できる充実したリファレンスとして生まれ変わってくれるので幸せになれます。</p>
+
+<p>　</p>
+
+<p>余談ですけど、サードパーティのレシピ使うときは気をつけてくださいね。iptable 設定用のレシピ、よくわからないからとりあえず動かそうというノリで動かしたら 22番含めポートが全部閉まって鼻からうどんでましたから。</p>
+
+<p>　</p>
+
+<p>もう1つ余談になりますけど、本書にでてくる Unix ユーザ追加レシピのユーザ名はゲームのキャラクタでした！</p>
+
+<p>　</p>
+
+<h4>Webの創成 ― World Wide Webはいかにして生まれどこに向かうのか</h4>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839902879/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51568BG9REL._SL160_.jpg" alt="Webの創成 ― World Wide Webはいかにして生まれどこに向かうのか" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839902879/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Webの創成 ― World Wide Webはいかにして生まれどこに向かうのか</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 13.04.04</div></div><div class="amazlet-detail">ティム・バーナーズ-リー <br />毎日コミュニケーションズ <br />売り上げランキング: 188,953<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4839902879/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>　</p>
+
+<p>ティム・バーナーズ-リーの著作をなんぞ一冊読みたいな、と Amazon を探したところでてきたのがこれだけだったというライフハック。2001年出版の本です。</p>
+
+<p>ティムが Web のプロトタイプを作って HTTP の仕様を決めて、周囲に布教して世の中に広めていく様を描いた前半と、執筆当時にティムや W3C が抱えてた諸問題について語る後半とに大きくわかれます。後半なんか読むの苦痛・・と思ったら翻訳者が前半と違う人でした。</p>
+
+<p>Web のそもそもの出発点がティムが関わる目の前のお仕事の不満を解消したいという不満ドリブンであったという話や、ティムが実現したかった初期の Web はブラウザにページの更新機能（ リロードではなくアップデートね！ ）が実装されているものだったという話など、興味深い話がてんこもりでした。</p>
+
+<p>ピーゴロゴロピーというモデムの音や、ページロード時のマシンのゴリゴリゴリゴリという音が、読みながら耳の奥で蘇ってきましたよ。</p>
+
+<p>　</p>
+
+<p>一方で後半で語られるプライバシーやモラル（ アダルトコンテンツと青少年みたいな ）の問題は、いまなお問題で根が深いのだな、と。</p>
+
+<p>利便性追求するテクニカルな話はすごい勢いで進んでいくんですけどね。不特定多数が関わる利便性を阻害する動きってのはどうしてこう・・・まぁいいや。</p>
+
+<p>　</p>
+
+<p>印象的だったのが Web を作ったのが不満ドリブンだったいう話で。</p>
+
+<p>Web って</p>
+
+<ul>
+<li>文書と URI( ティム的には URL ではなく URI って言葉を使ってほしいらしい ) が 1対1 であること</li>
+<li>それぞれの文書が hyper link によって網の目状に繋がりあうこと</li>
+</ul>
+
+
+<p>と、とてもシンプルなルールで成り立っていて、シンプルであるがゆえにスケーラブルなわけで、結果すごい勢いで広まって（ 広めるために相当の努力をティムはしてますけどね！ ）はないですか。</p>
+
+<p>こういうものをね、不満ドリブンで作り上げてしまうというのが、自分的には割りとショッキングと言いますか、すごいなーと。</p>
+
+<p>目の前にある問題に対して、シンプルな回答を用意することで、その問題だけじゃなく、あれもこれも解決してしまう、というのは何度も見てきていて、自分もそういう発想したい、と常々思ってるわけですけども、どうにも頭が固くてなかなかできずにコンプレックスになっているというか。宮本茂コンプレックスと密かに呼んでるんですけども。</p>
+
+<blockquote><p><a href="http://www.1101.com/iwata/2007-08-31.html" target="_blank">アイデアというのはなにか？ | ほぼ日刊イトイ新聞</a></p>
+
+<p>そうです。つまり、宮本さんによれば、
+「アイデアというのは
+　複数の問題を一気に解決するものである」
+ということなんですが、
+この話を事務所のみんなにしたところ、
+ものすごく感心されまして。</p></blockquote>
+
+<p>　</p>
+
+<p>はい！コンプレックスをティムが作り上げた素敵な Web に垂れ流してみました！</p>
+
+<p>　</p>
+
+<h4>UNIXという考え方―その設計思想と哲学</h4>
+
+<div class="amazlet-box" style="margin-bottom:0px;"><div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank"><img src="http://ecx.images-amazon.com/images/I/518ME653H3L._SL160_.jpg" alt="UNIXという考え方―その設計思想と哲学" style="border: none;" /></a></div><div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"><div class="amazlet-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">UNIXという考え方―その設計思想と哲学</a><div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%">posted with <a href="http://www.amazlet.com/" title="amazlet" target="_blank">amazlet</a> at 13.04.04</div></div><div class="amazlet-detail">Mike Gancarz <br />オーム社 <br />売り上げランキング: 73,421<br /></div><div class="amazlet-sub-info" style="float: left;"><div class="amazlet-link" style="margin-top: 5px"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4274064069/amazedkoumei-22/ref=nosim/" name="amazletlink" target="_blank">Amazon.co.jpで詳細を見る</a></div></div></div><div class="amazlet-footer" style="clear: left"></div></div>
+
+<p>　</p>
+
+<p>LTSV 祭りのときにこのようなツイートを拝見してですね。</p>
+
+<blockquote class="twitter-tweet"><p>自己記述的なのでフィールド追加に対して開かれていて、かつ行指向なのでワンライナーで集計しやすい。 Unix 哲学の大事な点が形になっていると思う。素晴らしい。 / “Labeled Tab Separated Valueノススメ …” <a href="http://t.co/jyZAoghJ" title="http://htn.to/hpw58Q">htn.to/hpw58Q</a></p>&mdash; Takuto Wada (@t_wada) <a href="https://twitter.com/t_wada/status/298809190598713346">February 5, 2013</a></blockquote>
+
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>こんな顔になってしまったのが本書を手にとったきっかけです。</p>
+
+<p><a href="http://3.bp.blogspot.com/-70Nhi0CjjLY/TlfycXfMpmI/AAAAAAAAAoY/UeHstCwae58/s1600/IMG_0022.JPG" imageanchor="1" ><img border="0" src="http://3.bp.blogspot.com/-70Nhi0CjjLY/TlfycXfMpmI/AAAAAAAAAoY/UeHstCwae58/s320/IMG_0022.JPG" /></a></p>
+
+<p>　</p>
+
+<p>そういえば、もういい中年なのにソフトウェア哲学とか思想とか、まったく何も読んできてないよね、と。</p>
+
+<p>内容はいたってシンプルで、小さく作って、早く試作して、と作っていくと幸せになれるよね、という話です。アジャイル導入とかベンチャー立ち上げあたりでよく聞く話。ちなみにこの本も 2001年の本な！</p>
+
+<p>　</p>
+
+<p>せっかく9つの定理にまとめてくださってますし、転載しますか。</p>
+
+<p>参考: <a href="http://ssl.ohmsha.co.jp/cgi-bin/menu.cgi?ISBN=4-274-06406-9" target="_blank">http://ssl.ohmsha.co.jp/cgi-bin/menu.cgi?ISBN=4-274-06406-9</a></p>
+
+<ul>
+<li>定理1：スモール・イズ・ビューティフル</li>
+<li>定理2：一つのプログラムには一つのことをうまくやらせる</li>
+<li>定理3：できるだけ早く試作を作成する</li>
+<li>定理4：効率より移植性</li>
+<li>定理5：数値データはASCIIフラットファイルに保存する</li>
+<li>定理6：ソフトウェアの梃子を有効に活用する</li>
+<li>定理7：シェルスクリプトを使うことで梃子の効果と移植性を高める</li>
+<li>定理8：過度の対話的インタフェースを避ける</li>
+<li>定理9：すべてのプログラムをフィルタにする</li>
+</ul>
+
+
+<p>こんな感じに Unix に横たわる考え方を小さく切り出してまとめてくれてます。まさに Unix 的な書籍！</p>
+
+<p>フォントも大きめで翻訳も優しく、何度も読み返せる作りになってます。ぜひ Kindle 化を！</p>
+
+<p>　</p>
+
+<p>個人的には、最後の「定理9：すべてのプログラムをフィルタにする」が割りと印象的で、</p>
+
+<ul>
+<li>インターフェースを統一しておくと幸せになれるよね</li>
+<li>エラー情報を stdout に吐くなよ？ぶっ殺すよ？</li>
+</ul>
+
+
+<p>という話なんですけど、stdout と stderr と出力先が分かれてることにちゃんと意味があったんですね！</p>
+
+<p>知りませんでした！！！！</p>
+
+<p>　</p>
+
+<p>以上！最近読んだ本がどれも良書だったいうエントリでした！</p>
+
+<p>　</p>
+</div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

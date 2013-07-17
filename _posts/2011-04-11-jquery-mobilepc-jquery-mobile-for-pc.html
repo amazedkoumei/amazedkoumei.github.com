@@ -1,0 +1,133 @@
+---
+layout: post
+title: 'jQuery Mobileで作成したページをPC向けに表示するためのライブラリ『 jQuery Mobile for PC 』を公開しました'
+date: 2011/04/11 08:00
+tags: [jQueryMobile]
+comments: false
+---
+
+<div class='post'>
+<p>過去数回に渡って jQuery Mobile の手軽さ・自由度の高さを紹介してきました。<br /> <br /> <strong>過去のjQuery Mobile関連のエントリ :</strong><br /> <br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-3.html" target="_blank">jQuery Mobileのススメ - 商用利用に耐えうる3つの理由</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile.html" target="_blank">jQuery Mobile - 標準テーマでらくらくデザイン</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-data-transition.html" target="_blank">jQuery Mobile - data-transition属性でアニメーション指定</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/jquery-mobile-api.html" target="_blank">jQuery Mobile - APIの利用でより細かなカスタマイズ</a><br /> <br /> しかしjQuery Mobileは、実は大きな問題を抱えています。<br /> <br /> <br /></p>
+<h4>jQuery Mobileの問題点</h4>
+<p>jQuery Mobileはスマートフォンに最適化されたサイトを作るための優れたJavascriptライブラリですが、その反面jQuery Mobileで作成されたサイトをPCで表示するとやや間抜けなデザインとなってしまいます。<br /> <br /> iPhoneではこのように表示されるページも<br /> <br /> <a title="Untitled by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5601500062/"><img style="border: solid 3px #000000;" src="http://farm6.static.flickr.com/5269/5601500062_a9e15d8eab_m.jpg" alt="" width="160" height="240" /></a><br /> <br /> PCで表示するとこの通り。<br /> <br /> <a title="eWords_before by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5601098182/"><img style="border: solid 3px #000000;" src="http://farm6.static.flickr.com/5147/5601098182_1d48d1ee30.jpg" alt="eWords_before" width="500" height="153" /></a><br /> <br /> この問題を回避するためのJavascriptライブラリが <a href="https://github.com/amazedkoumei/jquery.mobile.forpc" target="_blank">jQuery Mobile for PC</a> です。<br /> <br /> <br /></p>
+<h4>jQuery Mobile for PC の概要</h4>
+<p><span style="color: red;">2011/05/08 追記: Firefox4でレイアウトが崩れます。修正までしばらくお時間いただけますと幸いです。</span><br /> <span style="color: red;">2011/05/24 追記: <a href="http://blog.amazedkoumei.com/2011/05/jquerymobileforpc-012js-is-published.html" target="_blank">修正版公開しました。</a></span><br /> <br /> jQuery Mobile for PCをHTMLに適用すると、先ほどのような画面がこのようなになります。<br /> <br /> <a title="eWords_after by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5604232039/"><img style="border: solid 3px #000000;" src="http://farm5.static.flickr.com/4099/5604232039_b379a6cb14.jpg" alt="eWords_after" width="500" height="248" /></a><br /> <br /> 背景やiPhoneの表示位置はカスタマイズ可能なので、ここからあなた好みの画面を作っていってください。<br /> <br /> iPhone向け英単語学習サイト『<a href="http://ewords.amazedkoumei.com">eWords</a>』ではこんな感じにしてみました。<br /> <br /> <a title="eWords_finish by amazedkoumei, on Flickr" href="http://www.flickr.com/photos/syokaturyo/5604817028/"><img style="border: solid 3px #000000;" src="http://farm5.static.flickr.com/4102/5604817028_366a3b42c9.jpg" alt="eWords_finish" width="500" height="248" /></a><br /> <br /> ちなみに背景画像は『Design × Lifehack × CrossOver Lab』さんの以下のエントリを参考に、<br /> <a href="http://www.igosso.net/" target="_blank">igosso画像検索</a>というサービスから探してきました。<br /> <br /></p>
+<p><a href="http://happy-montblanc.com/blog/?p=2331" target="_blank"><img src="http://capture.heartrails.com/150x130/shadow?http://happy-montblanc.com/blog/?p=2331" border="0" alt="" width="150" height="130" align="left" /></a><a href="http://happy-montblanc.com/blog/?p=2331" target="_blank">Design × Lifehack × CrossOver Lab - 【ブログ】ブログに華を咲かせましょ　〜ブログで使える無料画像サービスまとめ〜</a><a href="http://b.hatena.ne.jp/entry/http://happy-montblanc.com/blog/?p=2331" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/http://happy-montblanc.com/blog/?p=2331" border="0" alt="" /></a><br /> <span style="color: #808080; font-size: 80%;"> </span><br /> <strong>いつもお世話になってます。ありがとうございます。</strong><br style="clear: both;" /></p>
+<p><br /> <br /></p>
+<h4>jQuery Mobile for PC の推奨環境</h4>
+<p>Mozila (Firefox)、WebKit (Chrome, Safari) で動作します。<br /> IEでの動作の検証はしていません。<br /> <br /> むしろ爆発してください。<br /> <br /> <br /></p>
+<h4>jQuery Mobile for PC の構成</h4>
+<p>下記２ファイルで構成されています。</p>
+<ul>
+<li>jquery.mobile.forpc-0.1.0.js</li>
+<li>background-iphone.png</li>
+</ul>
+<p><br /> これらのファイルはGitHubで公開しています。<br /> <br /> <a href="http://github.com/amazedkoumei/jquery.mobile.forpc" target="_blank">amazedkoumei / jquery.mobile.forpc | GitHUB</a><br /> <br /> ライセンスはMITライセンスとしていますので、私のコピーライト表示を含んだヘッダを維持したままであれば再配布も変更も自由にしていただいてかまいません。<br /> <br /> <br /></p>
+<h4>jQuery Mobile for PC の導入</h4>
+<p>jquery.mobile.forpc-0.1.0.js をインポートしてください。<br /> <br /> Javascriptファイルのインポートは<br /> <strong>必ず、jQuery, jQuery Mobile for PC, jQuery Mobileの順で行ってください。</strong><br /> <br /> 例）</p>
+<pre class="brush: xml"><script type="text/javascript" src="/core/js/jquery-1.5.js"><!--mce:0--></script>
+<script type="text/javascript" src="/core/js/jquery.mobile.forpc-0.1.0.js"><!--mce:1--></script>
+<script type="text/javascript" src="/core/js/jquery.mobile-1.0a3.js"><!--mce:2--></script>
+</pre>
+<p><br /> jquery.mobile.forpc-0.1.0.js と background-iphone.pngを同一ディレクトリに設置した場合は、これで導入完了です。<br /> <br /> 別ディレクトリに設置した場合は、jquery.mobile.forpc-0.1.0.js の修正が必要です。<br /> <br /> 修正の詳細は次の『jQuery Mobile for PC のカスタマイズ』をご覧ください。<br /> <br /> <br /></p>
+<h4>jQuery Mobile for PC のカスタマイズ</h4>
+<ul>
+<li>jquery.mobile.forpc-0.1.0.jsとbackground-iphone.pngを異なるディレクトリに配置した場合は<strong>12行目</strong>のPATHの値を書き換えてください。</li>
+<li>iPhoneを任意の場所に表示した場合は、<strong>16行目</strong>のPOSITION_LEFTの値をWindowの左端からのピクセル数(Integer型)に置き換えてください。</li>
+</ul>
+<p><br /> jquery.mobile.forpc-0.1.1.js　<span style="color: red; font-size: 80%;">2011/4/12 修正</span></p>
+<pre class="brush: javascript">/*!
+ * jquery.mobile.forpc JavaScript Library v0.1.1
+ *
+ * Copyright (c) 2011 amazedkoumei (Twitter: @amazedkoumei, Blog:http://blog.amazedkoumei.com)
+ * Licensed under the MIT license + "keep this comment block even if you modify it".
+ *
+ * History:
+ *  04-11-2011 Published as jquery.mobile.forpc-0.1.0.js
+ *  04-12-2011 bug fixed: stylesheet is not applied for external html as jquery.mobile.forpc-0.1.1.js
+ */
+var iPhoneImage = {
+ // set your iPhone image path
+ PATH : "background-iphone.png",
+ // set Integer, how many px far from left side you would like to show iPhone image
+ // null means centering
+ POSITION_LEFT : null,
+ 
+ WIDTH : 396,
+ HEIGHT : 744,
+ INNER_WIDTH : 320,
+ INNER_HEIGHT : 460,
+ MAGIN_LEFT : 37,
+ MAGIN_TOP : 145,
+ isLoading : true
+}; // end iPhoneImage
+
+$(function(){
+ if( navigator.userAgent.indexOf('Linux; U; Android ') == -1 &amp;&amp;
+  navigator.userAgent.indexOf('iPhone; U') == -1 &amp;&amp;
+  navigator.userAgent.indexOf('iPad; U') == -1){
+  
+  $('div[data-role="page"]').live('pagebeforeshow',function(event, ui){
+   if(!jQuery.support.checkOn){
+    // for web-kit page transition
+    $('.background-iphone').show();
+   }
+  });
+  $('div[data-role="page"]').live('pageshow',function(event, ui){
+   $('.background-iphone').hide();
+   $('.' + $.mobile.activePageClass).closest('.background-iphone').show();
+  });
+  $('div[data-role="page"]').live('pagecreate',function(event){
+   var resizeRate =  iPhoneImage.HEIGHT / $(window).height();
+   if(iPhoneImage.POSITION_LEFT == null) {
+    iPhoneImage.POSITION_LEFT = ($(window).width() - iPhoneImage.INNER_WIDTH)/2;
+   }
+   $(this).css("overflow-y", "auto");
+   $(this).css("overflow-x", "hidden");
+   $(this).css("height", iPhoneImage.INNER_HEIGHT + "px");
+   $(this).css("width", iPhoneImage.INNER_WIDTH + "px");
+   $(this).css("margin-top", iPhoneImage.MAGIN_TOP + "px");
+   $(this).css("margin-left", iPhoneImage.POSITION_LEFT + iPhoneImage.MAGIN_LEFT + "px");
+   $(this).wrap('');
+   $(this).closest('.background-iphone').prepend('<img class="background-iphone-img" src="' + iPhoneImage.PATH + '" alt="" />');
+   $(this).closest('.background-iphone').css("padding-left", iPhoneImage.POSITION_LEFT + "px");
+   $(this).closest('.background-iphone').css("height", $(window).height() + "px");
+   $(this).closest('.background-iphone').css("font-size", resizeRate*100 + "%");
+   $(this).closest('.background-iphone').css("position", "relative");
+   $(this).closest('.background-iphone-img').css("height", resizeRate*100 + "%");
+  });
+  $('div[data-role="page"]').live('pagebeforecreate',function(event){
+   $(this).find('div[data-position="fixed"]').each(function(index, div) {
+    $(div).attr("data-position", "inline");
+   });
+  });
+ }
+}); // end onload
+</pre>
+<p><br /> 背景は『background-iphone』クラスにstyleを追加することで変更できます。<br /> <br /> 私は下記のようなstyleを追加しています。</p>
+<pre class="brush: css">.background-iphone {
+ background-image:url("images/background-office6.jpg");
+ -webkit-background-size: 100% 100%;
+ -moz-background-size: 100% 100%;
+ background-repeat:no-repeat;
+ overflow:hidden;
+}
+</pre>
+<p><br /> CSSを適用させるHTMLでは、下記のようにインポートすることで、スマートフォンからアクセスした場合には適用されないようにすることが可能です。<br /> <br /></p>
+<pre class="brush: xml">&lt;link href="/core/css/jquery.mobile.forpc.css" rel="stylesheet" type="text/css" media="screen and (min-width:481px)" /&gt;
+</pre>
+<p><br /> <br /></p>
+<h4>問題点・課題</h4>
+<ul>
+<li>data-position="fixed"を強制的にdata-position="inline"に書き換えているため、ヘッダ・フッタが中途半端な位置に配置される。</li>
+<li>ページの高さが表示サイズを超える場合にスライドバーを表示させることで回避しているが美しくない。</li>
+<li>ページ下部に無駄なスペースができる・・これはなんとかせねばですね。</li>
+</ul>
+<p><br /> またjQuery Mobileで提供されている全要素について動作を検証できているわけではありません。<br /> もし、レイアウト崩れ等、発生しましたら<a href="https://twitter.com/amazedkoumei" target="_blank">@amazedkoumei</a>までご一報いただけると幸いです。<br /> <br /> <br /></p>
+<h4>最後に</h4>
+<p>jQuery Mobile for PC はGitHUBで公開しています。<br /> まだまだ動作は不安定ですが、ご利用いただけると嬉しいです。<br /> <br /> <a href="http://github.com/amazedkoumei/jquery.mobile.forpc" target="_blank">amazedkoumei / jquery.mobile.forpc | GitHUB</a><br /> <br /> また、エントリ中で紹介した『eWords』にもぜひアクセスしてみてください。<br /> 単語ページで左右にスワイプすることで単語を切り替えられます。<br /> <br /></p>
+<p><a href="http://ewords.amazedkoumei.com/"><img src="http://capture.heartrails.com/150x130/shadow?http://ewords.amazedkoumei.com/" border="0" alt="" width="150" height="130" align="left" /></a><a href="http://ewords.amazedkoumei.com/" target="_blank">eWords</a><a href="http://b.hatena.ne.jp/entry/http://ewords.amazedkoumei.com/" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/http://ewords.amazedkoumei.com/" border="0" alt="" /></a><br /> <span style="color: #808080; font-size: 80%;"> </span><br /> <strong>すきま時間の有効活用！英語マスタへの道は単語から！</strong><br style="clear: both;" /></p>
+<p><strong>eWords 関連エントリ : </strong><br /> <a href="http://blog.amazedkoumei.com/2011/02/ewords-iphone-on-gae.html" target="_blank">[ #eWords ] iPhone向け英単語学習サイト on GAE</a><br /> <a href="http://blog.amazedkoumei.com/2011/02/ewords-koumeilabs-google-translate-api.html" target="_blank">[ #ewords ][ #koumeilabs ] Google Translate API v2 ( Google翻訳API )の使い方</a><br /> <a href="http://blog.amazedkoumei.com/2011/02/ewords-koumeilabs-mobile-safari.html" target="_blank">[ #ewords ][ #koumeilabs ] Mobile Safari のキャッシング .manifest の使い方</a><br /> <a href="http://blog.amazedkoumei.com/2011/03/ewords-iphone.html" target="_blank">[ #eWords ] iPhone向け英単語学習サイト 機能追加のお知らせ</a><br /> <br /> <br /><strong>追記 2011/04/12 :</strong><br /> <br /> <a href="http://twitter.com/nz_000" target="_blank">@nz_000</a> にご指摘いただき、外部HTMLに遷移した際にスタイルが適用されない不具合を修正しました。<br /> <br /> ご指摘ありがとうございました。<br /> <br /><br /></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

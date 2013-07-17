@@ -1,0 +1,104 @@
+---
+layout: post
+title: 'bugfix: SublimeKnifeSolo v1.0.1'
+date: 2013/04/16 18:00
+tags: [SublimeText,python]
+comments: false
+---
+
+<div class='post'>
+<p>SublimeText から knife solo コマンドを実行できる plugin 書いて嬉々として使ってたわけなのですが</p>
+
+<ul>
+<li><a href="http://blog.amazedkoumei.com/2013/02/sublimeknifesolo-sublimetext-command.html" target="_blank">SublimeKnifeSolo - SublimeText の Command Palette から knife solo を実行できる Plugin を書いたでござる</a></li>
+<li><a href="https://github.com/amazedkoumei/SublimeKnifeSolo" target="_blank">amazedkoumei / SublimeKnifeSolo | Github</a></li>
+</ul>
+
+
+<p>どうにも調子がよろしくない。</p>
+
+<p>plugin がやっていることはといえば</p>
+
+<ol>
+<li>事前登録した knife solo コマンドの保存</li>
+<li>knife solo コマンドの実行</li>
+<li>knife solo コマンド の stdout, stderr を SublimeText の view に表示</li>
+</ol>
+
+
+<p>と、ただこれだけなのですが、3 の stdout, stderr 表示時の CPU Usage が異様に高く、遂には SublimeText が応答なしになるケースもありまして、ああこれはいけないね、と。</p>
+
+<p>使ってるくれてる方に申し訳ないことしたな、何人くらい使ってるのかなと <a href="http://wbond.net/sublime_packages/community" target="_blank">wbond.net の Sublime Text Packages community</a> に行って "knifesolo" と検索してみたところ、 1 Install と表示されました。おれやんけ。</p>
+
+<p>　</p>
+
+<h4>対策</h4>
+
+<p><a href="https://github.com/amazedkoumei/SublimeKnifeSolo/commit/c6ea1ac40c2679cf78555e36de726216309e4803" target="_blank">reduce cpu-usage when display stream returned by knife solo command</a></p>
+
+<ul>
+<li>SublimeKnifeSolo.py
+
+<ul>
+<li>stdout_queue, stderr_queue にknife solo コマンドが stream で返した文字列を行区切りで貯めこんでいます。</li>
+<li>上記文字列の view への表示タイミングを下記のように修正
+
+<ul>
+<li>修正前: 1行ごと</li>
+<li>修正後: stream が途切れたタイミングでまとめて表示</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>helper.py
+
+<ul>
+<li>ちょっと実装が気になったのでついでに直しただけです。
+
+<ul>
+<li>view に文字列を1回出力するごとに read_only 属性を off にして on にして、としてたんだけど、まぁいらないよね、それ、と。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>　</p>
+
+<h4>high cpu usage の原因</h4>
+
+<p>受け取った stream を順次てけてけてけと view に表示してました。</p>
+
+<ol>
+<li>文字列を view の末尾に追加</li>
+<li>文字列の高さが view の高さを超えた場合は、差を計算して view をスクロール</li>
+</ol>
+
+
+<p>この 2 の「差を計算して view をスクロール」が helper.py 内のこの実装なのですが</p>
+
+<pre><code>  def scroll(self):
+    (cur_row, _) = self.view.rowcol(self.view.size())
+    self.view.show(self.view.text_point(cur_row, 0))
+</code></pre>
+
+<p>これが異様にリソース食ってた。</p>
+
+<p>これを軽くする方法がわからなかったので呼び出し回数を減らして上記の対策のようになりましたよっと。</p>
+
+<p>ちなみに</p>
+
+<pre><code>  def scroll(self):
+    self.view.show(self.view.size())
+</code></pre>
+
+<p>と書いても同じ動作を実現できて、cpu usage も変わりませんよっと。</p>
+
+<p>　</p>
+<p>以上です！</p>
+<p>　</p>
+<p>　</p>
+</div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

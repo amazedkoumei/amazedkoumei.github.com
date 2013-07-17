@@ -1,0 +1,127 @@
+---
+layout: post
+title: '[ #ewords ][ #koumeilabs ] Google Translate API v2 ( Google翻訳API )の使い方'
+date: 2011/02/17 09:00
+tags: [koumeilabs,googleAppEngine,ewords]
+comments: false
+---
+
+<div class='post'>
+先日このブログで紹介した、iPhone向け英単語学習サイト『<a href="http://ewords.amazedkoumei.com" target="_blank">eWords</a>』。<br />
+※eWordsの紹介記事は<a href="http://blog.amazedkoumei.com/2011/02/ewords-iphone-on-gae.html" target="_blank">こちら</a><br />
+<br />
+そのサイトで使用している<a href="https://code.google.com/intl/ja/apis/language/translate/v2/getting_started.html">Google Translate API ( Google翻訳API )</a>の使い方があまりにシンプルだったので紹介することにする。<br />
+<br />
+Google Translate APIはGoogleが提供している翻訳APIだ。<br />
+<a href="http://translate.google.co.jp/" target="_blank">本家のGoogle翻訳</a>は馴染み深い方も多いだろう。<br />
+<br />
+Google Translate APIを使えば、その機能をあなたのアプリケーションに取り込むことができる。<br />
+<br />
+Google Translate APIはGetリクエストのみ受け付ける。<br />
+URLは https://www.googleapis.com/language/translate/v2<br />
+送るべきパラメータは以下の4つだ。<br />
+<table border="1"><thead><th>パラメータ名</th><th>意味</th></thead><tbody>
+<tr><td>key</td><td>あなたのAPI KEY</td>
+<tr>
+<tr><td>q</td><td>翻訳したい文章</td>
+<tr>
+<tr>
+<tr><td>source</td><td>翻訳前の言語の言語コード</td>
+<tr>
+<tr>
+<tr><td>target</td><td>翻訳後の言語の現コード</td>
+<tr><tbody></table><br />
+API KEYは<a href="https://code.google.com/apis/console/" target="_blank">Google APIs Console</a>の右下「Translate API」の「Activate」ボタンをクリックすることで取得できる。<br />
+<br />
+「source」と「target」に指定する言語コードはGoogle Translate APのドキュメントに<a href="https://code.google.com/intl/ja/apis/language/translate/v2/using_rest.html#language-params" target="_blank">下記のような一覧</a>が明示されてるので確認してほしい。(2011/02/17現在)<br />
+<table border="1"><thead><th>言語</th><th>言語コード</th></thead><tbody>
+<tr><td>Afrikaans</td><td>af</td></tr>
+<tr><td>Albanian</td><td>sq</td></tr>
+<tr><td>Arabic</td><td>ar</td></tr>
+<tr><td>Belarusian</td><td>be</td></tr>
+<tr><td>Bulgarian</td><td>bg</td></tr>
+<tr><td>Catalan</td><td>ca</td></tr>
+<tr><td>Chinese Simplified</td><td>zh-CN</td></tr>
+<tr><td>Chinese Traditional</td><td>zh-TW</td></tr>
+<tr><td>Croatian</td><td>hr</td></tr>
+<tr><td>Czech</td><td>cs</td></tr>
+<tr><td>Danish</td><td>da</td></tr>
+<tr><td>Dutch</td><td>nl</td></tr>
+<tr><td>English</td><td>en</td></tr>
+<tr><td>Estonian</td><td>et</td></tr>
+<tr><td>Filipino</td><td>tl</td></tr>
+<tr><td>Finnish</td><td>fi</td></tr>
+<tr><td>French</td><td>fr</td></tr>
+<tr><td>Galician</td><td>gl</td></tr>
+<tr><td>German</td><td>de</td></tr>
+<tr><td>Greek</td><td>el</td></tr>
+<tr><td>Haitian Creole</td><td>ht</td></tr>
+<tr><td>Hebrew</td><td>iw</td></tr>
+<tr><td>Hindi</td><td>hi</td></tr>
+<tr><td>Hungarian</td><td>hu</td></tr>
+<tr><td>Icelandic</td><td>is</td></tr>
+<tr><td>Indonesian</td><td>id</td></tr>
+<tr><td>Irish</td><td>ga</td></tr>
+<tr><td>Italian</td><td>it</td></tr>
+<tr><td>Japanese</td><td>ja</td></tr>
+<tr><td>Latvian</td><td>lv</td></tr>
+<tr><td>Lithuanian</td><td>lt</td></tr>
+<tr><td>Macedonian</td><td>mk</td></tr>
+<tr><td>Malay</td><td>ms</td></tr>
+<tr><td>Maltese</td><td>mt</td></tr>
+<tr><td>Norwegian</td><td>no</td></tr>
+<tr><td>Persian</td><td>fa</td></tr>
+<tr><td>Polish</td><td>pl</td></tr>
+<tr><td>Portuguese</td><td>pt</td></tr>
+<tr><td>Romanian</td><td>ro</td></tr>
+<tr><td>Russian</td><td>ru</td></tr>
+<tr><td>Serbian</td><td>sr</td></tr>
+<tr><td>Slovak</td><td>sk</td></tr>
+<tr><td>Slovenian</td><td>sl</td></tr>
+<tr><td>Spanish</td><td>es</td></tr>
+<tr><td>Swahili</td><td>sw</td></tr>
+<tr><td>Swedish</td><td>sv</td></tr>
+<tr><td>Thai</td><td>th</td></tr>
+<tr><td>Turkish</td><td>tr</td></tr>
+<tr><td>Ukrainian</td><td>uk</td></tr>
+<tr><td>Vietnamese</td><td>vi</td></tr>
+<tr><td>Welsh</td><td>cy</td></tr>
+<tr><td>Yiddish</td><td>yi</td></tr>
+</tbody></table><br />
+要するに、「flower」を日本語に訳すには下記のURLを叩けばいい。<br />
+YOUR_API_KEYは<a href="https://code.google.com/apis/console/" target="_blank">Google APIs Console</a>で取得したAPI KEYに書き換える必要がある。<br />
+<br />
+https://www.googleapis.com/language/translate/v2?key=YOUR_API_KEY&q=flowers&source=en&target=ja<br />
+<br />
+返ってくるレスポンスは下記のようなJSONだ。(2011/02/17現在)<br />
+<blockquote>{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"data":&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"translations":&nbsp;[<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"translatedText":&nbsp;"花"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}</blockquote><br />
+iPhone向け英単語学習サイト『<a href="http://ewords.amazedkoumei.com" target="_blank">eWords</a>』は、Google App Engine をホストにしているため、Pythonで実装したが、oogle Translate APはどの言語を使おうと簡単に使いこなせる仕様になっているのがお分かり頂けるだろう。<br />
+<br />
+<br />
+現在、Google Translate APIはv1とv2があり、それぞれステータスが Graduate、Labとなっている。<br />
+<br />
+v1は安定して使えるが今後の発展は期待できない。<br />
+v2は突然の仕様変更が発生する可能性があるが、発展が期待できるということだ。<br />
+<br />
+これからGoogle Translate APIをあなたのアプリケーションに<br />
+組み込むつもりならぜひv2をお勧めしたい。<br />
+<br />
+<a href="http://translate.google.co.jp/" target="_blank">本家のGoogle翻訳</a>にはすでに発声機能が実装されており、対応言語数や翻訳精度など、日々向上している。（らしい）<br />
+また、先日リリースされたiPhoneアプリ『<a href="http://click.linksynergy.com/fs-bin/stat?id=2pzF1zZ1Icg&offerid=94348&type=3&subid=0&tmpid=2192&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fjp%252Fapp%252Fgoogle-translate%252Fid414706506%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30" target="itunes_store">Google Translate - Google</a>も、多くのブログで取り上げられてかなりの好評なようだ。<br />
+<br />
+Googleが今後、翻訳機能の充実や、その機能のモバイルへの展開に注力していくのであれば<br />
+Google Translate APIはものすごい速度で進化していくことになる。<br />
+<br />
+そして、その新たに追加されていく機能は、あなたのアプリケーション上で動くことになるのだ。<br />
+<br /></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

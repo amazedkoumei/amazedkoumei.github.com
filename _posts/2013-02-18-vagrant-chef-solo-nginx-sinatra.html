@@ -1,0 +1,260 @@
+---
+layout: post
+title: 'Vagrant + chef-solo 使って nginx + sinatra で HelloWorld!'
+date: 2013/02/18 14:41
+tags: [VM,ruby,環境構築]
+comments: false
+---
+
+<div class='post'>
+<p>Markdown 手順書スラスラ書けてまじイノベーティブ！とか言ってたやつ誰だ！ ( おれだ！ )</p>
+<p>Vagrant + chef-solo で  nginx + sinatra で HelloWorld! してみました。</p>
+<blockquote>
+<p><a href="https://github.com/amazedkoumei/vagrant-centos-nginx_sinatra" target="_blank">amazedkoumei / vagrant-centos-nginx_sinatra</a></p>
+</blockquote>
+<p> </p>
+<p>きっかけをくれたはこちらのエントリ </p>
+<blockquote>
+<p><a href="http://d.hatena.ne.jp/naoya/20130205/1360062070" target="_blank">Vagrant - naoyaのはてなダイアリー</a> </p>
+<p>ちょっとしたテストのために壊してもいい環境が欲しいというのにももちろん使えますし、方々を見ていると組織の中で標準化された開発環境を全開発者に配布するときなんかにも使われているようですね。自分は EC2 でホストしているステージングサーバーへ chef-solo を流す前に vagrant で調整して、問題なければステージングにも chef を適用するのに使ってます。 </p>
+<p><br /><br /></p>
+</blockquote>
+<p>これは熱い。欲しくないプログラマがいるのかと。</p>
+<p> </p>
+<p>サンプルリポジトリも用意してくれていたので、もちのろんで流用させてもらいました。</p>
+<p>ただですね、、そのまま使うとまっさらなぼくの大切なVMに<a href="http://xenoblade.wikia.com/wiki/File:Fiorung.png" target="_blank">ゼノブレイドのキャラクタ</a>がユーザとして追加されちゃうのです・・なんぞこれｗ</p>
+<blockquote>
+<p><a href="https://github.com/naoya/vagrant-centos-rbenv_chef" target="_blank">naoya / vagrant-centos-rbenv_chef</a></p>
+</blockquote>
+<p> </p>
+<p> </p>
+<h4>Vagrant の setup</h4>
+<p>作業ディレクトリを準備して</p>
+<pre>$ mkdir ~/vagrant-centos-nginx_sinatra<br />$ cd ~/vagrant-centos-nginx_sinatra</pre>
+<p><a href="http://d.hatena.ne.jp/naoya/20130205/1360062070" target="_blank">naoya さんとこ</a>に記載されてるコマンドをそのまま実行。</p>
+<pre>$ gem install vagrant<br />$ vagrant box add centos http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-x86_64-v20130101.box<br />$ vagrant init centos<br />$ vagrant up</pre>
+<p>で、VM立ち上がります（まじで！）</p>
+<p>このままだと naoya のはてなダイアリーコピペブログなので以下に補足説明をば。</p>
+<p> </p>
+<p>$ vagrant box add [VM名] [ダウンロード先] でVMイメージをダウンロードしています。ここにダウンロードされます。</p>
+<pre>~/.vagrant.d/boxes/</pre>
+<p>上記のコマンド実行後の  ~/.vagrant.d/boxes/ はこんな感じ</p>
+<pre>$ls ~/.vagrant.d/boxes/centos/<br /> Vagrantfile box-disk1.vmdk box.ovf</pre>
+<p> </p>
+<p>VMのダウンロード先の一覧はこちら。</p>
+<p><a href="http://www.vagrantbox.es/" target="_blank">A list of base boxes for Vagrant - Vagrantbox.es</a></p>
+<p> </p>
+<p><a href="http://www.ryuzee.com/contents/blog/4310" target="_blank">Vagrantboxes なる拡張をインストール</a>することで</p>
+<pre>$ sudo vagrant vagrantboxes search</pre>
+<p>でわざわざブラウザに移動しなくてもコマンドラインから探せるようになるらしい。（私の環境では動作せず。どぼちて？）</p>
+<p> </p>
+<p> ~/.vagrant.d/boxes/ に VMイメージができたら $ vagrant init で CurrentDirectory に Vagrantfile が作成されます。</p>
+<pre>$ vagrant init centos<br />$ ls<br />Vagrantfile</pre>
+<p> </p>
+<p>その他のコマンドは vagrant -h で確認できますのでご確認をば。</p>
+<p> </p>
+<p>Vagrant 導入の利点はというと Virtualbox GUI からの永遠のお別れといったところでしょうか。</p>
+<p>ミラーサイトにいってイメージ落としてもっさりしたGUIでセットアップ、とか、起動のたびにもっさりしたGUI立ちあげてクリッククリックとか、そういったストレスから解放されますよっと。</p>
+<p>言葉でいうと陳腐ですけどこれ意外と大きい。</p>
+<p><a href="http://blog.amazedkoumei.com/2012/09/iphonewritten-by-rubymotionclipto-github.html" target="_blank">以前に Rubymotion の利点としてXcodeからの解放！と書いたことがあるんですけど</a>、それに似ています。</p>
+<p> </p>
+<p>慣れてしまうとなかなかあれですが、解放されて初めて、ああ、おれの心はあの重いGUIに傷つけられていたのだな、と気がつくのであります。</p>
+<p> </p>
+<p>Virtualbox の弱点 Vagrant が華麗に補う素敵なコラボレーション♪</p>
+<p> </p>
+<p> </p>
+<h4>chef-solo の setup - kitchenの作成と構成</h4>
+<p> ますは knife-solo をインストール</p>
+<pre>$ gem install knife-solo</pre>
+<p> </p>
+<p>Vargantfile のあるディレクトリで  knfe solo init DIRECTORY を実行すると Chef の 基本構造を作成してくれます。</p>
+<p>この基本構造の名前を探したのですがよくわかりませんでしたので <a href="http://matschaffer.github.com/knife-solo/" target="_blank">knife-solo のドキュメント</a> の表現を借りて kitchen と呼びますね！( 以下のコマンドでは chef-repo 配下が kitchen ) ( わかりにくいな。ごめんなさい。 )</p>
+<pre>$ knife solo init chef-repo<br />$ tree chef-repo/<br />chef-repo/<br />├── cookbooks<br />├── data_bags<br />├── nodes<br />├── roles<br />├── site-cookbooks<br />└── solo.rb</pre>
+<p> </p>
+<p>各構成要素はこんな感じ （ざっくり）</p>
+<ul>
+<li>coobooks</li>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Cookbooks">http://wiki.opscode.com/display/chef/Cookbooks</a></li>
+<li>詳細後述</li>
+</ul>
+<li>data_bags</li>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Chef+Solo#ChefSolo-Roles">http://wiki.opscode.com/display/chef/Chef+Solo#ChefSolo-Roles</a></li>
+<li>ユーザごとの変数をJSONで定義をする（らしい）</li>
+<li>vagrant-centos-nginx_sinatra では使いませんでした ( つまりよくわかってません！ )</li>
+</ul>
+<li>nodes</li>
+<ul>
+<li>cookbook には変数を与えることができるのです。これの host ごとの変数を JSON で定義する</li>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Attributes#Attributes-NodeAttributes">http://wiki.opscode.com/display/chef/Attributes#Attributes-NodeAttributes</a></li>
+<li>うまく変数を切り出せてる cookbook は nodes の編集だけで、自分の環境に適合させることができるわけですな。</li>
+<li>逆にうまく切り出せてない cookbook は cookbook 自体を修正しないと自分の環境に適合させることができません。</li>
+<ul>
+<li>実害としては、独立しているはずの cookbook を git submodule として管理できない</li>
+</ul>
+</ul>
+<li>変数は cookbooks 配下 または site-cookbooks 配下に <a href="https://github.com/opscode-cookbooks/ohai" target="_blank">opscode-cookbooks / ohai</a> を設置することで拡張可能</li>
+<ul>
+<li>host 固有の変数 ( 例えばIPアドレスやホスト名 ) などを ohai が自動設定してくれる</li>
+<ul>
+<li>自動設定される変数の一覧はこちら → <a href="http://docs.opscode.com/ohai_automatic_attributes.html" target="_blank">Automatic Attributes — Chef Docs</a></li>
+<li>自動設定された Automatic Attribute を nodes で上書きすることはできません。→ <a href="http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributeTypeandPrecedence" target="_blank">Attributes - Chef - Opscode Open Source Wiki </a> </li>
+</ul>
+</ul>
+<li>knife solo cook vagrant@HOSTNAME 実行時には node/HOSTNAME.json が読み込まれる (  vagrant-centos-nginx_sinatra では <a href="https://github.com/amazedkoumei/vagrant-centos-nginx_sinatra/blob/master/chef-repo/nodes/192.168.33.11.json" target="_blank">nodes/192.168.33.11.json</a> )</li>
+<ul>
+<li>なので Vargant 起動時にも HOSTNAME.json を読み込むようにしておくのが吉</li>
+<ul>
+<li>Vargant 起動時の読み込み JSON は Vargantfile で設定できます。</li>
+</ul>
+</ul>
+</ul>
+<li>roles</li>
+<ul>
+<li>chef-solo でも role 使えますよ、という説明 <a href="http://wiki.opscode.com/display/chef/Chef+Solo#ChefSolo-Roles">http://wiki.opscode.com/display/chef/Chef+Solo#ChefSolo-Roles</a></li>
+<li>role の説明 <a href="http://wiki.opscode.com/display/chef/Roles">http://wiki.opscode.com/display/chef/Roles</a></li>
+<li>たぶん複数 host を管理する場合に、host をグルーピングしてそれぞれのグループごとに変数を JSON で定義できますよ、ということ ( だと思われ) </li>
+<li>vagrant-centos-nginx_sinatra では使いませんでした ( つまりよくわかってません！ )</li>
+</ul>
+<li>site-cookbooks</li>
+<ul>
+<li>cookbooks と同じ</li>
+<li>ただし cookbooks と site-cookbooks に同名の cookbook が存在した場合には site-cookbooks の cookbook のみが実行される。( cookbooks 内のcookbookは無視される！ )</li>
+<ul>
+<li>いまいちこの仕様の素敵さ加減がわかりません。</li>
+<ul>
+<li>クラサバ型Chef との整合性の都合上えいや！で盛り込んだ？</li>
+</ul>
+</ul>
+</ul>
+<li>solo.rb</li>
+<ul>
+<li>実行ファイルでござる</li>
+<li><a href="http://wiki.opscode.com/display/chef/Chef+Solo#ChefSolo-ConfigureChefSolo">http://wiki.opscode.com/display/chef/Chef+Solo#ChefSolo-ConfigureChefSolo</a></li>
+</ul>
+</ul>
+<p> </p>
+<h4 style="font-size: medium;">chef-solo の setup - cookbookの作成と構成</h4>
+<p>続いて cookbook を作ります。</p>
+<pre>$ cd chef-repo/<br />$ knife cookbook create nginx_sinatra -o site-cookbooks<br />$ tree site-cookbooks/nginx_sinatra/<br />site-cookbooks/nginx_sinatra/<br />├── CHANGELOG.md<br />├── README.md<br />├── attributes<br />├── definitions<br />├── files<br />│   └── default<br />├── libraries<br />├── metadata.rb<br />├── providers<br />├── recipes<br />│   └── default.rb<br />├── resources<br />└── templates<br />       └── default</pre>
+<p> </p>
+<p>各構成要素はこんな感じ （またもやざっくり）</p>
+<ul>
+<li> attributes</li>
+<ul>
+<li>kitchen の nodes で指定可能な変数が未指定だったときの変数のデフォルト値を定義します。</li>
+<li>定義の仕方はこんな感じで <a href="http://wiki.opscode.com/display/chef/Attributes#Attributes-CookbookAttributes">http://wiki.opscode.com/display/chef/Attributes#Attributes-CookbookAttributes</a></li>
+</ul>
+<li>definitions</li>
+<ul>
+<li>resource の定義をします。</li>
+<ul>
+<li>resource とは recipe から呼ぶことができるメソッドのことです。詳しくはこちら → <a href="http://wiki.opscode.com/display/chef/Resources">http://wiki.opscode.com/display/chef/Resources</a></li>
+<ul>
+<li>デフォルトでも使用可能な resource いぱーい</li>
+<ul>
+<li>directory</li>
+<li>file</li>
+<li>git</li>
+<li>template</li>
+<li>このあたりはよく使う</li>
+</ul>
+<li>しかしながら、これらだけでやりくりしようとすると可読性の観点や DRY の観点から好ましくないわけですな</li>
+<li>で、definition の出番ですよっと</li>
+<li>例えば nagios cookbook だと conf ファイル作成の definistion を定義してますね！ <a href="https://github.com/opscode-cookbooks/nagios/blob/master/definitions/nagios_conf.rb">https://github.com/opscode-cookbooks/nagios/blob/master/definitions/nagios_conf.rb</a></li>
+</ul>
+</ul>
+</ul>
+<li>files</li>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Resources#Resources-CookbookFile">http://wiki.opscode.com/display/chef/Resources#Resources-CookbookFile</a></li>
+<li>host ごとのファイルの定義っぽい</li>
+<li>vagrant-centos-nginx_sinatra では使いませ(ry</li>
+</ul>
+<li>libraries</li>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Libraries">http://wiki.opscode.com/display/chef/Libraries</a></li>
+<li>Chef::Recipe とかの Chef で使用する Ruby Classの拡張をするらしい</li>
+<li>vagrant-centos-nginx_sinatra では使(ry</li>
+</ul>
+<li>providers</li>
+<ul>
+<li>Chef を Ruby ぽくオブジェクティブに拡張するためのキモになるっぽい（また曖昧なものいいですみません</li>
+<ul>
+<li><a href="http://wiki.opscode.com/pages/viewpage.action?pageId=7274964" target="_blank">Lightweight Resources and Providers (LWRP)</a></li>
+<li>スライドもある→ <a href="http://www.slideshare.net/jtimberman/understanding-lwrp-development">http://www.slideshare.net/jtimberman/understanding-lwrp-development</a> </li>
+</ul>
+<li>providers を実装している cookbook は割りとたくさんあるので参考にしつつ1個作ってみるときちんと把握できそう。</li>
+<li>そうです。vagrant-centos-nginx_sinatra では使いませんでした ( つまりよくわかってません！すみませんすみません )</li>
+</ul>
+<li>recipes</li>
+<ul>
+<li>chef のキモ</li>
+<li><a href="http://wiki.opscode.com/display/chef/Recipes">http://wiki.opscode.com/display/chef/Recipes</a></li>
+<li>記述した内容がシーケンシャルに実行されます。</li>
+</ul>
+<li>resources</li>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Resources">http://wiki.opscode.com/display/chef/Resources</a></li>
+<li>関連項目→ definitions, providers</li>
+</ul>
+<li>templates</li>
+<ul>
+<li>erb 形式で記述します</li>
+<li>template resource を recipe 内で call して動的にファイル作成！</li>
+<li><a href="http://wiki.opscode.com/display/chef/Templates">http://wiki.opscode.com/display/chef/Templates</a></li>
+</ul>
+</ul>
+<p> </p>
+<h4 style="font-size: medium;">chef-solo の ドキュメント</h4>
+<p>あまりにざっくりなのでリンクを貼っておきますね。</p>
+<ul>
+<li><a href="http://wiki.opscode.com/display/chef/Home">http://wiki.opscode.com/display/chef/Home</a></li>
+<li><a href="http://docs.opscode.com/">http://docs.opscode.com/</a></li>
+</ul>
+<p> </p>
+<p> </p>
+<p>wiki と docs と2つのドキュメントがあるのですが、wiki から docs への移行を進めているようにみえます。</p>
+<p>現時点では wiki の方が情報が充実していること、wiki のページトップには docs へのリンクが貼ってあることから、まずは wiki を見て、それから docs を見るのがオススメです。</p>
+<p> </p>
+<h4 style="font-size: medium;">chef-solo の実行</h4>
+<p>cookbook を シコシコと書く もしくは 既存の cookbooks を流用するなどして chef-solo の設定を完了したらいよいよ実行です。</p>
+<p>cookbook の既存資産はこのあたり</p>
+<ul>
+<li><a href="http://community.opscode.com/cookbooks" target="_blank">Opscode Community</a></li>
+<li><a href="https://github.com/opscode-cookbooks" target="_blank">opscode-cookbooks (Opscode Public Cookbooks) · GitHub</a></li>
+</ul>
+<p> </p>
+<p>Vagrant には chef-solo 実行オプションが実行されているので Vagrantfile でパラメータ指定すれば vagrant up 時に自動で chef-solo を実行してくれます。</p>
+<blockquote>
+<p>参考: <a href="https://github.com/amazedkoumei/vagrant-centos-nginx_sinatra/blob/master/Vagrantfile">https://github.com/amazedkoumei/vagrant-centos-nginx_sinatra/blob/master/Vagrantfile</a></p>
+</blockquote>
+<p>また knife-solo cook を使えば Vagrant を再起動することなく chef-solo を実行できます。</p>
+<pre>$ knife solo cook vagrant@192.168.33.11</pre>
+<p> </p>
+<p>事前に knife-solo prepare の実行や ~/.ssh/config の設定が必要になります。詳しくはこちら！→ <a href="http://d.hatena.ne.jp/naoya/20130205/1360062070" target="_blank">Vagrant - naoyaのはてなダイアリー</a></p>
+<p> </p>
+<p><b>2013.02.27 追記</b></p>
+<p>SublimeText から knife-solo を実行できる plugin 書きました。</p>
+<p><blockquote><a href="http://blog.amazedkoumei.com/2013/02/sublimeknifesolo-sublimetext-command.html" target="_blank">SublimeKnifeSolo - SublimeText の Command Palette から knife solo を実行できる Plugin を書いたでござる | 諸葛亮孔明もびっくりですわ のブログ</a></blockquote></p>
+<p> </p>
+<h4>最後に</h4>
+<p>思ったより・・分量あって・・けっこうｇｄｇｄに・・( ﾟ∀ﾟ)･∵. ｸﾞﾊｯ!!</p>
+<p>chef-solo は コマンド1発で いつでもどこでも同じ環境を作り出せるのが素敵ですね。</p>
+<p>キモとなる recipe が実行がシーケンシャルなうえにブロックで記述できるので、相当に可読性高いだろうと予想したのですが、構成要素が多いために、やや学習コストが高くなってしまってるところが悩ましいですね。</p>
+<p>中規模・大規模な現場だと導入したはいいが結局一部の人間しか理解できねえｗｗｗｗｗ みたいなことになってしまうやも・・ならないかも・・メンバの意識とか現場の空気やらにもよるんでしょうな。</p>
+<p> </p>
+<p>環境構築ツールではなくテスト・ツールですけど <a href="http://cukes.info/" target="_blank">Cucumber</a> なるものがあるようですね。</p>
+<p>テストを自然言語風味で書けて日本語にも対応してるとか。こんな感じに書けるようです。すげえ！</p>
+<blockquote>
+<p><a href="http://qiita.com/items/48fe830d2ee3b6c87bf5" target="_blank">Cucumber, ChefSpecとchefでテスト駆動のサーバ構築管理 #infrastructure #Cucumber #Ruby #chef #chefspec - Qiita</a></p>
+</blockquote>
+<p> </p>
+<p>ソース即ドキュメント、とか美しすぐる</p>
+<p> </p>
+<p> </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>

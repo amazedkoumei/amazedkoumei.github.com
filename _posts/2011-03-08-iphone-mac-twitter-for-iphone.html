@@ -1,0 +1,91 @@
+---
+layout: post
+title: 'iPhoneアプリのダウングレード Mac編 - Twitter for iPhoneを例に'
+date: 2011/03/08 07:00
+tags: [twitter,iphone]
+comments: false
+---
+
+<div class='post'>
+<div class="separator" style="float: right; text-align: left;"><a href="http://1.bp.blogspot.com/-JjS45yaaD6E/TXWF00Bu3II/AAAAAAAAAcU/ENrSldhwCdY/s1600/%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589.jpeg" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="180" width="180" src="http://1.bp.blogspot.com/-JjS45yaaD6E/TXWF00Bu3II/AAAAAAAAAcU/ENrSldhwCdY/s400/%25E3%2583%2580%25E3%2582%25A6%25E3%2583%25B3%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2589.jpeg" /></a></div><br />
+<br />
+<br />
+先日(2011/3/4)公開されたTwitter for iPhoneのアップグレードがひどい。<br />
+AppStoreの評価も現在☆1つと少しにまで下がっている。<br />
+これまで評価の高かったアプリなだけに、今回のバージョン3.3への酷評が相当多いのだろう。<br />
+<br />
+AppStoreのこのヒステリックにも似た評価システムは正直どうかと思うのだが、<br />
+今回は別のお話。<br />
+iPhoneアプリのダウングレード方法のお話だ。<br />
+<br />
+ダウングレードをすると登録済みのTwitterアカウントは初期化されてしまうので再認証が必要になる。<br />
+いささか面倒くさいが、仕方がない・・。<br />
+※アプリ内の設定が失われるだけでフォロワーやつぶやきが失われるわけではない。<br />
+<br />
+<br />
+MacではiPhoneアプリは「.ipa」という拡張子で保存される。<br />
+アプリがアップグレードされると、古い「.ipa」ファイルは自動でゴミ箱に移動され、従来の場所に新しい「.ipa」ファイルが生成される。私の環境では下記ディレクトリだった。<br />
+<blockquote><b>/Users/[ユーザ名]/Music/iTunes/Mobile\ Applications/</b><br />
+</blockquote>Finderで探すなら下記の順序で辿ればよい。<br />
+<blockquote><b>home -> ミュージック -> iTunes->Mobile Application</b><br />
+</blockquote><br />
+ちなみに私の環境は下記の通り。<br />
+　Mac OS X 10.6.6 <br />
+　iTunes 10.1.2<br />
+<br />
+以下に手順を示すが、くれぐれも自己責任でお願いします。<br />
+<br />
+なお、以下の手順はすでにiPhoneとiTunesを最新版に同期させてしまっていることが前提になる。<br />
+<br />
+<br />
+<h3>1. iTunesからTwitter for iPhoneを削除する</h3><br />
+<div class="separator" style="clear: both; text-align: left;"><a href="http://4.bp.blogspot.com/-KR_83WKycqg/TXTLTMstE_I/AAAAAAAAAb8/PtvknSwq4xc/s1600/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-07%2B21.08.26%25EF%25BC%2589.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="249" width="400" src="http://4.bp.blogspot.com/-KR_83WKycqg/TXTLTMstE_I/AAAAAAAAAb8/PtvknSwq4xc/s400/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-07%2B21.08.26%25EF%25BC%2589.png" /></a></div>やや見づらいが左側サイドバーの「App」をクリックする。<br />
+するとアプリの一覧が表示されるので「Twitter」を探し、右クリックから「削除」を選択する。<br />
+<br />
+<br />
+<h3>２. ゴミ箱から旧バージョンのTwitterを探す</h3><br />
+<div class="separator" style="clear: both; text-align: left;"><a href="http://1.bp.blogspot.com/-l-MmZPsbe_s/TXTSQ0GzEOI/AAAAAAAAAcM/YCuIGXEePsE/s1600/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-07%2B21.39.31%25EF%25BC%2589.png" imageanchor="1" style="margin-left:1em; margin-right:1em"><img border="0" height="208" width="400" src="http://1.bp.blogspot.com/-l-MmZPsbe_s/TXTSQ0GzEOI/AAAAAAAAAcM/YCuIGXEePsE/s400/%25E3%2582%25B9%25E3%2582%25AF%25E3%2583%25AA%25E3%2583%25BC%25E3%2583%25B3%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%25EF%25BC%25882011-03-07%2B21.39.31%25EF%25BC%2589.png" /></a></div><br />
+ゴミ箱を開くと下記の2つのファイルが見つかるはずだ。<br />
+<ul><li>Twitter 3.ipa</li>
+<li>Twitter 3.3.ipa</li>
+</ul><br />
+上が旧バージョンのファイル、下が今回の諸悪の根源、新バージョンのファイルだ。<br />
+今回は旧バージョンにダウングレードするのが目的なので、「Twitter 3.ipa」をMacの任意の場所に移動する。<br />
+私は念のためにDropboxフォルダに移動させた。<br />
+<br />
+<br />
+<h3>3. 「Twitter 3.ipa」をダブルクリックする。</h3><br />
+これでiTunes上に旧バージョンのTwitter for iPhoneが復活する。<br />
+<br />
+<br />
+<h3>4. iPhoneでTwitter for iPhoneアプリを削除する</h3><br />
+iPhoneで任意のアイコンを長押しすると、バツ印が表示されぷるぷる震えだすので<br />
+Twitter for iPhoneのバツ印をタップする。<br />
+削除が完了したらホームボタンをタップすれば、ぷるぷるが止まり、元の状態になる。<br />
+<br />
+<br />
+<h3>5. iPhoneとiTunesを同期する</h3><br />
+iPhoneとiTunesを同期すればめでたく(?) ダウングレード完了だ。<br />
+<br />
+<br />
+<a href="http://click.linksynergy.com/fs-bin/stat?id=khRM7eIZQnI&offerid=94348&type=3&subid=0&tmpid=2192&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fjp%252Fapp%252Freeder%252Fid325502379%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30" target="itunes_store">Reeder</a>と並んで、私のiPhoneで起動時間1,2を競うアプリなので一刻も早いバージョンアップ&バグFIXを期待したい。<br />
+<br />
+しかし一体どうしてしまったのだろう。<br />
+私はTwitter社のファンなので、あまり言いたくはないが今回のバージョンアップはあまりに酷かった。<br />
+<br />
+正直今回のバージョンは・・<br />
+<br />
+うむー。<br />
+<br />
+追記:<br />
+2011/03/09にバグFIX版3.31がリリースされました。<br />
+クイックバーの仕様が変更され操作感が向上しました。<br />
+メモリリークによる異常終了も解消されたようです。<br />
+<br />
+<h2><a rel="nofollow" target="_blank" href="http://click.linksynergy.com/fs-bin/stat?id=khRM7eIZQnI&offerid=94348&type=3&subid=0&tmpid=2192&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fjp%252Fapp%252Ftwitter%252Fid333903271%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30"><span style="color:rgb(0, 0, 255);">Twitter 3.3.1（無料）</span></a></h2><p>iPhone、iPod touch および iPad 互換 iOS 3.1 以降が必要</p><p><img width="75" class="alignleft" align="left" src="http://a2.mzstatic.com/us/r1000/053/Purple/3e/8f/8a/mzl.vfhdcazk.75x75-65.jpg"><strong>Twitter 3.3.1</strong><br />
+カテゴリ: ソーシャルネットワーキング<br />
+価格: 無料 <a rel="nofollow" target="_blank" href="http://click.linksynergy.com/fs-bin/stat?id=khRM7eIZQnI&offerid=94348&type=3&subid=0&tmpid=2192&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252Fjp%252Fapp%252Ftwitter%252Fid333903271%253Fmt%253D8%2526uo%253D4%2526partnerId%253D30"><img src="http://ax.phobos.apple.com.edgesuite.net/images/web/linkmaker/badge_appstore-sm.gif" alt="App"></a><br />
+更新: 2011/03/09<br style="clear:both;"></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+</div>
