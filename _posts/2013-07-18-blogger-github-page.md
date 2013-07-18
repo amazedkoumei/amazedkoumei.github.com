@@ -3,7 +3,7 @@ layout: post
 title: "ドラクエのリハビリに Blogger から Github Page にブログ移行したった"
 description: ""
 category: 
-tags: []
+tags: [jekyll]
 date: 2013-07-18 17:16
 ---
 {% include JB/setup %}
