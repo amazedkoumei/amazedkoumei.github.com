@@ -4,7 +4,6 @@
 permalink: /:year/:month/:title.html
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "bundle"]
-auto: true
 
 # override by github pages
 # https://help.github.com/articles/using-jekyll-with-pages#configuring-jekyll
