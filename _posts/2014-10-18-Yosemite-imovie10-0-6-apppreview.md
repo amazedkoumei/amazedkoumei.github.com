@@ -3,7 +3,7 @@ layout: post
 title: "Yosemite + iMovie 10.0.6 で App Previews 作った"
 description: ""
 category: 
-tags: [octofeed iPhoneアプリ AppPreviews]
+tags: [octofeed,iphoneアプリ,AppPreviews]
 date: 2014-10-18 14:30
 ---
 {% include JB/setup %}
