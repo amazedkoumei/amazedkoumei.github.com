@@ -273,6 +273,9 @@ font-weight: bold;
 .post-body p {
 margin:0 0 .75em;
 }
+.post-body iframe {
+margin:0 0 .75em;
+}
 .post-body ul li {
 padding-top: 5px;
 padding-bottom: 5px;
