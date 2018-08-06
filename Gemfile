@@ -27,4 +27,4 @@ source 'https://rubygems.org'
 
 gem 'liquid',     '~>3.0.6'
 gem 'rdiscount',  '=1.6.8'
-gem "pygments.rb", "0.6.3"
+gem "pygments.rb", ">=0.6.3"
