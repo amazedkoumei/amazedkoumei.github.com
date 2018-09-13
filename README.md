@@ -17,10 +17,9 @@
 		+ to know detail, see files in _includes/JB/
 		+ need to add setting to _config.yml
 
-  
+
 ## Command Help
 
 + start local server
-	+ `bundle exec jekyll serve --watch`
+	+ `bundle exec jekyll serve --watch` or `bundle exec jekyll s`
 		+ see http://localhost:4000/
- 
